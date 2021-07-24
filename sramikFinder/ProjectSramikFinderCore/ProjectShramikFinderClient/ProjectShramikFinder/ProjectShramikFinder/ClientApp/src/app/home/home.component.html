@@ -1,0 +1,61 @@
+<h1>Shramik Finder</h1>
+<p>A Plateform to Provide workers and traking thare performance. We provide:</p>
+<ul>
+  <li>AI and Whatsapp based service</li>
+  <li>Mobile based worktraking, analysis.</li>
+  <li>Guranty of work satisfaction.</li>
+</ul>
+<p>To Start stress less and highly optimised work please enter your watsapp phone number here:</p>
+<div class="row">
+
+  <div class="col-sm-5">
+    <div style="padding:10px;">
+      <label for="test">WhatsApp Mobile Number </label><br />
+      <input class="input form-control" name="txtWhatsappNumber"
+             type="text"/>
+    </div>
+  </div>
+  <div class="col-sm-1">
+    OR
+  </div>
+  <div class="col-sm-5">
+    <div class="row" style="padding:10px;">
+      <div *ngIf="!isValidFormSubmitted">
+        <form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm,mobNumber)">
+          <div>
+
+
+            <label for="mobileNumber">WhatsApp Mobile Number (please do not add 91)</label><br />
+            <span style="position: absolute; left: 13px; padding-top: 7px; ">+91</span>
+            <input class="input form-control" name="txtWhatsappNumber"
+                   type="text" [(ngModel)]="watsappNumber" [pattern]="mobNumberPattern" #mobNumber="ngModel" required style="padding-left: 30px;"/>
+
+            <br />
+            <button class="btn-primary btn" [disabled]="!userForm.valid " style="float: right;">Submit</button>
+            <br />
+
+
+            <div *ngIf="mobNumber.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error alert alert-danger'">
+              <div *ngIf="mobNumber.errors.pattern">
+                Mobile number not valid.
+              </div>
+              <div *ngIf="mobNumber.errors.required">Mobile Number is required.</div>
+              <div *ngIf="mobNumber.errors.minlength">
+                Name must be at least 10 characters long.
+              </div>
+            </div>
+
+            {{watsappNumber}}
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="isValidFormSubmitted">
+        Please respond in you watsapp and fill this 4 digit code.<span style="font-size: 40px;">{{randomCode}}</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
