@@ -1,0 +1,6 @@
+﻿select * from FoodGroups
+select * from ItemsGroups
+select * from FoodItems
+select * from ItemsGroups
+select * from OrderItem
+select * from Orders
