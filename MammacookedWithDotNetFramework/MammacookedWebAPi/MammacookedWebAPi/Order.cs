@@ -17,7 +17,6 @@ namespace MammacookedWebAPi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.OrderItems = new HashSet<OrderItem>();
             this.OrderItems1 = new HashSet<OrderItem1>();
         }
     
@@ -33,8 +32,6 @@ namespace MammacookedWebAPi
         public string DeleveredTo { get; set; }
         public Nullable<double> PendingAmount { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem1> OrderItems1 { get; set; }
     }

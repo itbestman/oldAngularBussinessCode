@@ -27,7 +27,6 @@ namespace MammacookedWebAPi
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
@@ -35,12 +34,11 @@ namespace MammacookedWebAPi
         public virtual DbSet<FoodGroup> FoodGroups { get; set; }
         public virtual DbSet<FoodItem> FoodItems { get; set; }
         public virtual DbSet<ItemsGroup> ItemsGroups { get; set; }
-        public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<CustomerDetail> CustomerDetails { get; set; }
-        public virtual DbSet<C__MigrationHistory1> C__MigrationHistory1 { get; set; }
         public virtual DbSet<OrderItem1> OrderItem1 { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

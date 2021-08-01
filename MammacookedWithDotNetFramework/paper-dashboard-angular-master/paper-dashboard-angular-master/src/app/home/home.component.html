@@ -65,21 +65,27 @@
                                 <div class="col-5 col-md-4">
                                     <div class="icon-big icon-warning">
                                         <img [src]="x.Image" style="height: 350px; width: 400px;"/>
-                                    
                                     </div>
                                 </div>
                                 <div class="col-7 col-md-8">
                                     <div class="numbers" style="text-align: center;">
-                                        <p class="card-title text-center groupNameForSelect" >{{x.GroupName}} <p></p>
+                                        <a  class="card-title text-center groupNameForSelect" >{{x.GroupName}}</a>
                                             <p class="card-category">{{x.GroupDetails}}</p>
-                                            
+
+                                    </div>
+                                    <div class="summary">
+                                        {{x.Summary}}
+                                    </div>
+                                    <br>
+                                    <div class="stats" >
+                                        <a (click)="jumpToFoodgrops(x)" >Know More ....</a>
                                     </div>
                                 </div>
                             </div>
                         </ng-template>
                     </ngb-carousel> 
                 </div>
-                <div class="card-footer ">
+                <div class="card-footer">
                     <hr>
                     <div class="stats" >
                         <a (click)="jumpToFoodgrops()" > More Details</a>

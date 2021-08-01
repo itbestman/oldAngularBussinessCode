@@ -13,6 +13,7 @@ namespace MammacookedWebAPi.Models
         public Nullable<bool> DeleteFlag { get; set; }
         public Nullable<bool> OfferFlag { get; set; }
         public string Image { get; set; }
+        public string Summary { get; set; }
         public virtual ICollection<itemsGroupDOM> ItemsGroups { get; set; }
     }
 }

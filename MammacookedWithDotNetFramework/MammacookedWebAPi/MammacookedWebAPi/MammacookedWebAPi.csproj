@@ -242,9 +242,6 @@
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>DBEntityDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="C__MigrationHistory1.cs">
-      <DependentUpon>DBEntityDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBEntityDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -279,9 +276,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\itemsGroupDOM.cs" />
     <Compile Include="Order.cs">
-      <DependentUpon>DBEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OrderItem.cs">
       <DependentUpon>DBEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderItem1.cs">

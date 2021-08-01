@@ -20,7 +20,6 @@ namespace MammacookedWebAPi.Controllers
         {
             try
             {
-
                 using (DBContext db = new DBContext())
                 {
                     string host = HttpContext.Current.Request.UrlReferrer.AbsoluteUri;
@@ -32,7 +31,8 @@ namespace MammacookedWebAPi.Controllers
                             x.Id,
                             x.GroupDetails,
                             x.GroupName,
-                            x.Image
+                            x.Image,
+                            x.Summary
                         })
                         .ToList();
 
@@ -52,6 +52,7 @@ namespace MammacookedWebAPi.Controllers
                         lfg.GroupDetails = FG.GroupDetails;
                         lfg.GroupName = FG.GroupName;
                         lfg.Image = ConvertImageToString(FG.Image.Trim());
+                        lfg.Summary = FG.Summary;
                         foodGroupsDOMs.Add(lfg);
 
                     }
@@ -97,7 +98,6 @@ namespace MammacookedWebAPi.Controllers
         {
             try
             {
-
                 using (DBContext db = new DBContext())
                 {
                     var foodItemJson = db.getFoodGroupItemJson().ToList();

@@ -107,6 +107,7 @@
           <Property Name="DeleteFlag" Type="bit" />
           <Property Name="OfferFlag" Type="bit" />
           <Property Name="Image" Type="varchar(max)" />
+          <Property Name="Summary" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="FoodItems">
           <Key>
@@ -356,16 +357,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyMammacoookeDRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -427,6 +418,7 @@
           <Property Name="OfferFlag" Type="Boolean" />
           <NavigationProperty Name="ItemsGroups" Relationship="Self.FK_ItemsGroups_FoodGroups" FromRole="FoodGroups" ToRole="ItemsGroups" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="FoodItem">
           <Key>
@@ -451,7 +443,6 @@
           <Property Name="DeleteBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DeleteOn" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="ItemsGroups" Relationship="Self.FK_ItemsGroups_FoodItems" FromRole="FoodItems" ToRole="ItemsGroups" />
-          <NavigationProperty Name="OrderItems" Relationship="Self.FK_OrderItem_FoodItems" FromRole="FoodItems" ToRole="OrderItem" />
           <NavigationProperty Name="OrderItems1" Relationship="MyMammacoookeDRMModel.FK_OrderItem_FoodItems1" FromRole="FoodItem" ToRole="OrderItem1" />
         </EntityType>
         <EntityType Name="ItemsGroup">
@@ -463,17 +454,6 @@
           <Property Name="ItemId" Type="Int32" />
           <NavigationProperty Name="FoodGroup" Relationship="Self.FK_ItemsGroups_FoodGroups" FromRole="ItemsGroups" ToRole="FoodGroups" />
           <NavigationProperty Name="FoodItem" Relationship="Self.FK_ItemsGroups_FoodItems" FromRole="ItemsGroups" ToRole="FoodItems" />
-        </EntityType>
-        <EntityType Name="OrderItem">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="ItemId" Type="Int32" Nullable="false" />
-          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="FoodItem" Relationship="Self.FK_OrderItem_FoodItems" FromRole="OrderItem" ToRole="FoodItems" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_OrderItem_Orders" FromRole="OrderItem" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -490,7 +470,6 @@
           <Property Name="PaymentMedium" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DeleveredTo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PendingAmount" Type="Double" />
-          <NavigationProperty Name="OrderItems" Relationship="Self.FK_OrderItem_Orders" FromRole="Orders" ToRole="OrderItem" />
           <NavigationProperty Name="OrderItems1" Relationship="MyMammacoookeDRMModel.FK_OrderItem_Orders1" FromRole="Order" ToRole="OrderItem1" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -555,36 +534,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderItem_FoodItems">
-          <End Role="FoodItems" Type="Self.FoodItem" Multiplicity="1" />
-          <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FoodItems">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderItem">
-              <PropertyRef Name="ItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderItem_Orders">
-          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Orders">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderItem">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
         <EntityContainer Name="DBContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
@@ -592,7 +546,6 @@
           <EntitySet Name="FoodGroups" EntityType="Self.FoodGroup" />
           <EntitySet Name="FoodItems" EntityType="Self.FoodItem" />
           <EntitySet Name="ItemsGroups" EntityType="Self.ItemsGroup" />
-          <EntitySet Name="OrderItems" EntityType="Self.OrderItem" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -610,14 +563,6 @@
           <AssociationSet Name="FK_ItemsGroups_FoodItems" Association="Self.FK_ItemsGroups_FoodItems">
             <End Role="FoodItems" EntitySet="FoodItems" />
             <End Role="ItemsGroups" EntitySet="ItemsGroups" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderItem_FoodItems" Association="Self.FK_OrderItem_FoodItems">
-            <End Role="FoodItems" EntitySet="FoodItems" />
-            <End Role="OrderItem" EntitySet="OrderItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderItem_Orders" Association="Self.FK_OrderItem_Orders">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrderItem" EntitySet="OrderItems" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -655,7 +600,6 @@
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="getFoodGroupItemJson" ReturnType="Collection(String)" />
           <EntitySet Name="CustomerDetails" EntityType="MyMammacoookeDRMModel.CustomerDetail" />
-          <EntitySet Name="C__MigrationHistory1" EntityType="MyMammacoookeDRMModel.C__MigrationHistory1" />
           <EntitySet Name="OrderItem1" EntityType="MyMammacoookeDRMModel.OrderItem1" />
           <AssociationSet Name="FK_OrderItem_FoodItems1" Association="MyMammacoookeDRMModel.FK_OrderItem_FoodItems1">
             <End Role="FoodItem" EntitySet="FoodItems" />
@@ -665,6 +609,7 @@
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderItem1" EntitySet="OrderItem1" />
           </AssociationSet>
+          <EntitySet Name="C__MigrationHistory" EntityType="MyMammacoookeDRMModel.C__MigrationHistory" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -707,16 +652,6 @@
           <Property Name="Phone_1" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Phone_2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="C__MigrationHistory1">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="OrderItem1">
           <Key>
             <PropertyRef Name="Id" />
@@ -752,6 +687,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -807,6 +752,7 @@
           <EntitySetMapping Name="FoodGroups">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.FoodGroup">
               <MappingFragment StoreEntitySet="FoodGroups">
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
@@ -940,16 +886,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="C__MigrationHistory1">
-            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.C__MigrationHistory1">
-              <MappingFragment StoreEntitySet="C__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OrderItem1">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.OrderItem1">
               <MappingFragment StoreEntitySet="OrderItems">
@@ -957,6 +893,16 @@
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="C__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
