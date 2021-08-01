@@ -242,6 +242,9 @@
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>DBEntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="C__MigrationHistory1.cs">
+      <DependentUpon>DBEntityDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntityDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -269,6 +272,7 @@
     <Compile Include="ItemsGroup.cs">
       <DependentUpon>DBEntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FoodGroupsDOM.cs" />
@@ -278,6 +282,9 @@
       <DependentUpon>DBEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderItem.cs">
+      <DependentUpon>DBEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderItem1.cs">
       <DependentUpon>DBEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -359,6 +366,7 @@
     <Content Include="DBEntityDataModel.edmx.diagram">
       <DependentUpon>DBEntityDataModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\Images\.editorconfig" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

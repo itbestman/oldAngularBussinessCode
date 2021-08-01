@@ -18,6 +18,7 @@ namespace MammacookedWebAPi
         public Order()
         {
             this.OrderItems = new HashSet<OrderItem>();
+            this.OrderItems1 = new HashSet<OrderItem1>();
         }
     
         public int Id { get; set; }
@@ -34,5 +35,7 @@ namespace MammacookedWebAPi
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderItem1> OrderItems1 { get; set; }
     }
 }

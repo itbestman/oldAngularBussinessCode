@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MyMammacoookeDRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -43,11 +33,11 @@
         </EntityType>
         <EntityType Name="AspNetUserRoles">
           <Key>
-            <PropertyRef Name="UserId" />
             <PropertyRef Name="RoleId" />
+            <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -66,6 +56,16 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="ValidToDelevery" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerDetails">
           <Key>
@@ -88,10 +88,10 @@
           <Property Name="D_latLong" Type="varchar" MaxLength="50" />
           <Property Name="Verified" Type="bit" Nullable="false" />
           <Property Name="ValidForSupply" Type="bit" Nullable="false" />
-          <Property Name="MonyBalance" Type="money" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="DeletedOn" Type="datetime2" Precision="7" />
-          <Property Name="UpdateOn" Type="datetime2" Precision="7" />
+          <Property Name="MonyBalance" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="DeletedOn" Type="datetime" />
+          <Property Name="UpdateOn" Type="datetime" />
           <Property Name="DeleteFlag" Type="bit" Nullable="false" />
           <Property Name="ImagePath" Type="varchar(max)" />
           <Property Name="Phone_1" Type="varchar" MaxLength="15" Nullable="false" />
@@ -116,7 +116,7 @@
           <Property Name="Category" Type="varchar" MaxLength="20" />
           <Property Name="PreferredTime" Type="time" Precision="7" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Prise" Type="money" />
+          <Property Name="Prise" Type="decimal" Precision="19" Scale="4" />
           <Property Name="RestrictedDays" Type="varchar" MaxLength="100" />
           <Property Name="Details" Type="varchar" MaxLength="500" />
           <Property Name="CountType" Type="varchar" MaxLength="50" />
@@ -139,14 +139,14 @@
           <Property Name="GroupId" Type="int" />
           <Property Name="ItemId" Type="int" />
         </EntityType>
-        <EntityType Name="OrderItem">
+        <EntityType Name="OrderItems">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="ItemId" Type="int" Nullable="false" />
-          <Property Name="DateTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -155,7 +155,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="OrderItemId" Type="int" />
-          <Property Name="Date" Type="datetime2" Precision="7" />
+          <Property Name="Date" Type="datetime" />
           <Property Name="TimeSlot" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
           <Property Name="Location" Type="varchar" MaxLength="200" />
@@ -174,9 +174,30 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK_CustomerDetails_AspNetUsers" />-->
+        <Association Name="FK_AspNetUserRoles_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserRoles_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -201,34 +222,6 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -259,30 +252,29 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
         </Association>
         <Association Name="FK_OrderItem_FoodItems">
           <End Role="FoodItems" Type="Self.FoodItems" Multiplicity="1" />
-          <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FoodItems">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="OrderItem">
+            <Dependent Role="OrderItems">
               <PropertyRef Name="ItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderItem_Orders">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-          <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="OrderItem">
+            <Dependent Role="OrderItems">
               <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="getFoodGroupItemJson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -314,19 +306,27 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="MyMammacoookeDRMModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerDetails" EntityType="Self.CustomerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FoodGroups" EntityType="Self.FoodGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FoodItems" EntityType="Self.FoodItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemsGroups" EntityType="Self.ItemsGroups" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderItem" EntityType="Self.OrderItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="Self.FK_AspNetUserRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers" Association="Self.FK_AspNetUserRoles_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -334,14 +334,6 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemsGroups_FoodGroups" Association="Self.FK_ItemsGroups_FoodGroups">
             <End Role="FoodGroups" EntitySet="FoodGroups" />
@@ -353,11 +345,11 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_FoodItems" Association="Self.FK_OrderItem_FoodItems">
             <End Role="FoodItems" EntitySet="FoodItems" />
-            <End Role="OrderItem" EntitySet="OrderItem" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_Orders" Association="Self.FK_OrderItem_Orders">
             <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrderItem" EntitySet="OrderItem" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -422,7 +414,7 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <Property Name="ValidToDelevery" Type="Boolean" Nullable="false" />
+          <Property Name="ValidToDelevery" Type="Boolean" Nullable="false" DefaultValue="false" />
         </EntityType>
         <EntityType Name="FoodGroup">
           <Key>
@@ -460,6 +452,7 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
           <Property Name="DeleteOn" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="ItemsGroups" Relationship="Self.FK_ItemsGroups_FoodItems" FromRole="FoodItems" ToRole="ItemsGroups" />
           <NavigationProperty Name="OrderItems" Relationship="Self.FK_OrderItem_FoodItems" FromRole="FoodItems" ToRole="OrderItem" />
+          <NavigationProperty Name="OrderItems1" Relationship="MyMammacoookeDRMModel.FK_OrderItem_FoodItems1" FromRole="FoodItem" ToRole="OrderItem1" />
         </EntityType>
         <EntityType Name="ItemsGroup">
           <Key>
@@ -489,7 +482,7 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="OrderItemId" Type="Int32" />
-          <Property Name="Date" Type="DateTime" Precision="7" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="TimeSlot" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -498,6 +491,7 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
           <Property Name="DeleveredTo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PendingAmount" Type="Double" />
           <NavigationProperty Name="OrderItems" Relationship="Self.FK_OrderItem_Orders" FromRole="Orders" ToRole="OrderItem" />
+          <NavigationProperty Name="OrderItems1" Relationship="MyMammacoookeDRMModel.FK_OrderItem_Orders1" FromRole="Order" ToRole="OrderItem1" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -661,6 +655,16 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="getFoodGroupItemJson" ReturnType="Collection(String)" />
           <EntitySet Name="CustomerDetails" EntityType="MyMammacoookeDRMModel.CustomerDetail" />
+          <EntitySet Name="C__MigrationHistory1" EntityType="MyMammacoookeDRMModel.C__MigrationHistory1" />
+          <EntitySet Name="OrderItem1" EntityType="MyMammacoookeDRMModel.OrderItem1" />
+          <AssociationSet Name="FK_OrderItem_FoodItems1" Association="MyMammacoookeDRMModel.FK_OrderItem_FoodItems1">
+            <End Role="FoodItem" EntitySet="FoodItems" />
+            <End Role="OrderItem1" EntitySet="OrderItem1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItem_Orders1" Association="MyMammacoookeDRMModel.FK_OrderItem_Orders1">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderItem1" EntitySet="OrderItem1" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -695,30 +699,65 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
           <Property Name="Verified" Type="Boolean" Nullable="false" />
           <Property Name="ValidForSupply" Type="Boolean" Nullable="false" />
           <Property Name="MonyBalance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="DeletedOn" Type="DateTime" Precision="7" />
-          <Property Name="UpdateOn" Type="DateTime" Precision="7" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdateOn" Type="DateTime" Precision="3" />
           <Property Name="DeleteFlag" Type="Boolean" Nullable="false" />
           <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Phone_1" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Phone_2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="C__MigrationHistory1">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrderItem1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FoodItem" Relationship="MyMammacoookeDRMModel.FK_OrderItem_FoodItems1" FromRole="OrderItem1" ToRole="FoodItem" />
+          <NavigationProperty Name="Order" Relationship="MyMammacoookeDRMModel.FK_OrderItem_Orders1" FromRole="OrderItem1" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_OrderItem_FoodItems1">
+          <End Type="MyMammacoookeDRMModel.FoodItem" Role="FoodItem" Multiplicity="1" />
+          <End Type="MyMammacoookeDRMModel.OrderItem1" Role="OrderItem1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItem1">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItem_Orders1">
+          <End Type="MyMammacoookeDRMModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="MyMammacoookeDRMModel.OrderItem1" Role="OrderItem1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItem1">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MyMammacoookeDRMModelStoreContainer" CdmEntityContainer="DBContext">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
@@ -810,16 +849,6 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderItems">
-            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.OrderItem">
-              <MappingFragment StoreEntitySet="OrderItem">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.Order">
               <MappingFragment StoreEntitySet="Orders">
@@ -880,7 +909,6 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MyMammacoookeDRMModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MyMammacoookeDRMModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="getFoodGroupItemJson" FunctionName="MyMammacoookeDRMModel.Store.getFoodGroupItemJson" />
           <EntitySetMapping Name="CustomerDetails">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.CustomerDetail">
               <MappingFragment StoreEntitySet="CustomerDetails">
@@ -908,6 +936,26 @@ warning 6035: The relationship 'FK_CustomerDetails_AspNetUsers' has columns that
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__MigrationHistory1">
+            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.C__MigrationHistory1">
+              <MappingFragment StoreEntitySet="C__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItem1">
+            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.OrderItem1">
+              <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

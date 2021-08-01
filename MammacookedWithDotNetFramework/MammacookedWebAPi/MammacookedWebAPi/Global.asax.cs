@@ -22,8 +22,9 @@ namespace MammacookedWebAPi
 
         protected void Application_BeginRequest()
         {
-            if (!Response.Headers.AllKeys.Contains("Origin")&& Request.RawUrl == "/token")
+            if ((!Response.Headers.AllKeys.Contains("Origin")) && Request.RawUrl == "/token")
             {
+                //Server
                 Response.Headers.Add("Access-Control-Allow-Origin", "*");
             }
         }

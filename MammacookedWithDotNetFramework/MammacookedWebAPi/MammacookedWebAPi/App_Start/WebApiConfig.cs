@@ -24,9 +24,9 @@ namespace MammacookedWebAPi
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(cors);
-
+            //EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
+            //config.EnableCors(cors);
+            config.EnableCors(new EnableCorsAttribute("http://localhost:4200",headers:"*",methods:"*"));
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
