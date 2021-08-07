@@ -39,6 +39,7 @@ namespace MammacookedWebAPi
         public Nullable<System.DateTime> EditedOn { get; set; }
         public string DeleteBy { get; set; }
         public string DeleteOn { get; set; }
+        public Nullable<int> DefaultQuantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemsGroup> ItemsGroups { get; set; }

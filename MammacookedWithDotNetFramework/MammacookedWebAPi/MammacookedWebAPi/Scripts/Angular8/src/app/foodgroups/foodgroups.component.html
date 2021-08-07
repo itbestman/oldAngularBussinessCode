@@ -9,35 +9,35 @@
                 </div>
                 <div class="card-body">
                
-                    <ngb-tabset activeId="ngb-tab-3" #tabset="ngbTabset">
+                    <ngb-tabset activeId="FoodGroupID4" #tabset="ngbTabset">
                         <div *ngFor="let foodGroup of foodGroupItem; let i = index;">
-                            <ngb-tab [title]="foodGroup.GroupName">
-                                <ng-template ngbTabContent>
-                                    <div class="row" style="padding:20px;">
-                                        <div class="col-md-4">
-                                        <img [src]="foodGroup.FoodGroupImage" style=" width: 100%;height: 50%;">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div *ngFor="let item of foodGroup.foodItems">
-                                                <div class="row">
-                                                    <div class="col-md-3" style="padding: 20px; padding-top: 0px;">
-                                                        <img [src]="item.Image" style="max-width: 200px; height: 150px;"/>
-                                                    </div>
-                                                    <div class="col-md-9" style="padding:20px; ">
-                                                        <span style="font-size: 20px; " >{{item.Name}}</span>
-                                                        <br>
-                                                        {{item.Prise}} {{item.Currency}}/ {{item.CountType}}
-                                                        <br/>
-                                                        {{item.Details}}
-                                                        
-                                                    </div>
-                                                </div>
-                                               
-                                            </div>
-                                        </div>
+                          <ngb-tab [title]="foodGroup.GroupName" [id]="'sr'+foodGroup.FoodGroupID">
+                            <ng-template ngbTabContent>
+                              <div class="row" style="padding:20px;">
+                                <div class="col-md-4">
+                                  <img [src]="foodGroup.FoodGroupImage" style=" width: 100%;height: 50%;">
+                                </div>
+                                <div class="col-md-8">
+                                  <div *ngFor="let item of foodGroup.foodItems">
+                                    <div class="row">
+                                      <div class="col-md-3" style="padding: 20px; padding-top: 0px;">
+                                        <img [src]="item.Image" style="max-width: 200px; height: 150px;" />
+                                      </div>
+                                      <div class="col-md-9" style="padding:20px; ">
+                                        <span style="font-size: 20px; ">{{item.Name}}</span>
+                                        <br>
+                                        {{item.Prise}} {{item.Currency}}/ {{item.CountType}}
+                                        <br />
+                                        {{item.Details}}
+                                      </div>
                                     </div>
-                                </ng-template>
-                            </ngb-tab>
+
+                                  </div>
+                                </div>
+                              </div>
+
+                            </ng-template>
+                          </ngb-tab>
                         </div>
                     </ngb-tabset> 
                 </div>

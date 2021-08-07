@@ -46,9 +46,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  jumpToFoodgrops() {
-
-    this.appService.selectedFoodGroup = document.getElementsByClassName('carousel-item active')[0].getElementsByClassName('groupId')[0].innerHTML;
+  jumpToFoodgrops(arg='Y') {
+    if (arg!='N') {
+      this.appService.selectedFoodGroup = document.getElementsByClassName('carousel-item active')[0].getElementsByClassName('groupId')[0].innerHTML;
+    }
     this._router.navigate(["foodgroups"])
   }
   

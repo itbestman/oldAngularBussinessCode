@@ -5,25 +5,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f63d1589d0f24fd08524286e5158ac51" Name="Diagram1">
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.AspNetUserClaim" Width="1.875" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.AspNetUserLogin" Width="2.25" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.FoodGroup" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.FoodItem" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.ItemsGroup" Width="1.5" PointX="8.5" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.Order" Width="1.5" PointX="5.5" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="MyMammacoookeDRMModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="MyMammacoookeDRMModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="MyMammacoookeDRMModel.FK_ItemsGroups_FoodGroups" ManuallyRouted="false" />
-        <AssociationConnector Association="MyMammacoookeDRMModel.FK_ItemsGroups_FoodItems" ManuallyRouted="false" />
-        <AssociationConnector Association="MyMammacoookeDRMModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.CustomerDetail" Width="1.5" PointX="8.375" PointY="3.75" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.OrderItem1" Width="1.5" PointX="2.625" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.AspNetRole" PointX="0.875" PointY="1.375" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.AspNetUserClaim" PointX="5.25" PointY="1" Width="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.AspNetUserLogin" PointX="5.25" PointY="3.75" Width="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.AspNetUser" PointX="3" PointY="1.25" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.FoodGroup" PointX="5.125" PointY="7.25" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.FoodItem" PointX="0.75" PointY="7.125" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.ItemsGroup" PointX="2.875" PointY="7.25" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.Order" PointX="7.375" PointY="8" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.sysdiagram" PointX="10.25" PointY="7.5" Width="1.5" IsExpanded="true" />
+        <AssociationConnector ManuallyRouted="false" Association="MyMammacoookeDRMModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector ManuallyRouted="false" Association="MyMammacoookeDRMModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector ManuallyRouted="false" Association="MyMammacoookeDRMModel.FK_ItemsGroups_FoodGroups" />
+        <AssociationConnector ManuallyRouted="false" Association="MyMammacoookeDRMModel.FK_ItemsGroups_FoodItems" />
+        <AssociationConnector ManuallyRouted="false" Association="MyMammacoookeDRMModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.CustomerDetail" PointX="8.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.OrderItem1" PointX="2.875" PointY="9.5" Width="1.5" IsExpanded="true" />
         <AssociationConnector Association="MyMammacoookeDRMModel.FK_OrderItem_FoodItems1" />
         <AssociationConnector Association="MyMammacoookeDRMModel.FK_OrderItem_Orders1" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.C__MigrationHistory" Width="2.125" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.C__MigrationHistory" PointX="0.75" PointY="3.75" Width="2.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

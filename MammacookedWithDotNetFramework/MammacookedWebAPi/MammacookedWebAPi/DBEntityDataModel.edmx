@@ -130,7 +130,8 @@
           <Property Name="EditeBy" Type="varchar" MaxLength="50" />
           <Property Name="EditedOn" Type="datetime" />
           <Property Name="DeleteBy" Type="varchar" MaxLength="50" />
-          <Property Name="DeleteOn" Type="nchar" MaxLength="10" />
+          <Property Name="DeleteOn" Type="varchar" MaxLength="10" />
+          <Property Name="DefaultQuantity" Type="int" />
         </EntityType>
         <EntityType Name="ItemsGroups">
           <Key>
@@ -148,6 +149,7 @@
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="ItemId" Type="int" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -445,9 +447,10 @@
           <Property Name="EditeBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EditedOn" Type="DateTime" Precision="3" />
           <Property Name="DeleteBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DeleteOn" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DeleteOn" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="ItemsGroups" Relationship="Self.FK_ItemsGroups_FoodItems" FromRole="FoodItems" ToRole="ItemsGroups" />
           <NavigationProperty Name="OrderItems1" Relationship="MyMammacoookeDRMModel.FK_OrderItem_FoodItems1" FromRole="FoodItem" ToRole="OrderItem1" />
+          <Property Name="DefaultQuantity" Type="Int32" />
         </EntityType>
         <EntityType Name="ItemsGroup">
           <Key>
@@ -670,6 +673,7 @@
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="FoodItem" Relationship="MyMammacoookeDRMModel.FK_OrderItem_FoodItems1" FromRole="OrderItem1" ToRole="FoodItem" />
           <NavigationProperty Name="Order" Relationship="MyMammacoookeDRMModel.FK_OrderItem_Orders1" FromRole="OrderItem1" ToRole="Order" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_OrderItem_FoodItems1">
           <End Type="MyMammacoookeDRMModel.FoodItem" Role="FoodItem" Multiplicity="1" />
@@ -773,6 +777,7 @@
           <EntitySetMapping Name="FoodItems">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.FoodItem">
               <MappingFragment StoreEntitySet="FoodItems">
+                <ScalarProperty Name="DefaultQuantity" ColumnName="DefaultQuantity" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="PreferredTime" ColumnName="PreferredTime" />
@@ -897,6 +902,7 @@
           <EntitySetMapping Name="OrderItem1">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.OrderItem1">
               <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />

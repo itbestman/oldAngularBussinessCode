@@ -415,6 +415,10 @@
     <Content Include="Scripts\Angular8\src\assets\img\jan-sendereks.jpg" />
     <Content Include="Scripts\Angular8\src\assets\img\logo-small.png" />
     <Content Include="Scripts\Angular8\src\assets\img\mike.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\mother\mother.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\mother\motherBaby.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\mother\motherDouter.png" />
+    <Content Include="Scripts\Angular8\src\assets\img\mother\motherSon.jpg" />
     <Content Include="Scripts\Angular8\src\assets\siteImages\calikut-biryani-recipe.jpg" />
     <Content Include="Scripts\Angular8\src\assets\siteImages\Chettinad-Chicken-Curry-Image.jpg" />
     <Content Include="Scripts\Angular8\src\assets\siteImages\holiday vej lunch.jfif" />
