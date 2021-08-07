@@ -147,5 +147,19 @@ namespace MammacookedWebAPi
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("getFoodGroupItemJson");
         }
+    
+        public virtual ObjectResult<string> getFoodItems(Nullable<int> groupId)
+        {
+            var groupIdParameter = groupId.HasValue ?
+                new ObjectParameter("GroupId", groupId) :
+                new ObjectParameter("GroupId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("getFoodItems", groupIdParameter);
+        }
+    
+        public virtual ObjectResult<string> getFoodGroupItemJson1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("getFoodGroupItemJson1");
+        }
     }
 }

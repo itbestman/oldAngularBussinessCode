@@ -100,7 +100,9 @@ namespace MammacookedWebAPi.Controllers
             {
                 using (DBContext db = new DBContext())
                 {
-                    var foodItemJson = db.getFoodGroupItemJson().ToList();
+                    
+
+                    var foodItemJson = db.getFoodGroupItemJson1().ToList();
                     string retval = "";
                     foreach (string str in foodItemJson)
                     {
@@ -110,10 +112,10 @@ namespace MammacookedWebAPi.Controllers
                     var json = JArray.Parse(retval);
                     foreach (JObject root in json)
                     {
-                        root["Image"] = ConvertImageToString(root["Image"].ToString().Trim());
-                        foreach (JObject rootInner  in root["foodItems"])
+                        root["FoodGroupImage"] = ConvertImageToString(root["FoodGroupImage"].ToString().Trim());
+                        foreach (JObject rootInner in root["foodItems"])
                         {
-                            rootInner["Image"]= ConvertImageToString(rootInner["Image"].ToString().Trim());
+                            rootInner["Image"] = ConvertImageToString(rootInner["Image"].ToString().Trim());
                         }
                     }
 

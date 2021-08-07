@@ -276,6 +276,10 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="getFoodGroupItemJson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getFoodItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -610,6 +614,10 @@
             <End Role="OrderItem1" EntitySet="OrderItem1" />
           </AssociationSet>
           <EntitySet Name="C__MigrationHistory" EntityType="MyMammacoookeDRMModel.C__MigrationHistory" />
+          <FunctionImport Name="getFoodItems" ReturnType="Collection(String)">
+          <Parameter Name="GroupId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getFoodGroupItemJson1" ReturnType="Collection(String)" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -906,6 +914,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getFoodItems" FunctionName="MyMammacoookeDRMModel.Store.getFoodItems" />
+          <FunctionImportMapping FunctionImportName="getFoodGroupItemJson1" FunctionName="MyMammacoookeDRMModel.Store.getFoodGroupItemJson" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

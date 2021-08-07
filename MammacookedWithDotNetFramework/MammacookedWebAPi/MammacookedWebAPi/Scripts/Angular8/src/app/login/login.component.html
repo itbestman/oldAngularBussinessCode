@@ -1,0 +1,119 @@
+<div class="bg-c-gray">
+    <div class="col-sm-12 " style=" padding-left: 20%;padding-right: 20%;padding-top: 5%;">
+        <div class="well p-1rem p-b-0 card card-stats ">
+            <!--This table contains the fields that we want to capture to register a new user-->
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <th colspan="2">
+                            Login
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="form-group">
+                        <td style="width: 30%;"> <label for="email">Email</label> </td>
+                        <td><input type="email" class="form-control" id="txtEmail" minlength="4" [(ngModel)]="email"
+                                placeholder="Email" required #emailb="ngModel" />
+                            <div *ngIf="emailb.invalid && (emailb.dirty || emailb.touched)" class="alert alert-danger"
+                                style="margin-top: 5px;margin-bottom: 0px;">
+                                <div *ngIf="emailb.errors.required">
+                                    Email is required.
+                                </div>
+                                <div *ngIf="emailb.errors.minlength">
+                                    Name must be at least 4 characters long.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="password"> Password</label></td>
+                        <td><input type="password" class="form-control" id="txtPassword" [(ngModel)]="password" required
+                                #passwordb="ngModel" placeholder="Password" />
+                            <div *ngIf="passwordb.invalid && (passwordb.dirty || passwordb.touched)"
+                                class="alert alert-danger" style="margin-top: 5px;margin-bottom: 0px;">
+                                <div *ngIf="passwordb.errors.required">
+                                    Password is required.
+                                </div>
+                                <div *ngIf="passwordb.errors.minlength">
+                                    Password must be at least 4 characters long.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="success">
+                        <td colspan="2">
+                            <input id="btnLogin" class="btn btn-success" type="button" value="Login"
+                                (click)="loginUser()" />
+
+                            <input  class="btn btn-success" type="button" value="Register"
+                                style="float: right;margin-left: 10px;" routerLink="/register" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <!-- <div class="alert alert-danger" *ngFor="let x of errorArray">
+            {{x}}
+        </div> -->
+    </div>
+</div>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--<script src="Scripts/bootstrap.min.js"></script> -->
+
+<script>
+// $(document).ready(function(){
+//     alert('tim jhim');
+// });
+
+// var loginData = {
+//     grant_type: 'password',
+//     username: 'mkgupta1%40ayaya.com',
+//     password: 'qqqqqqq'
+// };
+// $.ajax({
+//     type: 'POST',
+//     url: '/Token',
+//     data: loginData
+// }).done(function (data) {
+//     self.user(data.userName);
+//     console.log(data,'manish');
+    
+//     // Cache the access token in session storage.
+//     sessionStorage.setItem(tokenKey, data.access_token);
+// }).fail(showError);
+</script>
+
+
+<!-- <script type="text/javascript">
+    $(document).ready(function () {
+
+        //Close the bootstrap alert
+        $('#linkClose').click(function () {
+            $('#divError').hide('fade');
+        });
+
+        // Save the new user details
+        $('#btnRegister').click(function () {
+            $.ajax({
+                url: 'http://localhost:59786/api/account/register',
+                method: 'POST',
+                data: {
+                    email: $('#txtEmail').val(),
+                    password: $('#txtPassword').val(),
+                    confirmPassword: $('#txtConfirmPassword').val()
+                },
+                success: function () {
+                    $('#successModal').modal('show');
+                },
+                error: function (jqXHR) {
+                    $('#divErrorText').text(jqXHR.responseText);
+                    $('#divError').show('fade');
+                }
+            });
+        });
+    });
+</script> -->

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -25,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>4.2</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -332,6 +334,107 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Angular8\documentation\css\bootstrap.min.css" />
+    <Content Include="Scripts\Angular8\documentation\css\demo.css" />
+    <Content Include="Scripts\Angular8\documentation\css\documentation.css" />
+    <Content Include="Scripts\Angular8\documentation\css\paper-dashboard.css" />
+    <Content Include="Scripts\Angular8\documentation\css\paper-dashboard.min.css" />
+    <Content Include="Scripts\Angular8\documentation\js\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\Angular8\documentation\js\bootstrap-notify.js" />
+    <Content Include="Scripts\Angular8\documentation\js\bootstrap-selectpicker.js" />
+    <Content Include="Scripts\Angular8\documentation\js\bootstrap-switch-tags.js" />
+    <Content Include="Scripts\Angular8\documentation\js\bootstrap-table.js" />
+    <Content Include="Scripts\Angular8\documentation\js\bootstrap.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\chartist.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\demo.js" />
+    <Content Include="Scripts\Angular8\documentation\js\es6-promise-auto.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\fullcalendar.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\jquery-jvectormap.js" />
+    <Content Include="Scripts\Angular8\documentation\js\jquery-ui.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\jquery.bootstrap.wizard.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\jquery.datatables.js" />
+    <Content Include="Scripts\Angular8\documentation\js\jquery.easypiechart.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\jquery.validate.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\moment.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\nouislider.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\paper-dashboard.js" />
+    <Content Include="Scripts\Angular8\documentation\js\perfect-scrollbar.min.js" />
+    <Content Include="Scripts\Angular8\documentation\js\sweetalert2.js" />
+    <Content Include="Scripts\Angular8\documentation\tutorial-components.html" />
+    <Content Include="Scripts\Angular8\karma.conf.js" />
+    <Content Include="Scripts\Angular8\protractor.conf.js" />
+    <Content Include="Scripts\Angular8\src\app\app.component.css" />
+    <Content Include="Scripts\Angular8\src\app\app.component.html" />
+    <Content Include="Scripts\Angular8\src\app\foodgroups\dist\foodgroups.component.js" />
+    <Content Include="Scripts\Angular8\src\app\foodgroups\foodgroups.component.html" />
+    <Content Include="Scripts\Angular8\src\app\home\dist\home.component.css" />
+    <Content Include="Scripts\Angular8\src\app\home\dist\home.component.js" />
+    <Content Include="Scripts\Angular8\src\app\home\dist\home.component.min.css" />
+    <Content Include="Scripts\Angular8\src\app\home\home.component.html" />
+    <Content Include="Scripts\Angular8\src\app\layouts\admin-layout\admin-layout.component.html" />
+    <Content Include="Scripts\Angular8\src\app\login\dist\login.component.js" />
+    <Content Include="Scripts\Angular8\src\app\login\dist\login.service.js" />
+    <Content Include="Scripts\Angular8\src\app\login\login.component.html" />
+    <Content Include="Scripts\Angular8\src\app\pages\dashboard\dashboard.component.html" />
+    <Content Include="Scripts\Angular8\src\app\pages\icons\icons.component.html" />
+    <Content Include="Scripts\Angular8\src\app\pages\maps\maps.component.html" />
+    <Content Include="Scripts\Angular8\src\app\pages\notifications\notifications.component.html" />
+    <Content Include="Scripts\Angular8\src\app\pages\table\table.component.html" />
+    <Content Include="Scripts\Angular8\src\app\pages\typography\typography.component.html" />
+    <Content Include="Scripts\Angular8\src\app\pages\upgrade\upgrade.component.html" />
+    <Content Include="Scripts\Angular8\src\app\pages\user\user.component.html" />
+    <Content Include="Scripts\Angular8\src\app\register\dist\register.component.js" />
+    <Content Include="Scripts\Angular8\src\app\register\register.component.html" />
+    <Content Include="Scripts\Angular8\src\app\shared\fixedplugin\fixedplugin.component.html" />
+    <Content Include="Scripts\Angular8\src\app\shared\footer\footer.component.html" />
+    <Content Include="Scripts\Angular8\src\app\shared\navbar\navbar.component.html" />
+    <Content Include="Scripts\Angular8\src\app\sidebar\sidebar.component.html" />
+    <Content Include="Scripts\Angular8\src\assets\css\demo.css" />
+    <Content Include="Scripts\Angular8\src\assets\img\angular.png" />
+    <Content Include="Scripts\Angular8\src\assets\img\angular2-logo-white.png" />
+    <Content Include="Scripts\Angular8\src\assets\img\angular2-logo.png" />
+    <Content Include="Scripts\Angular8\src\assets\img\apple-icon.png" />
+    <Content Include="Scripts\Angular8\src\assets\img\bg5.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\damir-bosnjak.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\default-avatar.png" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\ayo-ogunseinde-1.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\ayo-ogunseinde-2.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\clem-onojeghuo-1.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\clem-onojeghuo-2.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\clem-onojeghuo-3.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\clem-onojeghuo-4.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\erik-lucatero-1.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\erik-lucatero-2.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\joe-gardner-1.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\joe-gardner-2.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\kaci-baum-1.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\faces\kaci-baum-2.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\favicon.png" />
+    <Content Include="Scripts\Angular8\src\assets\img\header.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\jan-sendereks.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\img\logo-small.png" />
+    <Content Include="Scripts\Angular8\src\assets\img\mike.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\calikut-biryani-recipe.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\Chettinad-Chicken-Curry-Image.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\holiday vej lunch.jfif" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\holidyvejLunch.jfif" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\Homemade-Naan-Recipe-1.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\lemons.jfif" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\masoor ki dal-620.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\nonVeg.jfif" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\not-found.png" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\onion.jfif" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\random.jpg" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\rice.jfif" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\Roti.jfif" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\shahi paneer.jfif" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\sooji Halwa.jfif" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\vej breackFast.jfif" />
+    <Content Include="Scripts\Angular8\src\assets\siteImages\vejLunch.jfif" />
+    <Content Include="Scripts\Angular8\src\favicon.ico" />
+    <Content Include="Scripts\Angular8\src\index.html" />
+    <Content Include="Scripts\Angular8\src\styles.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -361,6 +464,72 @@
       <DependentUpon>DBEntityDataModel.edmx</DependentUpon>
     </Content>
     <Content Include="Content\Images\.editorconfig" />
+    <Content Include="Scripts\Angular8\.editorconfig" />
+    <Content Include="Scripts\Angular8\.gitignore" />
+    <Content Include="Scripts\Angular8\angular.json" />
+    <Content Include="Scripts\Angular8\browserslist" />
+    <Content Include="Scripts\Angular8\CHANGELOG.md" />
+    <Content Include="Scripts\Angular8\documentation\css\bootstrap.min.css.map" />
+    <Content Include="Scripts\Angular8\documentation\css\paper-dashboard.css.map" />
+    <Content Include="Scripts\Angular8\e2e\tsconfig.e2e.json" />
+    <Content Include="Scripts\Angular8\ISSUE_TEMPLATE.md" />
+    <Content Include="Scripts\Angular8\LICENSE.md" />
+    <Content Include="Scripts\Angular8\package-lock.json" />
+    <Content Include="Scripts\Angular8\package.json" />
+    <Content Include="Scripts\Angular8\README.md" />
+    <Content Include="Scripts\Angular8\src\app\foodgroups\foodgroups.component.scss" />
+    <Content Include="Scripts\Angular8\src\app\home\home.component.scss" />
+    <Content Include="Scripts\Angular8\src\app\layouts\admin-layout\admin-layout.component.scss" />
+    <Content Include="Scripts\Angular8\src\app\login\login.component.scss" />
+    <Content Include="Scripts\Angular8\src\app\register\register.component.scss" />
+    <Content Include="Scripts\Angular8\src\assets\fonts\nucleo-icons.eot" />
+    <Content Include="Scripts\Angular8\src\assets\fonts\nucleo-icons.ttf" />
+    <Content Include="Scripts\Angular8\src\assets\fonts\nucleo-icons.woff" />
+    <Content Include="Scripts\Angular8\src\assets\fonts\nucleo-icons.woff2" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\angular\_dropdown.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\angular\_fixed-plugin.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\angular\_inputs.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\angular\_plugin-ngx-toastr.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\angular\_sidebar-and-main-panel.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\cards\_card-chart.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\cards\_card-map.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\cards\_card-plain.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\cards\_card-stats.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\cards\_card-user.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\mixins\_buttons.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\mixins\_cards.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\mixins\_dropdown.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\mixins\_inputs.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\mixins\_page-header.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\mixins\_transparency.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\mixins\_vendor-prefixes.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\plugins\_plugin-animate-bootstrap-notify.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\plugins\_plugin-perfect-scrollbar.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_alerts.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_animated-buttons.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_buttons.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_cards.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_checkboxes-radio.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_dropdown.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_fixed-plugin.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_footers.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_images.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_inputs.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_misc.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_mixins.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_navbar.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_nucleo-outline.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_page-header.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_responsive.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_sidebar-and-main-panel.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_tables.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_typography.scss" />
+    <Content Include="Scripts\Angular8\src\assets\scss\paper-dashboard\_variables.scss" />
+    <Content Include="Scripts\Angular8\src\tsconfig.app.json" />
+    <Content Include="Scripts\Angular8\src\tsconfig.spec.json" />
+    <Content Include="Scripts\Angular8\tsconfig.json" />
+    <Content Include="Scripts\Angular8\tslint.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -391,6 +560,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Angular8\dist\" />
+    <Folder Include="Scripts\Angular8\node_modules\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -423,13 +594,59 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Angular8\e2e\app.e2e-spec.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\e2e\app.po.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\app.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\app.module.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\app.routing.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\foodgroups\foodgroups.component.spec.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\foodgroups\foodgroups.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\home\home.component.spec.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\home\home.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\layouts\admin-layout\admin-layout.component.spec.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\layouts\admin-layout\admin-layout.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\layouts\admin-layout\admin-layout.module.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\layouts\admin-layout\admin-layout.routing.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\login\login.component.spec.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\login\login.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\login\login.service.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\mamma.service.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\dashboard\dashboard.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\icons\icons.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\maps\maps.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\notifications\notifications.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\table\table.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\typography\typography.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\upgrade\upgrade.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\user\user.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\register\register.component.spec.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\register\register.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\shared\fixedplugin\fixedplugin.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\shared\fixedplugin\fixedplugin.module.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\shared\footer\footer.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\shared\footer\footer.module.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\shared\navbar\navbar.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\shared\navbar\navbar.module.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\sidebar\sidebar.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\sidebar\sidebar.module.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\environments\environment.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\main.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\polyfills.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\test.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\typings.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
