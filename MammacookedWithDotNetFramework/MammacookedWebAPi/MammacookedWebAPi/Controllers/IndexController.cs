@@ -31,8 +31,8 @@ namespace MammacookedWebAPi.Controllers
                             x.Id,
                             x.GroupDetails,
                             x.GroupName,
-                            x.Image,
-                            x.Summary
+                            x.Image
+                            ,x.Summary
                         })
                         .ToList();
 
@@ -102,7 +102,7 @@ namespace MammacookedWebAPi.Controllers
                 {
                     
 
-                    var foodItemJson = db.getFoodGroupItemJson1().ToList();
+                    var foodItemJson = db.getFoodGroupItemJson2().ToList();
                     string retval = "";
                     foreach (string str in foodItemJson)
                     {

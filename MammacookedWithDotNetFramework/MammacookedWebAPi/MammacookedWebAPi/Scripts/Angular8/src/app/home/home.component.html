@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+<nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent" style=" border: 0px; background-color: black !important;">
     <div class="container-fluid">
       <div class="navbar-wrapper">
         <a class="navbar-brand" href="javascript:void(0)">MammaCooked</a>
@@ -52,197 +52,152 @@
 </nav>
 
 
-<div style="background-color: #f4f3ef; padding: 20px;    margin-top: 60px;" class="container-fluid">
-
-    
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-stats">
-                <div class="card-body ">
-                    <ngb-carousel style="width: 100%;">
-                        <ng-template *ngFor="let x of foodGroupData" ngbSlide>
-                            <div class="row">
-                                <div class="col-5 col-md-4">
-                                    <div class="icon-big icon-warning">
-                                        <img [src]="x.Image" style="height: 350px; width: 400px;"/>
-                                    </div>
-                                </div>
-                                <div class="col-7 col-md-8">
-                                    <div class="numbers" style="text-align: center;">
-                                        <a  class="card-title text-center groupNameForSelect" >{{x.GroupName}}</a>
-                                            <p class="card-category">{{x.GroupDetails}}</p>
-
-                                    </div>
-                                    <div class="summary">
-                                        {{x.Summary}}
-                                    </div>
-                                    <br>
-                                
-                                    <div style="display: none;" class="groupId">{{x.Id}}</div>
-                                    <div class="stats" >
-                                        <a (click)="jumpToFoodgrops()" >Know More ....</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </ngb-carousel> 
-                </div>
-                <div class="card-footer">
-                    <hr>
-                    <div class="stats" >
-                        <a (click)="jumpToFoodgrops('N')" > More Details</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="container-fluid bg-fixed">
+  <div class="brodcomp">
+    <div class="scrollitem">
+      <span>MammaCooked</span>
     </div>
-    <!-- ----------routerLink="/foodgroups" -->
+    <div class="scrollitem">
+      <span>MammaCooked</span>
+    </div>
+    <div class="scrollitem">
+      <span>MammaCooked</span>
+    </div>
+    <div class="scrollitem">
+      <span>MammaCooked</span>
+    </div>
+    <div class="scrollitem">
+      <span>MammaCooked</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card bg-transparent">
+        <div class="card-header ">
+          <h5 class="card-title">We are</h5>
+          <p class="card-category"></p>
+        </div>
+        <div class="card-body ">
+          mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.mamma knows what is good for his child.
+          mamma knows what is good for his child.  mamma knows what is good for his child.
+          mamma knows what is good for his child.  mamma knows what is good for his child.
+          <canvas id=chartHours width="400" height="100"></canvas>
+        </div>
+        <!--<div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-history"></i> Updated 3 minutes ago
+          </div>
+        </div>-->
+        <br />
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-stats bg-transparent">
+        <div class="card-body ">
+          <ngb-carousel style="width: 100%;">
+            <ng-template *ngFor="let x of foodGroupData" ngbSlide>
+              <div class="row">
+                <div class="col-5 col-md-4">
+                  <div class="icon-big icon-warning">
+                    <img [src]="x.Image" style="height: 350px; width: 400px;" />
+                  </div>
+                </div>
+                <div class="col-7 col-md-8">
+                  <div class="numbers" style="text-align: center;">
+                    <a class="card-title text-center groupNameForSelect">{{x.GroupName}}</a>
+                    <p class="card-category">{{x.GroupDetails}}</p>
+
+                  </div>
+                  <div class="summary">
+                    {{x.Summary}}
+                  </div>
+                  <br>
+
+                  <div style="display: none;" class="groupId">{{x.Id}}</div>
+                  <div class="stats">
+                    <a (click)="jumpToFoodgrops()">Know More ....</a>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        </div>
+        <br />
+
+        <!--<div class="card-footer">
+          <hr>
+          <div class="stats">
+            <a (click)="jumpToFoodgrops('N')"> More Details</a>
+          </div>
+        </div>-->
+      </div>
+    </div>
+  </div>
+  <!-- ----------routerLink="/foodgroups" -->
 
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card ">
-                <div class="card-header ">
-                    <h5 class="card-title">Users Behavior</h5>
-                    <p class="card-category">24 Hours performance</p>
-                </div>
-                <div class="card-body ">
-                    <canvas id=chartHours width="400" height="100"></canvas>
-                </div>
-                <div class="card-footer ">
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-history"></i> Updated 3 minutes ago
-                    </div>
-                </div>
-            </div>
-        </div>
+
+  <!--<ng-template #customCellTemplate let-day="day" let-locale="locale">
+    <div class="cal-cell-top">
+      <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+      <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card ">
-                <div class="card-header ">
-                    <h5 class="card-title">Email Statistics</h5>
-                    <p class="card-category">Last Campaign Performance</p>
-                </div>
-                <div class="card-body ">
-                    <canvas id="chartEmail"></canvas>
-                </div>
-                <div class="card-footer ">
-                    <div class="legend">
-                        <i class="fa fa-circle text-primary"></i> Opened
-                        <i class="fa fa-circle text-warning"></i> Read
-                        <i class="fa fa-circle text-danger"></i> Deleted
-                        <i class="fa fa-circle text-gray"></i> Unopened
-                    </div>
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-calendar"></i> Number of emails sent
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="card card-chart">
-                <div class="card-header">
-                    <h5 class="card-title">NASDAQ: AAPL</h5>
-                    <p class="card-category">Line Chart with Points</p>
-                </div>
-                <div class="card-body">
-                    <canvas id="speedChart" width="400" height="100"></canvas>
-                </div>
-                <div class="card-footer">
-                    <div class="chart-legend">
-                        <i class="fa fa-circle text-info"></i> Tesla Model S
-                        <i class="fa fa-circle text-warning"></i> BMW 5 Series
-                    </div>
-                    <hr />
-                    <div class="card-stats">
-                        <i class="fa fa-check"></i> Data information certified
-                    </div>
-                </div>
-            </div>
-        </div>
+    <span (click)="test(day,locale);">test</span>
+    <small style="margin: 5px;">There are {{ day.events.length }} events on this day</small>
+  </ng-template>-->
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h5 class="card-title">Meal Summary of {{selectedDayForEditFoodPlan}}</h5>
+        <p class="card-category">Line Chart with Points</p>
+      </div>
+      <div class="card-body">
+        <!--<mwl-calendar-month-view
+          [viewDate]="viewDate"
+          [events]="events"
+          [cellTemplate]="customCellTemplate" >
+        </mwl-calendar-month-view>-->
+        <mwl-calendar-month-view [viewDate]="viewDate"
+                                 [events]="events"
+                                 [refresh]="refresh"
+                                 [activeDayIsOpen]="activeDayIsOpen"
+                                 (dayClicked)="dayClicked($event.day)"
+                                 (eventClicked)="handleEvent('Clicked', $event.event)">
+        </mwl-calendar-month-view>
+      </div>
     </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h5 class="card-title">Your Food Planse on Calander</h5>
+        <p class="card-category">Please select a day to change Plans for the day/week/month</p>
+      </div>
+      <div class="card-body">
+        <!--<mwl-calendar-month-view
+          [viewDate]="viewDate"
+          [events]="events"
+          [cellTemplate]="customCellTemplate" >
+        </mwl-calendar-month-view>-->
+        <mwl-calendar-month-view [viewDate]="viewDate"
+                                 [events]="events"
+                                 [refresh]="refresh"
+                                 [activeDayIsOpen]="activeDayIsOpen"
+                                 (dayClicked)="dayClicked($event.day)"
+                                 (eventClicked)="handleEvent('Clicked', $event.event)">
+        </mwl-calendar-month-view>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 
-<!-- //////////////////////// -->
-<!-- <div class="col-lg-3 col-md-6 col-sm-6">
-    <div class="card card-stats">
-        <div class="card-body ">
-            <div class="row">
-                <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                        <i class="nc-icon nc-money-coins text-success"></i>
-                    </div>
-                </div>
-                <div class="col-7 col-md-8">
-                    <div class="numbers">
-                        <p class="card-category">Revenue</p>
-                        <p class="card-title">$ 1,345
-                            <p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer ">
-            <hr>
-            <div class="stats">
-                <i class="fa fa-calendar-o"></i> Last day
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-3 col-md-6 col-sm-6">
-    <div class="card card-stats">
-        <div class="card-body ">
-            <div class="row">
-                <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                        <i class="nc-icon nc-vector text-danger"></i>
-                    </div>
-                </div>
-                <div class="col-7 col-md-8">
-                    <div class="numbers">
-                        <p class="card-category">Errors</p>
-                        <p class="card-title">23
-                            <p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer ">
-            <hr>
-            <div class="stats">
-                <i class="fa fa-clock-o"></i> In the last hour
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-3 col-md-6 col-sm-6">
-    <div class="card card-stats">
-        <div class="card-body ">
-            <div class="row">
-                <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                        <i class="nc-icon nc-favourite-28 text-primary"></i>
-                    </div>
-                </div>
-                <div class="col-7 col-md-8">
-                    <div class="numbers">
-                        <p class="card-category">Followers</p>
-                        <p class="card-title">+45K
-                            <p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer ">
-            <hr>
-            <div class="stats">
-                <i class="fa fa-refresh"></i> Update now
-            </div>
-        </div>
-    </div>
-</div> -->

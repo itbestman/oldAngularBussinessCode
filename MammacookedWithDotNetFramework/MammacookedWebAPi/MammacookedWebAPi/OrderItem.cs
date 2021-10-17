@@ -12,13 +12,12 @@ namespace MammacookedWebAPi
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderItem1
+    public partial class OrderItem
     {
         public int Id { get; set; }
         public int OrderId { get; set; }
         public int ItemId { get; set; }
         public System.DateTime DateTime { get; set; }
-        public int Quantity { get; set; }
     
         public virtual FoodItem FoodItem { get; set; }
         public virtual Order Order { get; set; }

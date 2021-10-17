@@ -24,12 +24,12 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/bootstrap/scss/bootstrap.scss",
               "src/assets/scss/paper-dashboard.scss",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -84,6 +84,7 @@
               "node_modules/bootstrap-notify/bootstrap-notify.js"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.css",
               "src/assets/sass/paper-dashboard.scss"
             ],

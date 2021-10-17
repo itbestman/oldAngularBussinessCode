@@ -12,12 +12,12 @@ ngb-carousel:focus{
     text-decoration: underline;
 }
 
-.carousel-control-prev:hover{
-    background-color: darkgray !important;
+.carousel-control-prev:hover {
+  background-color: #00000054 !important;
 }
 
-.carousel-control-next:hover{
-    background-color: darkgray !important;
+.carousel-control-next:hover {
+  background-color: #00000054 !important;
 }
 
 .carousel-item
@@ -48,4 +48,51 @@ ngb-carousel:focus{
     padding-right: 70px;
     height: 244px;
     overflow: overlay;
+}
+
+.bg-fixed {
+  background-image: url(../../assets/img/mother/mother.jpg);
+  padding: 20px;
+  margin-top: 60px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.bg-transparent {
+  background: rgb(0 0 0 / 71%) !important;
+  color: #f1f1f1;
+}
+.card {
+  border-radius: 0.25rem !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.brodcomp::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.brodcomp {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.brodcomp {
+  background-image: url(../../assets/img/mother/motherSon.jpg);
+  height: 100vh;
+  /* position: static; */
+  margin: -20px;
+  margin-bottom: 25px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.brodcomp .scrollitem {
+  height: 300px;
+  text-align: center;
+  padding-top: 200px;
+  font-size: 141px;
+  color: white;
 }

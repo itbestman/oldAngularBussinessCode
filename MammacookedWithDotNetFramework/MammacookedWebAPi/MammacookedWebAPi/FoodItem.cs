@@ -18,7 +18,7 @@ namespace MammacookedWebAPi
         public FoodItem()
         {
             this.ItemsGroups = new HashSet<ItemsGroup>();
-            this.OrderItems1 = new HashSet<OrderItem1>();
+            this.OrderItems = new HashSet<OrderItem>();
         }
     
         public int Id { get; set; }
@@ -39,11 +39,10 @@ namespace MammacookedWebAPi
         public Nullable<System.DateTime> EditedOn { get; set; }
         public string DeleteBy { get; set; }
         public string DeleteOn { get; set; }
-        public Nullable<int> DefaultQuantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemsGroup> ItemsGroups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItem1> OrderItems1 { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

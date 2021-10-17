@@ -22,7 +22,14 @@ import { LoginService } from './login/login.service';
 import { RegisterComponent } from './register/register.component';
 import { MammaService } from './mamma.service';
 import { FoodgroupsComponent } from './foodgroups/foodgroups.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/moment';
+import * as moment from 'moment';
+
+export function momentAdapterFactory() {
+  return adapterFactory(moment);
+}
 
 @NgModule({
   declarations:[
@@ -48,7 +55,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
     NgbModule,
     SidebarModule,
     FooterModule,
-    NavbarModule
+    NavbarModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory })
   ],
   exports: [RouterModule],
   providers: [MammaService,LoginService],
