@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+//import { FoodgroupsComponent } from '../../foodgroups/foodgroups.component'
 import Chart from 'chart.js';
-
+import { MammaService } from 'app/mamma.service';
 
 @Component({
     selector: 'dashboard-cmp',
@@ -15,8 +16,11 @@ export class DashboardComponent implements OnInit{
   public chartColor;
   public chartEmail;
   public chartHours;
+  selecteFood: string = '';
+  foodGroupItem: any = [];
 
-    ngOnInit(){
+  ngOnInit() {
+    this.loadFoodGroupItem();
       this.chartColor = "#FFFFFF";
 
       this.canvas = document.getElementById("chartHours");
@@ -206,4 +210,21 @@ export class DashboardComponent implements OnInit{
         options: chartOptions
       });
     }
+
+  constructor(private appService: MammaService) {
+  }
+
+  loadFoodGroupItem() {
+    if (this.selecteFood == "") {
+      this.selecteFood = "1";
+    }
+    this.appService.GetFoodGroupItems(this.selecteFood).subscribe((data) => {
+      this.foodGroupItem = data;
+      if (this.selecteFood != null && this.selecteFood != undefined) {
+      }
+      console.log(this.foodGroupItem, 'foodGroupItem');
+    }, (error) => {
+      console.log(error);
+    });
+  }
 }

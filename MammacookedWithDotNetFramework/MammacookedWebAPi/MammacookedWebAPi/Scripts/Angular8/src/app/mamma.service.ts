@@ -32,7 +32,7 @@ export class MammaService {
     })
   };
 
-  isLoggedIn:any=false;
+
   private actionUrl: string;
   constructor(private httpClient: HttpClient, private toastr: ToastrService) {
     this.httpOptionsBearer = {
@@ -42,7 +42,11 @@ export class MammaService {
         'Authorization': 'Bearer ' + this.token
       })
     };
-   }
+  }
+
+  isLoggedIn() {
+    return sessionStorage.getItem('token') != undefined ? true : false;
+  }
 
 
   private handleError(error: HttpErrorResponse) {

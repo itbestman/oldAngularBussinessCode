@@ -59,9 +59,8 @@
             </p>
           </a>
           <div ngbDropdownMenu aria-labelledby="account" class="dropdown-menu dropdown-menu-right">
-            <a ngbDropdownItem href="javascript:void(0)">Login</a>
-            <a ngbDropdownItem href="javascript:void(0)">Register</a>
-            <a ngbDropdownItem href="javascript:void(0)">Log Out</a>
+            <a ngbDropdownItem *ngIf="!isLoggedIn" routerLink="/login">Login / Register</a>
+            <a ngbDropdownItem *ngIf="isLoggedIn" (click)="logout()">Log Out</a>
           </div>
         </li>
       </ul>

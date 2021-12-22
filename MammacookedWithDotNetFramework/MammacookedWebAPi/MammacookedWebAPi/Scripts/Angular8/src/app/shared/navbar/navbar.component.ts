@@ -1,7 +1,8 @@
 import { Component, OnInit, Renderer, ViewChild, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
 import { Router } from '@angular/router';
-import { Location} from '@angular/common';
+import { Location } from '@angular/common';
+import { MammaService } from '../..//mamma.service';
 
 @Component({
     moduleId: module.id,
@@ -15,11 +16,12 @@ export class NavbarComponent implements OnInit{
     private nativeElement: Node;
     private toggleButton;
     private sidebarVisible: boolean;
-
+    public isLoggedIn = false;
     public isCollapsed = true;
     @ViewChild("navbar-cmp", {static: false}) button;
 
-    constructor(location:Location, private renderer : Renderer, private element : ElementRef, private router: Router) {
+  constructor(location: Location, private renderer: Renderer, private element: ElementRef, private router: Router,
+    private appService: MammaService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -31,7 +33,8 @@ export class NavbarComponent implements OnInit{
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
         this.router.events.subscribe((event) => {
           this.sidebarClose();
-       });
+        });
+      this.isLoggedIn = this.appService.isLoggedIn();
     }
     getTitle(){
       var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -45,6 +48,15 @@ export class NavbarComponent implements OnInit{
       }
       return 'Dashboard';
     }
+
+  logout() {
+    sessionStorage.clear();
+    this.appService.logOut().subscribe((data) => {
+      this.isLoggedIn = this.appService.isLoggedIn();
+      this.router.navigate(["home"]);
+    });
+  }
+
     sidebarToggle() {
         if (this.sidebarVisible === false) {
             this.sidebarOpen();

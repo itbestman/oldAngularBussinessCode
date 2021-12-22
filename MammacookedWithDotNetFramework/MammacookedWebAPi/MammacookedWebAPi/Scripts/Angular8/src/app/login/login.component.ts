@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       sessionStorage.setItem('token', data.access_token);
       this.appService.token = data.access_token;
-      this._router.navigate(['home']);
+      this._router.navigate(['dashboard/dashboard']);
     }, (error) => {
       console.log("error ", error);
       if (error.status == 400) {

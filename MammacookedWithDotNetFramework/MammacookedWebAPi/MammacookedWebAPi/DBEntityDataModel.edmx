@@ -4,38 +4,38 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MyMammacoookeDRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="MyMammacoookeDRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Id" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="Name" Nullable="false" MaxLength="256" Type="nvarchar" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" />
-          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="Id" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="Email" MaxLength="256" Type="nvarchar" />
+          <Property Name="EmailConfirmed" Nullable="false" Type="bit" />
           <Property Name="PasswordHash" Type="nvarchar(max)" />
           <Property Name="SecurityStamp" Type="nvarchar(max)" />
           <Property Name="PhoneNumber" Type="nvarchar(max)" />
-          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="PhoneNumberConfirmed" Nullable="false" Type="bit" />
+          <Property Name="TwoFactorEnabled" Nullable="false" Type="bit" />
           <Property Name="LockoutEndDateUtc" Type="datetime" />
-          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="ValidToDelevery" Type="bit" Nullable="false" />
+          <Property Name="LockoutEnabled" Nullable="false" Type="bit" />
+          <Property Name="AccessFailedCount" Nullable="false" Type="int" />
+          <Property Name="UserName" Nullable="false" MaxLength="256" Type="nvarchar" />
+          <Property Name="ValidToDelevery" Nullable="false" Type="bit" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="UserId" Nullable="false" MaxLength="128" Type="nvarchar" />
           <Property Name="ClaimType" Type="nvarchar(max)" />
           <Property Name="ClaimValue" Type="nvarchar(max)" />
         </EntityType>
@@ -45,64 +45,64 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LoginProvider" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="ProviderKey" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="UserId" Nullable="false" MaxLength="128" Type="nvarchar" />
         </EntityType>
         <EntityType Name="AspNetUserRole">
           <Key>
             <PropertyRef Name="AspNetRoles_Id" />
             <PropertyRef Name="AspNetUsers_Id" />
           </Key>
-          <Property Name="AspNetRoles_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="AspNetUsers_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AspNetRoles_Id" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="AspNetUsers_Id" Nullable="false" MaxLength="128" Type="nvarchar" />
         </EntityType>
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
             <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="MigrationId" Nullable="false" MaxLength="150" Type="nvarchar" />
+          <Property Name="ContextKey" Nullable="false" MaxLength="300" Type="nvarchar" />
+          <Property Name="Model" Nullable="false" Type="varbinary(max)" />
+          <Property Name="ProductVersion" Nullable="false" MaxLength="32" Type="nvarchar" />
         </EntityType>
         <EntityType Name="CustomerDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" />
-          <Property Name="FirstName" Type="varchar" MaxLength="250" />
-          <Property Name="LastName" Type="varchar" MaxLength="250" />
-          <Property Name="Address" Type="varchar" MaxLength="50" />
-          <Property Name="City" Type="varchar" MaxLength="50" />
-          <Property Name="Country" Type="varchar" MaxLength="50" />
-          <Property Name="PostalCode" Type="varchar" MaxLength="15" />
-          <Property Name="About" Type="varchar" MaxLength="500" />
-          <Property Name="BreakFastAddr" Type="varchar" MaxLength="500" />
-          <Property Name="LunchAddr" Type="varchar" MaxLength="500" />
-          <Property Name="Dinner" Type="varchar" MaxLength="500" />
-          <Property Name="B_LatLong" Type="varchar" MaxLength="50" />
-          <Property Name="L_LatLong" Type="varchar" MaxLength="50" />
-          <Property Name="D_latLong" Type="varchar" MaxLength="50" />
-          <Property Name="Verified" Type="bit" Nullable="false" />
-          <Property Name="ValidForSupply" Type="bit" Nullable="false" />
-          <Property Name="MonyBalance" Type="decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Email" MaxLength="256" Type="nvarchar" />
+          <Property Name="FirstName" MaxLength="250" Type="varchar" />
+          <Property Name="LastName" MaxLength="250" Type="varchar" />
+          <Property Name="Address" MaxLength="50" Type="varchar" />
+          <Property Name="City" MaxLength="50" Type="varchar" />
+          <Property Name="Country" MaxLength="50" Type="varchar" />
+          <Property Name="PostalCode" MaxLength="15" Type="varchar" />
+          <Property Name="About" MaxLength="500" Type="varchar" />
+          <Property Name="BreakFastAddr" MaxLength="500" Type="varchar" />
+          <Property Name="LunchAddr" MaxLength="500" Type="varchar" />
+          <Property Name="Dinner" MaxLength="500" Type="varchar" />
+          <Property Name="B_LatLong" MaxLength="50" Type="varchar" />
+          <Property Name="L_LatLong" MaxLength="50" Type="varchar" />
+          <Property Name="D_latLong" MaxLength="50" Type="varchar" />
+          <Property Name="Verified" Nullable="false" Type="bit" />
+          <Property Name="ValidForSupply" Nullable="false" Type="bit" />
+          <Property Name="MonyBalance" Nullable="false" Precision="19" Scale="4" Type="decimal" />
+          <Property Name="CreatedOn" Nullable="false" Type="datetime" />
           <Property Name="DeletedOn" Type="datetime" />
           <Property Name="UpdateOn" Type="datetime" />
-          <Property Name="DeleteFlag" Type="bit" Nullable="false" />
+          <Property Name="DeleteFlag" Nullable="false" Type="bit" />
           <Property Name="ImagePath" Type="varchar(max)" />
-          <Property Name="Phone_1" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Phone_2" Type="varchar" MaxLength="15" />
+          <Property Name="Phone_1" Nullable="false" MaxLength="15" Type="varchar" />
+          <Property Name="Phone_2" MaxLength="15" Type="varchar" />
         </EntityType>
         <EntityType Name="FoodGroup">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="GroupName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="GroupName" Nullable="false" MaxLength="500" Type="varchar" />
           <Property Name="GroupDetails" Type="varchar(max)" />
           <Property Name="DeleteFlag" Type="bit" />
           <Property Name="OfferFlag" Type="bit" />
@@ -113,30 +113,30 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Category" Type="varchar" MaxLength="20" />
-          <Property Name="PreferredTime" Type="time" Precision="7" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Prise" Type="decimal" Precision="19" Scale="4" />
-          <Property Name="RestrictedDays" Type="varchar" MaxLength="100" />
-          <Property Name="Details" Type="varchar" MaxLength="500" />
-          <Property Name="CountType" Type="varchar" MaxLength="50" />
-          <Property Name="Currency" Type="varchar" MaxLength="30" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Category" MaxLength="20" Type="varchar" />
+          <Property Name="PreferredTime" Precision="7" Type="time" />
+          <Property Name="Name" MaxLength="50" Type="varchar" />
+          <Property Name="Prise" Precision="19" Scale="4" Type="decimal" />
+          <Property Name="RestrictedDays" MaxLength="100" Type="varchar" />
+          <Property Name="Details" MaxLength="500" Type="varchar" />
+          <Property Name="CountType" MaxLength="50" Type="varchar" />
+          <Property Name="Currency" MaxLength="30" Type="varchar" />
           <Property Name="Image" Type="varchar(max)" />
           <Property Name="ServeGroup" Type="int" />
           <Property Name="DeleteFlag" Type="bit" />
-          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedBy" MaxLength="50" Type="varchar" />
           <Property Name="CreateOn" Type="datetime" />
-          <Property Name="EditeBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditeBy" MaxLength="50" Type="varchar" />
           <Property Name="EditedOn" Type="datetime" />
-          <Property Name="DeleteBy" Type="varchar" MaxLength="50" />
-          <Property Name="DeleteOn" Type="nchar" MaxLength="10" />
+          <Property Name="DeleteBy" MaxLength="50" Type="varchar" />
+          <Property Name="DeleteOn" MaxLength="10" Type="nchar" />
         </EntityType>
         <EntityType Name="ItemsGroup">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
           <Property Name="GroupId" Type="int" />
           <Property Name="ItemId" Type="int" />
         </EntityType>
@@ -144,40 +144,40 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="UserId" MaxLength="128" Type="nvarchar" />
           <Property Name="OrderItemId" Type="int" />
           <Property Name="Date" Type="datetime" />
-          <Property Name="TimeSlot" Type="varchar" MaxLength="50" />
-          <Property Name="Status" Type="varchar" MaxLength="50" />
-          <Property Name="Location" Type="varchar" MaxLength="200" />
-          <Property Name="PaymentStatus" Type="varchar" MaxLength="50" />
-          <Property Name="PaymentMedium" Type="varchar" MaxLength="50" />
-          <Property Name="DeleveredTo" Type="varchar" MaxLength="50" />
+          <Property Name="TimeSlot" MaxLength="50" Type="varchar" />
+          <Property Name="Status" MaxLength="50" Type="varchar" />
+          <Property Name="Location" MaxLength="200" Type="varchar" />
+          <Property Name="PaymentStatus" MaxLength="50" Type="varchar" />
+          <Property Name="PaymentMedium" MaxLength="50" Type="varchar" />
+          <Property Name="DeleveredTo" MaxLength="50" Type="varchar" />
           <Property Name="PendingAmount" Type="float" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OrderId" Type="int" Nullable="false" />
-          <Property Name="ItemId" Type="int" Nullable="false" />
-          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="OrderId" Nullable="false" Type="int" />
+          <Property Name="ItemId" Nullable="false" Type="int" />
+          <Property Name="DateTime" Nullable="false" Type="datetime" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="principal_id" Nullable="false" Type="int" />
+          <Property Name="diagram_id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_AspNetUserRoles_AspNetRoles">
-          <End Role="AspNetRole" Type="Self.AspNetRole" Multiplicity="1" />
-          <End Role="AspNetUserRole" Type="Self.AspNetUserRole" Multiplicity="*" />
+          <End Type="Self.AspNetRole" Multiplicity="1" Role="AspNetRole" />
+          <End Type="Self.AspNetUserRole" Multiplicity="*" Role="AspNetUserRole" />
           <ReferentialConstraint>
             <Principal Role="AspNetRole">
               <PropertyRef Name="Id" />
@@ -188,8 +188,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AspNetUserRoles_AspNetUsers">
-          <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="AspNetUserRole" Type="Self.AspNetUserRole" Multiplicity="*" />
+          <End Type="Self.AspNetUser" Multiplicity="1" Role="AspNetUser" />
+          <End Type="Self.AspNetUserRole" Multiplicity="*" Role="AspNetUserRole" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
@@ -200,10 +200,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="Self.AspNetUser" Multiplicity="1" Role="AspNetUser">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaim" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <End Type="Self.AspNetUserClaim" Multiplicity="*" Role="AspNetUserClaim" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
@@ -214,10 +214,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="Self.AspNetUser" Multiplicity="1" Role="AspNetUser">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserLogin" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <End Type="Self.AspNetUserLogin" Multiplicity="*" Role="AspNetUserLogin" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
@@ -228,8 +228,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemsGroups_FoodGroups">
-          <End Role="FoodGroup" Type="Self.FoodGroup" Multiplicity="0..1" />
-          <End Role="ItemsGroup" Type="Self.ItemsGroup" Multiplicity="*" />
+          <End Type="Self.FoodGroup" Multiplicity="0..1" Role="FoodGroup" />
+          <End Type="Self.ItemsGroup" Multiplicity="*" Role="ItemsGroup" />
           <ReferentialConstraint>
             <Principal Role="FoodGroup">
               <PropertyRef Name="Id" />
@@ -240,8 +240,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemsGroups_FoodItems">
-          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="0..1" />
-          <End Role="ItemsGroup" Type="Self.ItemsGroup" Multiplicity="*" />
+          <End Type="Self.FoodItem" Multiplicity="0..1" Role="FoodItem" />
+          <End Type="Self.ItemsGroup" Multiplicity="*" Role="ItemsGroup" />
           <ReferentialConstraint>
             <Principal Role="FoodItem">
               <PropertyRef Name="Id" />
@@ -252,8 +252,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderItem_FoodItems">
-          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="1" />
-          <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+          <End Type="Self.FoodItem" Multiplicity="1" Role="FoodItem" />
+          <End Type="Self.OrderItem" Multiplicity="*" Role="OrderItem" />
           <ReferentialConstraint>
             <Principal Role="FoodItem">
               <PropertyRef Name="Id" />
@@ -264,8 +264,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderItem_Orders">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+          <End Type="Self.Order" Multiplicity="1" Role="Order" />
+          <End Type="Self.OrderItem" Multiplicity="*" Role="OrderItem" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="Id" />
@@ -291,36 +291,36 @@
           <EntitySet Name="OrderItem" EntityType="Self.OrderItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagram" EntityType="Self.sysdiagram" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="Self.FK_AspNetUserRoles_AspNetRoles">
-            <End Role="AspNetRole" EntitySet="AspNetRole" />
-            <End Role="AspNetUserRole" EntitySet="AspNetUserRole" />
+            <End EntitySet="AspNetRole" Role="AspNetRole" />
+            <End EntitySet="AspNetUserRole" Role="AspNetUserRole" />
           </AssociationSet>
           <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers" Association="Self.FK_AspNetUserRoles_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUser" />
-            <End Role="AspNetUserRole" EntitySet="AspNetUserRole" />
+            <End EntitySet="AspNetUser" Role="AspNetUser" />
+            <End EntitySet="AspNetUserRole" Role="AspNetUserRole" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUser" />
-            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaim" />
+            <End EntitySet="AspNetUser" Role="AspNetUser" />
+            <End EntitySet="AspNetUserClaim" Role="AspNetUserClaim" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUser" />
-            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogin" />
+            <End EntitySet="AspNetUser" Role="AspNetUser" />
+            <End EntitySet="AspNetUserLogin" Role="AspNetUserLogin" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemsGroups_FoodGroups" Association="Self.FK_ItemsGroups_FoodGroups">
-            <End Role="FoodGroup" EntitySet="FoodGroup" />
-            <End Role="ItemsGroup" EntitySet="ItemsGroup" />
+            <End EntitySet="FoodGroup" Role="FoodGroup" />
+            <End EntitySet="ItemsGroup" Role="ItemsGroup" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemsGroups_FoodItems" Association="Self.FK_ItemsGroups_FoodItems">
-            <End Role="FoodItem" EntitySet="FoodItem" />
-            <End Role="ItemsGroup" EntitySet="ItemsGroup" />
+            <End EntitySet="FoodItem" Role="FoodItem" />
+            <End EntitySet="ItemsGroup" Role="ItemsGroup" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_FoodItems" Association="Self.FK_OrderItem_FoodItems">
-            <End Role="FoodItem" EntitySet="FoodItem" />
-            <End Role="OrderItem" EntitySet="OrderItem" />
+            <End EntitySet="FoodItem" Role="FoodItem" />
+            <End EntitySet="OrderItem" Role="OrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_Orders" Association="Self.FK_OrderItem_Orders">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="OrderItem" EntitySet="OrderItem" />
+            <End EntitySet="Order" Role="Order" />
+            <End EntitySet="OrderItem" Role="OrderItem" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -480,31 +480,31 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PostalCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="About" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="BreakFastAddr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="LunchAddr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Dinner" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="B_LatLong" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="L_LatLong" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="D_latLong" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Verified" Type="Boolean" Nullable="false" />
-          <Property Name="ValidForSupply" Type="Boolean" Nullable="false" />
-          <Property Name="MonyBalance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeletedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdateOn" Type="DateTime" Precision="3" />
-          <Property Name="DeleteFlag" Type="Boolean" Nullable="false" />
-          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Phone_1" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Phone_2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Email" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="FirstName" MaxLength="250" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="LastName" MaxLength="250" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Address" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="City" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Country" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="PostalCode" MaxLength="15" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="About" MaxLength="500" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="BreakFastAddr" MaxLength="500" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="LunchAddr" MaxLength="500" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Dinner" MaxLength="500" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="B_LatLong" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="L_LatLong" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="D_latLong" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Verified" Nullable="false" Type="Boolean" />
+          <Property Name="ValidForSupply" Nullable="false" Type="Boolean" />
+          <Property Name="MonyBalance" Nullable="false" Precision="19" Scale="4" Type="Decimal" />
+          <Property Name="CreatedOn" Nullable="false" Precision="3" Type="DateTime" />
+          <Property Name="DeletedOn" Precision="3" Type="DateTime" />
+          <Property Name="UpdateOn" Precision="3" Type="DateTime" />
+          <Property Name="DeleteFlag" Nullable="false" Type="Boolean" />
+          <Property Name="ImagePath" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Phone_1" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Phone_2" MaxLength="15" FixedLength="false" Unicode="false" Type="String" />
         </EntityType>
         <EntityType Name="FoodGroup">
           <Key>

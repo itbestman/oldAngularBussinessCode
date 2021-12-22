@@ -33,7 +33,7 @@
               </p>
             </a>
             <div ngbDropdownMenu aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-right">
-              <a *ngIf="!isLoggedIn" ngbDropdownItem routerLink="/login">Login</a>
+              <a *ngIf="!isLoggedIn" ngbDropdownItem routerLink="/login">Login / Register</a>
               <a *ngIf="isLoggedIn" (click)="logout()"  ngbDropdownItem >Log Out</a>
               <a *ngIf="isLoggedIn"  ngbDropdownItem routerLink="/dashboard/dashboard">Profile</a>
             </div>
@@ -152,52 +152,64 @@
     <small style="margin: 5px;">There are {{ day.events.length }} events on this day</small>
   </ng-template>-->
 
-<div class="row">
-  <div class="col-md-4">
-    <div class="card card-chart">
-      <div class="card-header">
-        <h5 class="card-title">Meal Summary of {{selectedDayForEditFoodPlan}}</h5>
-        <p class="card-category">Line Chart with Points</p>
+    <!--<div class="row">
+      <div class="col-md-4">
+        <div class="card card-chart">
+          <div class="card-header">
+            <h5 class="card-title">Meal Summary of {{selectedDayForEditFoodPlan}}</h5>
+            <p class="card-category">Line Chart with Points</p>
+          </div>
+          <div class="card-body">
+            <div class="card card-chart">
+              <div class="card-header">
+           
+                <p class="card-category">Morning breakfast</p>
+              </div>
+              <div class="card-body">
+
+              </div>
+            </div>
+
+            <div class="card card-chart">
+              <div class="card-header">
+        
+                <p class="card-category">Day Lunch</p>
+              </div>
+              <div class="card-body">
+
+              </div>
+            </div>
+
+            <div class="card card-chart">
+              <div class="card-header">
+                <p class="card-category">Night Dinner</p>
+              </div>
+              <div class="card-body">
+
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card-body">
-        <!--<mwl-calendar-month-view
-          [viewDate]="viewDate"
-          [events]="events"
-          [cellTemplate]="customCellTemplate" >
-        </mwl-calendar-month-view>-->
-        <mwl-calendar-month-view [viewDate]="viewDate"
-                                 [events]="events"
-                                 [refresh]="refresh"
-                                 [activeDayIsOpen]="activeDayIsOpen"
-                                 (dayClicked)="dayClicked($event.day)"
-                                 (eventClicked)="handleEvent('Clicked', $event.event)">
-        </mwl-calendar-month-view>
+      <div class="col-md-8">
+        <div class="card card-chart">
+          <div class="card-header">
+            <h5 class="card-title">Your Food Planse on Calander</h5>
+            <p class="card-category">Please select a day to change Plans for the day/week/month</p>
+          </div>
+          <div class="card-body">
+
+            <mwl-calendar-month-view [viewDate]="viewDate"
+                                     [events]="events"
+                                     [refresh]="refresh"
+                                     [activeDayIsOpen]="activeDayIsOpen"
+                                     (dayClicked)="dayClicked($event.day)"
+                                     (eventClicked)="handleEvent('Clicked', $event.event)">
+            </mwl-calendar-month-view>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div class="card card-chart">
-      <div class="card-header">
-        <h5 class="card-title">Your Food Planse on Calander</h5>
-        <p class="card-category">Please select a day to change Plans for the day/week/month</p>
-      </div>
-      <div class="card-body">
-        <!--<mwl-calendar-month-view
-          [viewDate]="viewDate"
-          [events]="events"
-          [cellTemplate]="customCellTemplate" >
-        </mwl-calendar-month-view>-->
-        <mwl-calendar-month-view [viewDate]="viewDate"
-                                 [events]="events"
-                                 [refresh]="refresh"
-                                 [activeDayIsOpen]="activeDayIsOpen"
-                                 (dayClicked)="dayClicked($event.day)"
-                                 (eventClicked)="handleEvent('Clicked', $event.event)">
-        </mwl-calendar-month-view>
-      </div>
-    </div>
-  </div>
-</div>
+    </div>-->
 </div>
 
 

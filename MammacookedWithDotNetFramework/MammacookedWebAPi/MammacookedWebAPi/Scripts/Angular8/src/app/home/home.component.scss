@@ -87,6 +87,10 @@ ngb-carousel:focus{
   margin-bottom: 25px;
   overflow-y: scroll;
   scroll-behavior: smooth;
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .brodcomp .scrollitem {

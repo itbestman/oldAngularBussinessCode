@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="MyMammacoookeDRMModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" />
         <EntityTypeShape EntityType="MyMammacoookeDRMModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" />
         <EntityTypeShape EntityType="MyMammacoookeDRMModel.C__MigrationHistory" Width="1.5" PointX="0.625" PointY="3" />
-        <EntityTypeShape EntityType="MyMammacoookeDRMModel.CustomerDetail" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MyMammacoookeDRMModel.CustomerDetail" PointX="9.375" PointY="10.75" Width="1.5" />
         <EntityTypeShape EntityType="MyMammacoookeDRMModel.FoodGroup" Width="1.5" PointX="5.375" PointY="7.125" />
         <EntityTypeShape EntityType="MyMammacoookeDRMModel.FoodItem" Width="1.5" PointX="0.75" PointY="7.125" />
         <EntityTypeShape EntityType="MyMammacoookeDRMModel.ItemsGroup" Width="1.5" PointX="3.125" PointY="7.125" />

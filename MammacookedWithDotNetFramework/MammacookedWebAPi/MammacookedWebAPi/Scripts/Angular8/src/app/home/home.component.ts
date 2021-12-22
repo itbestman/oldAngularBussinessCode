@@ -47,6 +47,9 @@ export class HomeComponent implements OnInit {
     event: CalendarEvent;
   };
 
+  BreackFast: string[] = [];
+  Lunch: string[] = [];
+  Dinner: string[] = [];
 
   /*  calander start*/
   actions: CalendarEventAction[] = [
@@ -115,10 +118,9 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private appService: MammaService, private _router: Router) {
-    this.appService.isLoggedIn = sessionStorage.getItem('token') != undefined ? true : false;
   }
-  
-  public isLoggedIn =  sessionStorage.getItem('token') != undefined ? true : false;
+
+  public isLoggedIn = false;
   public canvas: any;
   public ctx;
   public chartColor;
@@ -128,9 +130,14 @@ export class HomeComponent implements OnInit {
   public selectedDayForEditFoodPlan;
   /*start calender*/
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    this.selectedDayForEditFoodPlan = date.toDateString();
+    
     console.log(date,'date');
     if (isSameMonth(date, this.viewDate)) {
+
+      if (new Date() <= date) {
+        this.selectedDayForEditFoodPlan = date.toDateString();
+      }
+
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
         events.length === 0
@@ -164,7 +171,7 @@ export class HomeComponent implements OnInit {
   /*end calender*/
   
   ngOnInit() {
- 
+    this.isLoggedIn = this.appService.isLoggedIn();
     this.loadPage();
   }
 
@@ -177,7 +184,9 @@ export class HomeComponent implements OnInit {
     this.appService.getFoodGroup().subscribe((data) => {
       this.foodGroupData = data;
       setTimeout(function () {
-        document.getElementsByClassName('carousel-control-prev-icon')[0].click()
+        let ele: HTMLElement = document.querySelector('.carousel-control-prev-icon') as HTMLElement;
+        ele.click();
+        //document.getElementsByClassName('carousel-control-prev-icon')[0].click()
       }, 1000);
     }, (error) => {
       console.log(error);
@@ -193,8 +202,9 @@ export class HomeComponent implements OnInit {
   
   logout() {
     sessionStorage.clear();
-    this.appService.logOut().subscribe((data)=>{
-      this._router.navigate(["login"]);
+    this.appService.logOut().subscribe((data) => {
+      this.isLoggedIn = this.appService.isLoggedIn();
+      this._router.navigate(["home"]);
     });
   }
 
