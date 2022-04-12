@@ -4,105 +4,101 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="MyMammacoookeDRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+    <Schema Namespace="MyMammacoookeDRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="Name" Nullable="false" MaxLength="256" Type="nvarchar" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <EntityType Name="AspNetUser">
+        <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="Email" MaxLength="256" Type="nvarchar" />
-          <Property Name="EmailConfirmed" Nullable="false" Type="bit" />
-          <Property Name="PasswordHash" Type="nvarchar(max)" />
-          <Property Name="SecurityStamp" Type="nvarchar(max)" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" />
-          <Property Name="PhoneNumberConfirmed" Nullable="false" Type="bit" />
-          <Property Name="TwoFactorEnabled" Nullable="false" Type="bit" />
-          <Property Name="LockoutEndDateUtc" Type="datetime" />
-          <Property Name="LockoutEnabled" Nullable="false" Type="bit" />
-          <Property Name="AccessFailedCount" Nullable="false" Type="int" />
-          <Property Name="UserName" Nullable="false" MaxLength="256" Type="nvarchar" />
-          <Property Name="ValidToDelevery" Nullable="false" Type="bit" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <EntityType Name="AspNetUserClaim">
+        <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="UserId" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ClaimType" Type="nvarchar(max)" />
           <Property Name="ClaimValue" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="AspNetUserLogin">
+        <EntityType Name="AspNetUserLogins">
           <Key>
             <PropertyRef Name="LoginProvider" />
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="ProviderKey" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="UserId" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
-        <EntityType Name="AspNetUserRole">
+        <EntityType Name="AspNetUserRoles">
           <Key>
-            <PropertyRef Name="AspNetRoles_Id" />
-            <PropertyRef Name="AspNetUsers_Id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="AspNetRoles_Id" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="AspNetUsers_Id" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
-        <EntityType Name="C__MigrationHistory">
+        <EntityType Name="AspNetUsers">
           <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="MigrationId" Nullable="false" MaxLength="150" Type="nvarchar" />
-          <Property Name="ContextKey" Nullable="false" MaxLength="300" Type="nvarchar" />
-          <Property Name="Model" Nullable="false" Type="varbinary(max)" />
-          <Property Name="ProductVersion" Nullable="false" MaxLength="32" Type="nvarchar" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Email" MaxLength="256" Type="nvarchar" />
-          <Property Name="FirstName" MaxLength="250" Type="varchar" />
-          <Property Name="LastName" MaxLength="250" Type="varchar" />
-          <Property Name="Address" MaxLength="50" Type="varchar" />
-          <Property Name="City" MaxLength="50" Type="varchar" />
-          <Property Name="Country" MaxLength="50" Type="varchar" />
-          <Property Name="PostalCode" MaxLength="15" Type="varchar" />
-          <Property Name="About" MaxLength="500" Type="varchar" />
-          <Property Name="BreakFastAddr" MaxLength="500" Type="varchar" />
-          <Property Name="LunchAddr" MaxLength="500" Type="varchar" />
-          <Property Name="Dinner" MaxLength="500" Type="varchar" />
-          <Property Name="B_LatLong" MaxLength="50" Type="varchar" />
-          <Property Name="L_LatLong" MaxLength="50" Type="varchar" />
-          <Property Name="D_latLong" MaxLength="50" Type="varchar" />
-          <Property Name="Verified" Nullable="false" Type="bit" />
-          <Property Name="ValidForSupply" Nullable="false" Type="bit" />
-          <Property Name="MonyBalance" Nullable="false" Precision="19" Scale="4" Type="decimal" />
-          <Property Name="CreatedOn" Nullable="false" Type="datetime" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="250" />
+          <Property Name="LastName" Type="varchar" MaxLength="250" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="15" />
+          <Property Name="About" Type="varchar" MaxLength="500" />
+          <Property Name="BreakFastAddr" Type="varchar" MaxLength="500" />
+          <Property Name="LunchAddr" Type="varchar" MaxLength="500" />
+          <Property Name="DinnerAddr" Type="varchar" MaxLength="500" />
+          <Property Name="B_LatLong" Type="varchar" MaxLength="50" />
+          <Property Name="L_LatLong" Type="varchar" MaxLength="50" />
+          <Property Name="D_latLong" Type="varchar" MaxLength="50" />
+          <Property Name="Verified" Type="bit" Nullable="false" />
+          <Property Name="ValidForSupply" Type="bit" Nullable="false" />
+          <Property Name="MonyBalance" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="DeletedOn" Type="datetime" />
           <Property Name="UpdateOn" Type="datetime" />
-          <Property Name="DeleteFlag" Nullable="false" Type="bit" />
+          <Property Name="DeleteFlag" Type="bit" Nullable="false" />
           <Property Name="ImagePath" Type="varchar(max)" />
-          <Property Name="Phone_1" Nullable="false" MaxLength="15" Type="varchar" />
-          <Property Name="Phone_2" MaxLength="15" Type="varchar" />
+          <Property Name="Phone_1" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Phone_2" Type="varchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="FoodGroup">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="GroupName" Nullable="false" MaxLength="500" Type="varchar" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="GroupDetails" Type="varchar(max)" />
           <Property Name="DeleteFlag" Type="bit" />
           <Property Name="OfferFlag" Type="bit" />
@@ -113,30 +109,30 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Category" MaxLength="20" Type="varchar" />
-          <Property Name="PreferredTime" Precision="7" Type="time" />
-          <Property Name="Name" MaxLength="50" Type="varchar" />
-          <Property Name="Prise" Precision="19" Scale="4" Type="decimal" />
-          <Property Name="RestrictedDays" MaxLength="100" Type="varchar" />
-          <Property Name="Details" MaxLength="500" Type="varchar" />
-          <Property Name="CountType" MaxLength="50" Type="varchar" />
-          <Property Name="Currency" MaxLength="30" Type="varchar" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="20" />
+          <Property Name="PreferredTime" Type="time" Precision="7" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Prise" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="RestrictedDays" Type="varchar" MaxLength="100" />
+          <Property Name="Details" Type="varchar" MaxLength="500" />
+          <Property Name="CountType" Type="varchar" MaxLength="50" />
+          <Property Name="Currency" Type="varchar" MaxLength="30" />
           <Property Name="Image" Type="varchar(max)" />
           <Property Name="ServeGroup" Type="int" />
           <Property Name="DeleteFlag" Type="bit" />
-          <Property Name="CreatedBy" MaxLength="50" Type="varchar" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="CreateOn" Type="datetime" />
-          <Property Name="EditeBy" MaxLength="50" Type="varchar" />
+          <Property Name="EditeBy" Type="varchar" MaxLength="50" />
           <Property Name="EditedOn" Type="datetime" />
-          <Property Name="DeleteBy" MaxLength="50" Type="varchar" />
-          <Property Name="DeleteOn" MaxLength="10" Type="nchar" />
+          <Property Name="DeleteBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeleteOn" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="ItemsGroup">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GroupId" Type="int" />
           <Property Name="ItemId" Type="int" />
         </EntityType>
@@ -144,92 +140,89 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="UserId" MaxLength="128" Type="nvarchar" />
-          <Property Name="OrderItemId" Type="int" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="Date" Type="datetime" />
-          <Property Name="TimeSlot" MaxLength="50" Type="varchar" />
-          <Property Name="Status" MaxLength="50" Type="varchar" />
-          <Property Name="Location" MaxLength="200" Type="varchar" />
-          <Property Name="PaymentStatus" MaxLength="50" Type="varchar" />
-          <Property Name="PaymentMedium" MaxLength="50" Type="varchar" />
-          <Property Name="DeleveredTo" MaxLength="50" Type="varchar" />
+          <Property Name="TimeSlot" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Location" Type="varchar" MaxLength="200" />
+          <Property Name="PaymentStatus" Type="varchar" MaxLength="50" />
+          <Property Name="PaymentMedium" Type="varchar" MaxLength="50" />
+          <Property Name="DeleveredTo" Type="varchar" MaxLength="50" />
           <Property Name="PendingAmount" Type="float" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="OrderId" Nullable="false" Type="int" />
-          <Property Name="ItemId" Nullable="false" Type="int" />
-          <Property Name="DateTime" Nullable="false" Type="datetime" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Count" Type="int" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="principal_id" Nullable="false" Type="int" />
-          <Property Name="diagram_id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <Association Name="FK_AspNetUserRoles_AspNetRoles">
-          <End Type="Self.AspNetRole" Multiplicity="1" Role="AspNetRole" />
-          <End Type="Self.AspNetUserRole" Multiplicity="*" Role="AspNetUserRole" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRole">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRole">
-              <PropertyRef Name="AspNetRoles_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUserRoles_AspNetUsers">
-          <End Type="Self.AspNetUser" Multiplicity="1" Role="AspNetUser" />
-          <End Type="Self.AspNetUserRole" Multiplicity="*" Role="AspNetUserRole" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRole">
-              <PropertyRef Name="AspNetUsers_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_CustomerDetail_AspNetUsers' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_CustomerDetail_AspNetUsers" />-->
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="Self.AspNetUser" Multiplicity="1" Role="AspNetUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.AspNetUserClaim" Multiplicity="*" Role="AspNetUserClaim" />
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserClaim">
+            <Dependent Role="AspNetUserClaims">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="Self.AspNetUser" Multiplicity="1" Role="AspNetUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.AspNetUserLogin" Multiplicity="*" Role="AspNetUserLogin" />
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserLogin">
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemsGroups_FoodGroups">
-          <End Type="Self.FoodGroup" Multiplicity="0..1" Role="FoodGroup" />
-          <End Type="Self.ItemsGroup" Multiplicity="*" Role="ItemsGroup" />
+          <End Role="FoodGroup" Type="Self.FoodGroup" Multiplicity="0..1" />
+          <End Role="ItemsGroup" Type="Self.ItemsGroup" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FoodGroup">
               <PropertyRef Name="Id" />
@@ -240,8 +233,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemsGroups_FoodItems">
-          <End Type="Self.FoodItem" Multiplicity="0..1" Role="FoodItem" />
-          <End Type="Self.ItemsGroup" Multiplicity="*" Role="ItemsGroup" />
+          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="0..1" />
+          <End Role="ItemsGroup" Type="Self.ItemsGroup" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FoodItem">
               <PropertyRef Name="Id" />
@@ -252,8 +245,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderItem_FoodItems">
-          <End Type="Self.FoodItem" Multiplicity="1" Role="FoodItem" />
-          <End Type="Self.OrderItem" Multiplicity="*" Role="OrderItem" />
+          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="1" />
+          <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FoodItem">
               <PropertyRef Name="Id" />
@@ -264,8 +257,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderItem_Orders">
-          <End Type="Self.Order" Multiplicity="1" Role="Order" />
-          <End Type="Self.OrderItem" Multiplicity="*" Role="OrderItem" />
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="Id" />
@@ -278,49 +271,48 @@
         <Function Name="getFoodGroupItemJson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="MyMammacoookeDRMModelStoreContainer">
           <EntitySet Name="AspNetRole" EntityType="Self.AspNetRole" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUser" EntityType="Self.AspNetUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserClaim" EntityType="Self.AspNetUserClaim" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserLogin" EntityType="Self.AspNetUserLogin" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserRole" EntityType="Self.AspNetUserRole" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerDetail" EntityType="Self.CustomerDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FoodGroup" EntityType="Self.FoodGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FoodItem" EntityType="Self.FoodItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemsGroup" EntityType="Self.ItemsGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderItem" EntityType="Self.OrderItem" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagram" EntityType="Self.sysdiagram" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="Self.FK_AspNetUserRoles_AspNetRoles">
-            <End EntitySet="AspNetRole" Role="AspNetRole" />
-            <End EntitySet="AspNetUserRole" Role="AspNetUserRole" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers" Association="Self.FK_AspNetUserRoles_AspNetUsers">
-            <End EntitySet="AspNetUser" Role="AspNetUser" />
-            <End EntitySet="AspNetUserRole" Role="AspNetUserRole" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End EntitySet="AspNetUser" Role="AspNetUser" />
-            <End EntitySet="AspNetUserClaim" Role="AspNetUserClaim" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End EntitySet="AspNetUser" Role="AspNetUser" />
-            <End EntitySet="AspNetUserLogin" Role="AspNetUserLogin" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemsGroups_FoodGroups" Association="Self.FK_ItemsGroups_FoodGroups">
-            <End EntitySet="FoodGroup" Role="FoodGroup" />
-            <End EntitySet="ItemsGroup" Role="ItemsGroup" />
+            <End Role="FoodGroup" EntitySet="FoodGroup" />
+            <End Role="ItemsGroup" EntitySet="ItemsGroup" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemsGroups_FoodItems" Association="Self.FK_ItemsGroups_FoodItems">
-            <End EntitySet="FoodItem" Role="FoodItem" />
-            <End EntitySet="ItemsGroup" Role="ItemsGroup" />
+            <End Role="FoodItem" EntitySet="FoodItem" />
+            <End Role="ItemsGroup" EntitySet="ItemsGroup" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_FoodItems" Association="Self.FK_OrderItem_FoodItems">
-            <End EntitySet="FoodItem" Role="FoodItem" />
-            <End EntitySet="OrderItem" Role="OrderItem" />
+            <End Role="FoodItem" EntitySet="FoodItem" />
+            <End Role="OrderItem" EntitySet="OrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_Orders" Association="Self.FK_OrderItem_Orders">
-            <End EntitySet="Order" Role="Order" />
-            <End EntitySet="OrderItem" Role="OrderItem" />
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderItem" EntitySet="OrderItem" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -363,18 +355,17 @@
           <Parameter Name="GroupId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getFoodGroupItemJson1" ReturnType="Collection(String)" />
+          <FunctionImport Name="getFoodGroupItemJson2" ReturnType="Collection(String)" />
           <EntitySet Name="AspNetRoles" EntityType="MyMammacoookeDRMModel.AspNetRole" />
-          <EntitySet Name="AspNetUsers" EntityType="MyMammacoookeDRMModel.AspNetUser" />
+          <EntitySet Name="AspNetRoles1" EntityType="MyMammacoookeDRMModel.AspNetRole1" />
           <EntitySet Name="AspNetUserClaims" EntityType="MyMammacoookeDRMModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="MyMammacoookeDRMModel.AspNetUserLogin" />
-          <EntitySet Name="C__MigrationHistory" EntityType="MyMammacoookeDRMModel.C__MigrationHistory" />
-          <EntitySet Name="CustomerDetails" EntityType="MyMammacoookeDRMModel.CustomerDetail" />
+          <EntitySet Name="AspNetUsers" EntityType="MyMammacoookeDRMModel.AspNetUser" />
           <EntitySet Name="FoodGroups" EntityType="MyMammacoookeDRMModel.FoodGroup" />
           <EntitySet Name="FoodItems" EntityType="MyMammacoookeDRMModel.FoodItem" />
           <EntitySet Name="ItemsGroups" EntityType="MyMammacoookeDRMModel.ItemsGroup" />
           <EntitySet Name="Orders" EntityType="MyMammacoookeDRMModel.Order" />
           <EntitySet Name="OrderItems" EntityType="MyMammacoookeDRMModel.OrderItem" />
-          <EntitySet Name="sysdiagrams" EntityType="MyMammacoookeDRMModel.sysdiagram" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="MyMammacoookeDRMModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
@@ -399,11 +390,11 @@
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderItem" EntitySet="OrderItems" />
           </AssociationSet>
-          <AssociationSet Name="AspNetUserRole" Association="MyMammacoookeDRMModel.AspNetUserRole">
-            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+          <AssociationSet Name="AspNetUserRoles" Association="MyMammacoookeDRMModel.AspNetUserRoles">
+            <End Role="AspNetRole1" EntitySet="AspNetRoles1" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <FunctionImport Name="getFoodGroupItemJson2" ReturnType="Collection(String)" />
+          <EntitySet Name="CustomerDetails" EntityType="MyMammacoookeDRMModel.CustomerDetail" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -422,28 +413,14 @@
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="MyMammacoookeDRMModel.AspNetUserRole" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
-        <EntityType Name="AspNetUser">
+        <EntityType Name="AspNetRole1">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ValidToDelevery" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="MyMammacoookeDRMModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="MyMammacoookeDRMModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-          <NavigationProperty Name="AspNetRoles" Relationship="MyMammacoookeDRMModel.AspNetUserRole" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="MyMammacoookeDRMModel.AspNetUserRoles" FromRole="AspNetRole1" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
@@ -466,58 +443,38 @@
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="MyMammacoookeDRMModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
         </EntityType>
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="CustomerDetail">
+        <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Email" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="FirstName" MaxLength="250" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="LastName" MaxLength="250" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Address" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="City" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Country" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="PostalCode" MaxLength="15" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="About" MaxLength="500" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="BreakFastAddr" MaxLength="500" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="LunchAddr" MaxLength="500" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Dinner" MaxLength="500" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="B_LatLong" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="L_LatLong" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="D_latLong" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Verified" Nullable="false" Type="Boolean" />
-          <Property Name="ValidForSupply" Nullable="false" Type="Boolean" />
-          <Property Name="MonyBalance" Nullable="false" Precision="19" Scale="4" Type="Decimal" />
-          <Property Name="CreatedOn" Nullable="false" Precision="3" Type="DateTime" />
-          <Property Name="DeletedOn" Precision="3" Type="DateTime" />
-          <Property Name="UpdateOn" Precision="3" Type="DateTime" />
-          <Property Name="DeleteFlag" Nullable="false" Type="Boolean" />
-          <Property Name="ImagePath" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Phone_1" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Phone_2" MaxLength="15" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="MyMammacoookeDRMModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="MyMammacoookeDRMModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="MyMammacoookeDRMModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole1" />
         </EntityType>
         <EntityType Name="FoodGroup">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GroupName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="GroupDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DeleteFlag" Type="Boolean" />
           <Property Name="OfferFlag" Type="Boolean" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ItemsGroups" Relationship="MyMammacoookeDRMModel.FK_ItemsGroups_FoodGroups" FromRole="FoodGroup" ToRole="ItemsGroup" />
           <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ItemsGroups" Relationship="MyMammacoookeDRMModel.FK_ItemsGroups_FoodGroups" FromRole="FoodGroup" ToRole="ItemsGroup" />
         </EntityType>
         <EntityType Name="FoodItem">
           <Key>
@@ -560,7 +517,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="OrderItemId" Type="Int32" />
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="TimeSlot" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -579,18 +535,9 @@
           <Property Name="OrderId" Type="Int32" Nullable="false" />
           <Property Name="ItemId" Type="Int32" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Count" Type="Int32" />
           <NavigationProperty Name="FoodItem" Relationship="MyMammacoookeDRMModel.FK_OrderItem_FoodItems" FromRole="OrderItem" ToRole="FoodItem" />
           <NavigationProperty Name="Order" Relationship="MyMammacoookeDRMModel.FK_OrderItem_Orders" FromRole="OrderItem" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="MyMammacoookeDRMModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -668,16 +615,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRole">
-          <End Type="MyMammacoookeDRMModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+        <Association Name="AspNetUserRoles">
+          <End Type="MyMammacoookeDRMModel.AspNetRole1" Role="AspNetRole1" Multiplicity="*" />
           <End Type="MyMammacoookeDRMModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <EntityType Name="CustomerDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="About" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="BreakFastAddr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LunchAddr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DinnerAddr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="B_LatLong" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="L_LatLong" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="D_latLong" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Verified" Type="Boolean" Nullable="false" />
+          <Property Name="ValidForSupply" Type="Boolean" Nullable="false" />
+          <Property Name="MonyBalance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdateOn" Type="DateTime" Precision="3" />
+          <Property Name="DeleteFlag" Type="Boolean" Nullable="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_1" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MyMammacoookeDRMModelStoreContainer" CdmEntityContainer="DBContext">
+          <FunctionImportMapping FunctionImportName="getFoodGroupItemJson2" FunctionName="MyMammacoookeDRMModel.Store.getFoodGroupItemJson" />
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRole">
@@ -686,10 +664,36 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles1">
+            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.AspNetRole1">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.AspNetUser">
-              <MappingFragment StoreEntitySet="AspNetUser">
-                <ScalarProperty Name="ValidToDelevery" ColumnName="ValidToDelevery" />
+              <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -700,66 +704,6 @@
                 <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.AspNetUserClaim">
-              <MappingFragment StoreEntitySet="AspNetUserClaim">
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.AspNetUserLogin">
-              <MappingFragment StoreEntitySet="AspNetUserLogin">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="C__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CustomerDetails">
-            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.CustomerDetail">
-              <MappingFragment StoreEntitySet="CustomerDetail">
-                <ScalarProperty Name="Phone_2" ColumnName="Phone_2" />
-                <ScalarProperty Name="Phone_1" ColumnName="Phone_1" />
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
-                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
-                <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="MonyBalance" ColumnName="MonyBalance" />
-                <ScalarProperty Name="ValidForSupply" ColumnName="ValidForSupply" />
-                <ScalarProperty Name="Verified" ColumnName="Verified" />
-                <ScalarProperty Name="D_latLong" ColumnName="D_latLong" />
-                <ScalarProperty Name="L_LatLong" ColumnName="L_LatLong" />
-                <ScalarProperty Name="B_LatLong" ColumnName="B_LatLong" />
-                <ScalarProperty Name="Dinner" ColumnName="Dinner" />
-                <ScalarProperty Name="LunchAddr" ColumnName="LunchAddr" />
-                <ScalarProperty Name="BreakFastAddr" ColumnName="BreakFastAddr" />
-                <ScalarProperty Name="About" ColumnName="About" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -822,7 +766,6 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="TimeSlot" ColumnName="TimeSlot" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -831,6 +774,7 @@
           <EntitySetMapping Name="OrderItems">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.OrderItem">
               <MappingFragment StoreEntitySet="OrderItem">
+                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
@@ -838,26 +782,45 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagram">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="MyMammacoookeDRMModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole1">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="CustomerDetails">
+            <EntityTypeMapping TypeName="MyMammacoookeDRMModel.CustomerDetail">
+              <MappingFragment StoreEntitySet="CustomerDetail">
+                <ScalarProperty Name="Phone_2" ColumnName="Phone_2" />
+                <ScalarProperty Name="Phone_1" ColumnName="Phone_1" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+                <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="MonyBalance" ColumnName="MonyBalance" />
+                <ScalarProperty Name="ValidForSupply" ColumnName="ValidForSupply" />
+                <ScalarProperty Name="Verified" ColumnName="Verified" />
+                <ScalarProperty Name="D_latLong" ColumnName="D_latLong" />
+                <ScalarProperty Name="L_LatLong" ColumnName="L_LatLong" />
+                <ScalarProperty Name="B_LatLong" ColumnName="B_LatLong" />
+                <ScalarProperty Name="DinnerAddr" ColumnName="DinnerAddr" />
+                <ScalarProperty Name="LunchAddr" ColumnName="LunchAddr" />
+                <ScalarProperty Name="BreakFastAddr" ColumnName="BreakFastAddr" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRole" TypeName="MyMammacoookeDRMModel.AspNetUserRole" StoreEntitySet="AspNetUserRole">
-            <EndProperty Name="AspNetUser">
-              <ScalarProperty Name="Id" ColumnName="AspNetUsers_Id" />
-            </EndProperty>
-            <EndProperty Name="AspNetRole">
-              <ScalarProperty Name="Id" ColumnName="AspNetRoles_Id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="getFoodGroupItemJson2" FunctionName="MyMammacoookeDRMModel.Store.getFoodGroupItemJson" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

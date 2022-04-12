@@ -223,6 +223,9 @@
     <Compile Include="AspNetRole.cs">
       <DependentUpon>DBEntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AspNetRole1.cs">
+      <DependentUpon>DBEntityDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetUser.cs">
       <DependentUpon>DBEntityDataModel.tt</DependentUpon>
     </Compile>
@@ -239,9 +242,6 @@
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="CustomerDetail.cs">
-      <DependentUpon>DBEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>DBEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntityDataModel.Context.cs">
@@ -293,9 +293,6 @@
       <DependentUpon>DBEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>DBEntityDataModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -377,7 +374,7 @@
     <Content Include="Scripts\Angular8\src\app\login\dist\login.service.js" />
     <Content Include="Scripts\Angular8\src\app\login\login.component.html" />
     <Content Include="Scripts\Angular8\src\app\pages\dashboard\dashboard.component.html" />
-    <Content Include="Scripts\Angular8\src\app\pages\icons\icons.component.html" />
+    <Content Include="Scripts\Angular8\src\app\pages\planner\planner.component.html" />
     <Content Include="Scripts\Angular8\src\app\pages\maps\maps.component.html" />
     <Content Include="Scripts\Angular8\src\app\pages\notifications\notifications.component.html" />
     <Content Include="Scripts\Angular8\src\app\pages\table\table.component.html" />
@@ -621,7 +618,7 @@
     <TypeScriptCompile Include="Scripts\Angular8\src\app\login\login.service.ts" />
     <TypeScriptCompile Include="Scripts\Angular8\src\app\mamma.service.ts" />
     <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\dashboard\dashboard.component.ts" />
-    <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\icons\icons.component.ts" />
+    <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\planner\planner.component.ts" />
     <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\maps\maps.component.ts" />
     <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\notifications\notifications.component.ts" />
     <TypeScriptCompile Include="Scripts\Angular8\src\app\pages\table\table.component.ts" />

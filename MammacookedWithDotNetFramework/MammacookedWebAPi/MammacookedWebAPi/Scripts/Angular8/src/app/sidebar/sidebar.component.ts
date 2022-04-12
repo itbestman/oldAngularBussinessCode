@@ -10,11 +10,11 @@ export interface RouteInfo {
 //nc-bank'
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard/dashboard',     title: 'Dashboard',         icon:'nc-tv-2',       class: '' },
-    { path: '/dashboard/icons',         title: 'Planner',             icon:'nc-tap-01',    class: '' },
+    { path: '/dashboard/planner',         title: 'Planner',             icon:'nc-tap-01',    class: '' },
     { path: '/dashboard/maps',          title: 'Treck',              icon:'nc-pin-3',      class: '' },
     { path: '/dashboard/notifications', title: 'Notifications',     icon:'nc-bell-55',    class: '' },
     { path: '/dashboard/user',          title: 'User Profile',      icon:'nc-single-02',  class: '' },
-    { path: '/dashboard/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
+    /*{ path: '/dashboard/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },*/
     { path: '/dashboard/typography',    title: 'Promotions',        icon:'nc-trophy', class: '' },
     { path: '/dashboard/upgrade',       title: 'Upgrade to PRO',    icon:'nc-spaceship',  class: 'active-pro' },
 ];

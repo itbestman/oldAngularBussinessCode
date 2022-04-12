@@ -22,7 +22,6 @@ namespace MammacookedWebAPi
     
         public int Id { get; set; }
         public string UserId { get; set; }
-        public Nullable<int> OrderItemId { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public string TimeSlot { get; set; }
         public string Status { get; set; }

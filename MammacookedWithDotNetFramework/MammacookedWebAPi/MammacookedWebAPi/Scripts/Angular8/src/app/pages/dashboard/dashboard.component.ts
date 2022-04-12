@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { FoodgroupsComponent } from '../../foodgroups/foodgroups.component'
 import Chart from 'chart.js';
 import { MammaService } from 'app/mamma.service';
 

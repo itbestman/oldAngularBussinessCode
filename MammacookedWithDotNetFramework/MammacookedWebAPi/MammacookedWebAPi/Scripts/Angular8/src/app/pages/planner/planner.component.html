@@ -1,0 +1,166 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card demo-icons">
+      <div class="card-body all-icons">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-title">Your Food Planse on Calander</h5>
+                <div class="card-category" *ngIf="selectedDayForEditFoodPlan != undefined">
+                  Please click a day to change Plans for the day/week/month
+                  <div>
+                    <a style="text-decoration:underline" (click)="editPlanOnDate(selectedDayForEditFoodPlan)">{{selectedDayForEditFoodPlan}} Edit</a>
+                  </div>
+                </div>
+                <div *ngIf="selectedDayForEditFoodPlan==undefined">
+                  Please select a date from calender
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="btn-group">
+                  <div class="btn btn-primary"
+                       mwlCalendarPreviousView
+                       [view]="myView"
+                       [(viewDate)]="viewDate"
+                       (viewDateChange)="closeOpenMonthViewDay()">
+                    Previous
+                  </div>
+                  <div class="btn btn-outline-secondary"
+                       mwlCalendarToday
+                       [(viewDate)]="viewDate">
+                    Today
+                  </div>
+                  <div class="btn btn-primary"
+                       mwlCalendarNextView
+                       [view]="myView"
+                       [(viewDate)]="viewDate"
+                       (viewDateChange)="closeOpenMonthViewDay()">
+                    Next
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <h3>{{ viewDate | date}}</h3>
+                </div>
+                <mwl-calendar-month-view [viewDate]="viewDate"
+                                         [events]="events"
+                                         [refresh]="refresh"
+                                         [activeDayIsOpen]="activeDayIsOpen"
+                                         (dayClicked)="dayClicked($event.day)"
+                                         (eventClicked)="handleEvent('Clicked', $event.event)">
+                </mwl-calendar-month-view>
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-chart">
+              <span class="alert-heading bg-warning" style=" text-align: center;;
+                    padding: 17px;">Detail of food plans on date <b>{{viewDate | date}} </b> </span>
+              <br />
+
+              <ng-template ngFor let-item [ngForOf]="todayFoodPlans">
+                <table class="table">
+                  <!--<tr *ngFor="let item of todayFoodPlans">-->
+                  <tr>
+                    <td class="bg-warning" style="background-color: blanchedalmond !important;">
+                      <span style="float: left; font-size: large;">
+                        {{item.TimeSlot == "B" ? 'Breack Fast' : item.TimeSlot == "L" ? 'Lunch' : item.TimeSlot == "D" ? 'Dinner' : ''}}
+                      </span>
+                      <span style="float: right; font-size: large;">{{item.TotelPriceOfDelevery}} {{item.Currency}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+
+
+                      <ng-template ngFor let-n [ngForOf]="item.FoodItems">
+                        <table class="table table-striped">
+                          <tr>
+                            <td style="font-size: medium;">Food</td>
+                            <td style="font-size: large;"><strong>{{n.FoodItemName}} ({{n.Count}} {{n.CountType}})</strong> </td>
+                            <td style="font-size: medium;">Delevered To</td>
+                            <td style="font-size: large;">{{n.DeleveredTo}}</td>
+                            <td style="font-size: medium;">Delevery Status</td>
+                            <td style="font-size: large;">{{n.DeleveryStatus}}</td>
+                          </tr>
+                          <tr>
+                            <td style="font-size: medium;">Delevery Location</td>
+                            <td style="font-size: large;">{{n.Location}}</td>
+                            <td style="font-size: medium;">Payment Status</td>
+                            <td style="font-size: large;">{{n.PaymentStatus}}</td>
+                            <td style="font-size: medium;">Price Per Unit</td>
+                            <td style="font-size: large;">{{n.PricePerPice}}</td>
+                          </tr>
+                          <tr>
+
+                        
+                            <td colspan="4"></td>
+                            <td style="font-size: medium; ">Totel</td>
+                            <td style="font-size: large;"><strong>{{n.TotelPrice}}</strong> </td>
+                          </tr>
+                        </table>
+                      </ng-template>
+
+
+
+                    </td>
+                  </tr>
+
+                </table>
+              </ng-template>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="padding-top: 50px;">
+          <div class="col-md-12">
+            <div class="card card-chart">
+              <span class="alert-heading" style=" text-align: center; background-color: antiquewhite; padding: 17px;">The table showing default items you can change according to your need</span>
+              <br />
+              <table class="table">
+                <tr class="bg-warning">
+                  <td>Name</td>
+                  <td>Details</td>
+                  <td>Costs</td>
+                </tr>
+
+                <tr class="bg-warning" style="background-color: blanchedalmond !important;">
+                  <td colspan="3" style="text-align:center">Breack Fast</td>
+                </tr>
+                <tr *ngFor="let x of defauldFoodPlanBreackFast">
+                  <td>{{x.FoodItemName}} [{{x.Count}} {{x.CountType}}]</td>
+                  <td>{{x.Details}} </td>
+                  <td>{{x.Count}} * {{x.PricePerPice}} = {{x.TotelPrice}} {{x.Currency}}</td>
+                </tr>
+
+                <tr class="bg-warning" style="background-color: blanchedalmond !important;">
+                  <td colspan="3" style="text-align:center">Lunch</td>
+                </tr>
+                <tr *ngFor="let x of defauldFoodPlanLunct">
+                  <td>{{x.FoodItemName}} [{{x.Count}} {{x.CountType}}]</td>
+                  <td>{{x.Details}} </td>
+                  <td>{{x.Count}} * {{x.PricePerPice}} = {{x.TotelPrice}} {{x.Currency}}</td>
+                </tr>
+
+                <tr class="bg-warning" style="background-color: blanchedalmond !important;">
+                  <td colspan="3" style="text-align:center">Dinner</td>
+                </tr>
+                <tr *ngFor="let x of defauldFoodPlanDinner">
+                  <td>{{x.FoodItemName}} [{{x.Count}} {{x.CountType}}]</td>
+                  <td>{{x.Details}} </td>
+                  <td>{{x.Count}} * {{x.PricePerPice}} = {{x.TotelPrice}} {{x.Currency}}</td>
+                </tr>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

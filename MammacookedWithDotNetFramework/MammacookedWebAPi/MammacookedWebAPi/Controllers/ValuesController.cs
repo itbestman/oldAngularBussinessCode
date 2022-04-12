@@ -14,7 +14,6 @@ using System.Web.Http;
 
 namespace MammacookedWebAPi.Controllers
 {
-
     public class ValuesController : ApiController
     {
         DBContext db = new DBContext();
@@ -77,15 +76,15 @@ namespace MammacookedWebAPi.Controllers
         //}
 
         // POST api/values
-        public IHttpActionResult Post([FromBody]string value)
-        {
-            var fi = db.FoodItems.ToList().Select(x => new { x.Name, x.Prise, x.Details });
+        //public IHttpActionResult Post([FromBody] string value)
+        //{
+        //    var fi = db.FoodItems.ToList().Select(x => new { x.Name, x.Prise, x.Details });
 
-            //return Content(HttpStatusCode.BadRequest,"student not found");
-            return Ok(fi);
-        }
+        //    //return Content(HttpStatusCode.BadRequest,"student not found");
+        //    return Ok(fi);
+        //}
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 
@@ -93,7 +92,6 @@ namespace MammacookedWebAPi.Controllers
         public void Delete(int id)
         {
         }
-
 
     }
 }

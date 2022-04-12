@@ -18,6 +18,7 @@ namespace MammacookedWebAPi
         public int OrderId { get; set; }
         public int ItemId { get; set; }
         public System.DateTime DateTime { get; set; }
+        public Nullable<int> Count { get; set; }
     
         public virtual FoodItem FoodItem { get; set; }
         public virtual Order Order { get; set; }

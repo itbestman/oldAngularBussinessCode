@@ -42,7 +42,10 @@ export class LoginComponent implements OnInit {
     this.loginService.login(data).subscribe((data) => {
       console.log(data);
       sessionStorage.setItem('token', data.access_token);
-      this.appService.token = data.access_token;
+      if (!this.appService.token) {
+        this.appService.token = data.access_token;
+      }
+      
       this._router.navigate(['dashboard/dashboard']);
     }, (error) => {
       console.log("error ", error);

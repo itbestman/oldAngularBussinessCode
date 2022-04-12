@@ -151,6 +151,50 @@ namespace MammacookedWebAPi.Controllers
             }
         }
 
+        [Route("GetDefaultFoodPlans")]
+        [HttpPost]
+        public IHttpActionResult GetDefaultFoodPlans()
+        {
+            try
+            {
+                using (DBContext db = new DBContext())
+                {
+                    var res = (from O in db.Orders
+                              join OI in db.OrderItems on O.Id equals OI.OrderId
+                              join FI in db.FoodItems on OI.ItemId equals FI.Id
+                              where (O.UserId == "defalult_bf" || O.UserId == "defalult_dnr" || O.UserId == "defalult_lnc")
+                                    & FI.DeleteFlag == false
+                              select new
+                              {
+                                  FoodtypeName = O.UserId == "defalult_bf" ? "Breack Fast" : O.UserId == "defalult_dnr" ? "Dinner" : O.UserId == "defalult_lnc" ? "Lunch" : "",
+                                  FoodItemName = FI.Name,
+                                  Details = FI.Details,
+                                  Count = OI.Count,
+                                  PricePerPice=FI.Prise,
+                                  CountType=FI.CountType,
+                                  TotelPrice = OI.Count * FI.Prise,
+                                  Currency = FI.Currency
+                              }).ToList();
+                    if (res != null)
+                    {
+                        return Ok(res);
+                    }
+                    else
+                    {
+                        return Json(new { Status = "Error", Email = User.Identity.Name });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
+
+
 
 
 

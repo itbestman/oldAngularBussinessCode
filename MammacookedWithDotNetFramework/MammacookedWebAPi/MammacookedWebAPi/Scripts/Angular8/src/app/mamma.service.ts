@@ -87,6 +87,16 @@ export class MammaService {
   registerGoogleUser(base): Observable<any> {
     return this.httpClient.get<any>(this.apiURL + "/Account/ExternalLogins?returnUrl=" + base + "&generateState=true");
   }
+
+  logOut(data = {}) {
+    return this.httpClient.post<any>(this.apiURL + "/Account/Logout", data, this.httpOptionsBearer);
+  }
+
+  // old not in use
+  GetUserInformation(data = { name: 'the' }) {
+    return this.httpClient.get<any>(this.apiURL + "/Account/UserInfo", this.httpOptionsBearer);
+  }
+
   showNotification(notificType: string, message: string) {
     let X: string = 'bottom';
     let Y: string = 'right';
@@ -172,11 +182,7 @@ export class MammaService {
   GetFoodGroupItems(data) {
     return this.httpClient.post<any>(this.apiURL + "/homepage/GetFoodGroupItems", data, this.httpOptions);
   }
-  // old not in use
-  GetUserInformation(data = { name: 'the' }) {
-    return this.httpClient.get<any>(this.apiURL + "/Account/UserInfo",this.httpOptionsBearer);
-  }
-  
+
   getImage(data) {
     return this.httpClient.get<any>(data,this.httpOptionsBearer);
   }
@@ -189,8 +195,14 @@ export class MammaService {
     return this.httpClient.post<any>(this.apiURL + "/Consumer/GetConsumerDetails",data,this.httpOptionsBearer);
   }
 
-  logOut(data={})
-  {
-    return this.httpClient.post<any>(this.apiURL + "/Account/Logout",data,this.httpOptionsBearer);
+  //Start Planner
+  GetFoodPlansForMonth(data) {
+    return this.httpClient.post<any>(this.apiURL + "/Consumer/GetFoodPlansForMonth", data, this.httpOptionsBearer);
   }
+  
+  getDefaultFoodPlans(data = {}) {
+    return this.httpClient.post<any>(this.apiURL + "/homepage/GetDefaultFoodPlans", data, this.httpOptions);
+  }
+
+  // end Planner
 }

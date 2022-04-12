@@ -25,7 +25,7 @@ namespace MammacookedWebAPi
         public string About { get; set; }
         public string BreakFastAddr { get; set; }
         public string LunchAddr { get; set; }
-        public string Dinner { get; set; }
+        public string DinnerAddr { get; set; }
         public string B_LatLong { get; set; }
         public string L_LatLong { get; set; }
         public string D_latLong { get; set; }
