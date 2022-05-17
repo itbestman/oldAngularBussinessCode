@@ -20,7 +20,6 @@ namespace MammacookedWebAPi.Controllers
             string UserName = User.Identity.Name;
             try
             {
-
                 using (DBContext db = new DBContext())
                 {
                     CustomerDetail CD = db.CustomerDetails.Where(x => x.Email == UserName).FirstOrDefault();
@@ -28,42 +27,48 @@ namespace MammacookedWebAPi.Controllers
                     {
                         CustomerDetail AddCD = new CustomerDetail();
                         AddCD.Email = User.Identity.Name;
-                        AddCD.FirstName = value["FirstName"].ToString();
-                        AddCD.LastName = value["LastName"].ToString();
-                        AddCD.Address = value["Address"].ToString();
-                        AddCD.City = value["City"].ToString();
-                        AddCD.Country = value["Country"].ToString();
-                        AddCD.PostalCode = value["PostalCode"].ToString();
-                        AddCD.About = value["About"].ToString();
-                        AddCD.BreakFastAddr = value["BreakFastAddr"].ToString();
-                        AddCD.LunchAddr = value["LunchAddr"].ToString();
-                        AddCD.DinnerAddr = value["DinnerAddr"].ToString();
-                        AddCD.B_LatLong = value["B_LatLong"].ToString();
-                        AddCD.L_LatLong = value["L_LatLong"].ToString();
-                        AddCD.D_latLong = value["D_latLong"].ToString();
-                        AddCD.Phone_1 = value["Phone_1"].ToString();
-                        AddCD.Phone_2 = value["Phone_2"].ToString();
+                        AddCD.FirstName = value["firstName"].ToString();
+                        AddCD.LastName = value["lastName"].ToString();
+                        AddCD.Address = value["address"].ToString();
+                        AddCD.City = value["city"].ToString();
+                        AddCD.Country = value["country"].ToString();
+                        AddCD.PostalCode = value["postalCode"].ToString();
+                        AddCD.About = value["about"].ToString();
+                        //AddCD.BreakFastAddr = value["BreakFastAddr"].ToString();
+                        //AddCD.LunchAddr = value["LunchAddr"].ToString();
+                        //AddCD.DinnerAddr = value["DinnerAddr"].ToString();
+                        //AddCD.B_LatLong = value["B_LatLong"].ToString();
+                        //AddCD.L_LatLong = value["L_LatLong"].ToString();
+                        //AddCD.D_latLong = value["D_latLong"].ToString();  in Future will again review and provide saparet bld
+                        AddCD.BreakFastAddr = value["foodDeliveryAddress"].ToString();
+                        AddCD.LunchAddr = "";
+                        AddCD.DinnerAddr = "";
+                        AddCD.B_LatLong = value["FDALatLong"].ToString();
+                        AddCD.L_LatLong = "";
+                        AddCD.D_latLong = "";
+                        AddCD.Phone_1 = value["phoneNumber"].ToString();
+                        AddCD.Phone_2 = value["altPhoneNumber"].ToString();
                         AddCD.CreatedOn = DateTime.Now;
                         db.CustomerDetails.Add(AddCD);
                         return Ok(db.SaveChanges());
                     }
                     else
                     {
-                        CD.About = value["About"].ToString();
-                        CD.Address = value["Address"].ToString();
-                        CD.City = value["City"].ToString();
-                        CD.Country = value["Country"].ToString();
-                        CD.BreakFastAddr = value["BreakFastAddr"].ToString();
-                        CD.B_LatLong = value["B_LatLong"].ToString();
-                        CD.LunchAddr = value["LunchAddr"].ToString();
-                        CD.L_LatLong = value["L_LatLong"].ToString();
-                        CD.DinnerAddr = value["DinnerAddr"].ToString();
-                        CD.D_latLong = value["D_latLong"].ToString();
-                        CD.FirstName = value["FirstName"].ToString();
-                        CD.LastName = value["LastName"].ToString();
-                        CD.PostalCode = value["PostalCode"].ToString();
-                        CD.Phone_1 = value["Phone_1"].ToString();
-                        CD.Phone_2 = value["Phone_2"].ToString();
+                        CD.About = value["about"].ToString();
+                        CD.Address = value["address"].ToString();
+                        CD.City = value["city"].ToString();
+                        CD.Country = value["country"].ToString();
+                        CD.BreakFastAddr = value["foodDeliveryAddress"].ToString();
+                        CD.B_LatLong = value["FDALatLong"].ToString();
+                        CD.LunchAddr = "";
+                        CD.L_LatLong = "";
+                        CD.DinnerAddr = "";
+                        CD.D_latLong = "";
+                        CD.FirstName = value["firstName"].ToString();
+                        CD.LastName = value["lastName"].ToString();
+                        CD.PostalCode = value["postalCode"].ToString();
+                        CD.Phone_1 = value["phoneNumber"].ToString();
+                        CD.Phone_2 = value["altPhoneNumber"].ToString();
                         CD.UpdateOn = DateTime.Now;
                         var ret = db.SaveChanges();
                         return Ok(ret);
@@ -74,7 +79,6 @@ namespace MammacookedWebAPi.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-
             }
 
 

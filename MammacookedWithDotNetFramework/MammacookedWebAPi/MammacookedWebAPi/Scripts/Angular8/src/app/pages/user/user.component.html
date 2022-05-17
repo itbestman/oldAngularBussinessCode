@@ -190,7 +190,7 @@
               <div class="form-group">
                 <label>Food Delivery Address</label>
                 <input type="text" class="form-control" placeholder="Delivery Address" id="deliveryAddress" name="deleviryAddress" [(ngModel)]="userData.foodDeliveryAddress"><br />
-                <button type="button" class="btn btn-primary" (click)="fillSameAddress()">Delevery address is same as Permanent address</button>
+                <button type="button" class="btn btn-primary" (click)="fillSameAddress()" [disabled]="userData.foodDeliveryAddress!=''">Delevery address is same as Permanent address</button>
               </div>
             </div>
             <div class="col-md-6 pl-1">
@@ -198,7 +198,7 @@
                 <label>Delivery Latitude Longitude</label>
                 <input type="text" class="form-control" placeholder="Latitude Longitude" id="FDALatLong" name="FDALatLong" [(ngModel)]="userData.FDALatLong">
                 <br />
-                <button type="button" class="btn btn-default" onclick="window.open('https://www.google.com/maps/@25.4352706,81.8476511,17.23z');">Open Google Map to copy latitude and longitude</button>
+                <button type="button" class="btn btn-default" (click)="openGoogleMap()">Open Google Map to copy latitude and longitude</button>
                 <br />
                 <span class="text-danger"> To copy Latitude and Longitude please right click on your location on google map and select Latitude, Longitude and paste in the box </span><br />
 
@@ -244,7 +244,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label> Please share your experience with us</label>
+                <label> Please share more detail about destination if required.</label>
                 <textarea class="form-control textarea"  id="about" name="about" [(ngModel)]="userData.about">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
               </div>
             </div>
