@@ -25,9 +25,9 @@ export class UserComponent implements OnInit {
     altPhoneNumber: '',
     foodDeliveryAddress: '',
     about: '',
-    country: '',
+    country: 'India',
     FDALatLong: '',
-    Email:''
+    Email: ''
   };
 
   loadPageInformation() {
@@ -36,7 +36,7 @@ export class UserComponent implements OnInit {
         this.userData.about = data.About;
         this.userData.address = data.Address
         this.userData.city = data.City;
-        this.userData.country = data.Country;
+        this.userData.country = data.Country == '' ? 'India' : data.Country;
         this.userData.foodDeliveryAddress = data.BreakFastAddr;
         this.userData.FDALatLong = data.B_LatLong;
         this.userData.firstName = data.FirstName;

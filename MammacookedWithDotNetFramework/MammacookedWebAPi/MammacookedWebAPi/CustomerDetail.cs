@@ -39,5 +39,9 @@ namespace MammacookedWebAPi
         public string ImagePath { get; set; }
         public string Phone_1 { get; set; }
         public string Phone_2 { get; set; }
+        public string ReferenceCode { get; set; }
+        public Nullable<decimal> TotelEarnings { get; set; }
+        public Nullable<int> ReferredCount { get; set; }
+        public Nullable<int> TotelDelevery { get; set; }
     }
 }

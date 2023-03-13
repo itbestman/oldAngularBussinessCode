@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http
 import { Observable, throwError, of } from "rxjs";
 import { catchError } from 'rxjs/operators';
 import { ToastrService } from "ngx-toastr";
+import { LoginService } from './login/login.service';
 
 
 @Injectable({
@@ -13,10 +14,10 @@ import { ToastrService } from "ngx-toastr";
 export class MammaService {
 
   apiURL: string = 'http://localhost:59786/api';
-  token = sessionStorage.getItem('token');
-  selectedFoodGroup="";
-  public showLoader:boolean=false;
-  user:any={};
+  token = JSON.parse(JSON.stringify(sessionStorage.getItem('token')));
+  selectedFoodGroup = "";
+  public showLoader: boolean = false;
+  user: any = {};
   httpOptionsBearer = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -34,7 +35,11 @@ export class MammaService {
 
 
   private actionUrl: string;
-  constructor(private httpClient: HttpClient, private toastr: ToastrService) {
+  constructor(private httpClient: HttpClient, private toastr: ToastrService, private loginService: LoginService) {
+    if (this.token == null || this.token == undefined) {
+      this.token = this.loginService.token;
+    }
+
     this.httpOptionsBearer = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -184,28 +189,42 @@ export class MammaService {
   }
 
   getImage(data) {
-    return this.httpClient.get<any>(data,this.httpOptionsBearer);
+    return this.httpClient.get<any>(data, this.httpOptionsBearer);
   }
 
   UpdateConsumer(data) {
-    return this.httpClient.post<any>(this.apiURL + "/Consumer/UpdateConsumer",JSON.stringify(data), this.httpOptionsBearer);
+    return this.httpClient.post<any>(this.apiURL + "/Consumer/UpdateConsumer", JSON.stringify(data), this.httpOptionsBearer);
   }
 
-  GetConsumerDetails(data={}) {
-    return this.httpClient.post<any>(this.apiURL + "/Consumer/GetConsumerDetails",data,this.httpOptionsBearer);
+  GetConsumerDetails(data = {}) {
+    return this.httpClient.post<any>(this.apiURL + "/Consumer/GetConsumerDetails", data, this.httpOptionsBearer);
   }
+
+
+  // Start DashBoard
+
+  GetUserDashBoardData(data = {}) {
+    return this.httpClient.post<any>(this.apiURL + "/Consumer/GetUserDashBoardData", data, this.httpOptionsBearer);
+  }
+  // End Dashboard
+
 
   //Start Planner
   GetFoodPlansForMonth(data) {
     return this.httpClient.post<any>(this.apiURL + "/Consumer/GetFoodPlansForMonth", data, this.httpOptionsBearer);
   }
-  
+
   getDefaultFoodPlans(data = {}) {
-    return this.httpClient.post<any>(this.apiURL + "/homepage/GetDefaultFoodPlans", data, this.httpOptions);
+    return this.httpClient.post<any>(this.apiURL + "/homepage/GetDefaultFoodPlans", data, this.httpOptionsBearer);
+  }
+
+  AddOrder(data = {}) {
+    return this.httpClient.post<any>(this.apiURL + "/Consumer/AddOrder", data, this.httpOptionsBearer);
+  }
+  
+  getOrdersOfDate(data) {
+    return this.httpClient.post<any>(this.apiURL + "/Consumer/GetOrdersOfDate", data, this.httpOptionsBearer);
   }
 
   // end Planner
-
-
-
 }

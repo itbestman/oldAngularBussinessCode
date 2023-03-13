@@ -15,11 +15,20 @@ export class DashboardComponent implements OnInit{
   public chartColor;
   public chartEmail;
   public chartHours;
+  dashBoardPoints = {
+    MoneyRemain: 0,
+    TotelDelevery: 0,
+    ReferredCount: 0,
+    TotelEarnings: 0,
+    ReferenceCode: 0,
+    MonyBalance :0
+  };
   selecteFood: string = '';
   foodGroupItem: any = [];
 
   ngOnInit() {
     this.loadFoodGroupItem();
+    this.GetUserDashBoardData();
       this.chartColor = "#FFFFFF";
 
       this.canvas = document.getElementById("chartHours");
@@ -222,6 +231,18 @@ export class DashboardComponent implements OnInit{
       if (this.selecteFood != null && this.selecteFood != undefined) {
       }
       console.log(this.foodGroupItem, 'foodGroupItem');
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  
+  GetUserDashBoardData() {
+    this.appService.GetUserDashBoardData().subscribe((data) => {
+      if (data != null) {
+        this.dashBoardPoints = data[0];
+        console.log(data);
+      }
     }, (error) => {
       console.log(error);
     });

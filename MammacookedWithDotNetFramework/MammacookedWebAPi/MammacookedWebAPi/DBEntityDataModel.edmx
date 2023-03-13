@@ -92,6 +92,10 @@
           <Property Name="ImagePath" Type="varchar(max)" />
           <Property Name="Phone_1" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Phone_2" Type="varchar" MaxLength="15" />
+          <Property Name="ReferenceCode" Type="varchar" MaxLength="50" />
+          <Property Name="TotelEarnings" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ReferredCount" Type="int" />
+          <Property Name="TotelDelevery" Type="int" />
         </EntityType>
         <EntityType Name="FoodGroup">
           <Key>
@@ -150,6 +154,7 @@
           <Property Name="PaymentMedium" Type="varchar" MaxLength="50" />
           <Property Name="DeleveredTo" Type="varchar" MaxLength="50" />
           <Property Name="PendingAmount" Type="float" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -526,6 +531,7 @@ warning 6035: The relationship 'FK_CustomerDetail_AspNetUsers' has columns that 
           <Property Name="DeleveredTo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PendingAmount" Type="Double" />
           <NavigationProperty Name="OrderItems" Relationship="MyMammacoookeDRMModel.FK_OrderItem_Orders" FromRole="Order" ToRole="OrderItem" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -648,6 +654,10 @@ warning 6035: The relationship 'FK_CustomerDetail_AspNetUsers' has columns that 
           <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Phone_1" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Phone_2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ReferenceCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotelEarnings" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ReferredCount" Type="Int32" />
+          <Property Name="TotelDelevery" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -758,6 +768,7 @@ warning 6035: The relationship 'FK_CustomerDetail_AspNetUsers' has columns that 
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="PendingAmount" ColumnName="PendingAmount" />
                 <ScalarProperty Name="DeleveredTo" ColumnName="DeleveredTo" />
                 <ScalarProperty Name="PaymentMedium" ColumnName="PaymentMedium" />
@@ -793,6 +804,10 @@ warning 6035: The relationship 'FK_CustomerDetail_AspNetUsers' has columns that 
           <EntitySetMapping Name="CustomerDetails">
             <EntityTypeMapping TypeName="MyMammacoookeDRMModel.CustomerDetail">
               <MappingFragment StoreEntitySet="CustomerDetail">
+                <ScalarProperty Name="TotelDelevery" ColumnName="TotelDelevery" />
+                <ScalarProperty Name="ReferredCount" ColumnName="ReferredCount" />
+                <ScalarProperty Name="TotelEarnings" ColumnName="TotelEarnings" />
+                <ScalarProperty Name="ReferenceCode" ColumnName="ReferenceCode" />
                 <ScalarProperty Name="Phone_2" ColumnName="Phone_2" />
                 <ScalarProperty Name="Phone_1" ColumnName="Phone_1" />
                 <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />

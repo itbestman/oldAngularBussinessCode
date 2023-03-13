@@ -10,7 +10,8 @@
                 <div class="card-category" *ngIf="selectedDayForEditFoodPlan != undefined">
                   Please click a day to change Plans for the day/week/month
                   <div>
-                    <a style="text-decoration:underline" (click)="editPlanOnDate(selectedDayForEditFoodPlan)">{{selectedDayForEditFoodPlan}} Edit</a>
+                    <a style="text-decoration:underline"
+                      (click)="editPlanOnDate(selectedDayForEditFoodPlan)">{{selectedDayForEditFoodPlan}} Edit</a>
                   </div>
                 </div>
                 <div *ngIf="selectedDayForEditFoodPlan==undefined">
@@ -19,35 +20,25 @@
               </div>
               <div class="card-body">
                 <div class="btn-group">
-                  <div class="btn btn-primary"
-                       mwlCalendarPreviousView
-                       [view]="myView"
-                       [(viewDate)]="viewDate"
-                       (viewDateChange)="closeOpenMonthViewDay()">
+                  <div class="btn btn-primary" mwlCalendarPreviousView [view]="myView" [(viewDate)]="viewDate"
+                    (viewDateChange)="closeOpenMonthViewDay()">
                     Previous
                   </div>
-                  <div class="btn btn-outline-secondary"
-                       mwlCalendarToday
-                       [(viewDate)]="viewDate">
+                  <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
                     Today
                   </div>
-                  <div class="btn btn-primary"
-                       mwlCalendarNextView
-                       [view]="myView"
-                       [(viewDate)]="viewDate"
-                       (viewDateChange)="closeOpenMonthViewDay()">
+                  <div class="btn btn-primary" mwlCalendarNextView [view]="myView" [(viewDate)]="viewDate"
+                    (viewDateChange)="closeOpenMonthViewDay()">
                     Next
                   </div>
                 </div>
                 <div class="col-md-4">
                   <h3>{{ viewDate | date}}</h3>
                 </div>
-                <mwl-calendar-month-view [viewDate]="viewDate"
-                                         [events]="events"
-                                         [refresh]="refresh"
-                                         [activeDayIsOpen]="activeDayIsOpen"
-                                         (dayClicked)="dayClicked($event.day)"
-                                         (eventClicked)="handleEvent('Clicked', $event.event)">
+                <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+                  [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day);"
+                  (eventClicked)="handleEvent('Clicked', $event.event)">
+
                 </mwl-calendar-month-view>
                 <br />
               </div>
@@ -61,6 +52,10 @@
               <span class="alert-heading bg-warning" style=" text-align: center;;
                     padding: 17px;">Detail of food plans on date <b>{{viewDate | date}} </b> </span>
               <br />
+              <div *ngIf="todayFoodPlans.length == 0 "
+                style=" text-align: center; padding: 14px; font-weight: bold; margin-top: -25px;">
+                No Record found On Selected Day.
+              </div>
 
               <ng-template ngFor let-item [ngForOf]="todayFoodPlans">
                 <table class="table">
@@ -68,9 +63,11 @@
                   <tr>
                     <td class="bg-warning" style="background-color: blanchedalmond !important;">
                       <span style="float: left; font-size: large;">
-                        {{item.TimeSlot == "B" ? 'Breack Fast' : item.TimeSlot == "L" ? 'Lunch' : item.TimeSlot == "D" ? 'Dinner' : ''}}
+                        {{item.TimeSlot == "B" ? 'Breack Fast' : item.TimeSlot == "L" ? 'Lunch' : item.TimeSlot == "D" ?
+                        'Dinner' : ''}}
                       </span>
-                      <span style="float: right; font-size: large;">{{item.TotelPriceOfDelevery}} {{item.Currency}}</span>
+                      <span style="float: right; font-size: large;">{{item.TotelPriceOfDelevery}}
+                        {{item.Currency}}</span>
                     </td>
                   </tr>
                   <tr>
@@ -81,7 +78,8 @@
                         <table class="table table-striped">
                           <tr>
                             <td style="font-size: medium;">Food</td>
-                            <td style="font-size: large;"><strong>{{n.FoodItemName}} ({{n.Count}} {{n.CountType}})</strong> </td>
+                            <td style="font-size: large;"><strong>{{n.FoodItemName}} ({{n.Count}}
+                                {{n.CountType}})</strong> </td>
                             <td style="font-size: medium;">Delevered To</td>
                             <td style="font-size: large;">{{n.DeleveredTo}}</td>
                             <td style="font-size: medium;">Delevery Status</td>
@@ -97,7 +95,7 @@
                           </tr>
                           <tr>
 
-                        
+
                             <td colspan="4"></td>
                             <td style="font-size: medium; ">Totel</td>
                             <td style="font-size: large;"><strong>{{n.TotelPrice}}</strong> </td>
@@ -110,6 +108,7 @@
                     </td>
                   </tr>
 
+
                 </table>
               </ng-template>
 
@@ -120,7 +119,9 @@
         <div class="row" style="padding-top: 50px;">
           <div class="col-md-12">
             <div class="card card-chart">
-              <span class="alert-heading" style=" text-align: center; background-color: antiquewhite; padding: 17px;">The table showing default items you can change according to your need</span>
+              <span class="alert-heading"
+                style=" text-align: center; background-color: antiquewhite; padding: 17px;">The table showing default
+                items you can change according to your need</span>
               <br />
               <table class="table">
                 <tr class="bg-warning">
@@ -164,3 +165,215 @@
     </div>
   </div>
 </div>
+
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Food Plan at {{ viewDate | date}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <table class="table table-striped table-no-bordered ">
+        <tr class="">
+          <td class="flex-md-fill" style=" padding-top: 30px;">
+            Breakfast
+          </td>
+          <td>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="row">
+                  <div style="text-align:center;" class="col-lg-12">
+                    <div ngbDropdown class="d-inline-block">
+                      <button type="button" class="btn btn-outline-primary" id="dropdownB" ngbDropdownToggle>Select Your
+                        Breakfast </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownB">
+                        <button ngbDropdownItem *ngFor="let item of defauldFoodPlanBreackFast"
+                          (click)="dropdownFoodSelect(item,'B')">
+                          {{item.FoodItemName}}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="text-align:center; margin-top:5px;" class="col-lg-12">
+
+                    <button type="button" class="btn btn-outline-primary" style="font-weight: bold;"
+                      *ngIf="selectedFoodItemForBucket.B.FoodItemName!=undefined" (click)="moveToBasket('B')"
+                      [disabled]="selectedFoodItemForBucket.B.FoodItemName == undefined">
+                      {{selectedFoodItemForBucket.B.FoodItemName==undefined ? 'Add Item' : 'Move
+                      '+selectedFoodItemForBucket.B.FoodItemName + ' to basket'}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-8">
+                <table class="table table-borderless">
+                  <tr *ngFor="let item of orderingFoodItems.B">
+                    <td [ngStyle]="{'text-decoration': item.Count == 0 ?'line-through':'auto'}">
+                      {{item.FoodItemName}} ({{item.Count}} {{item.CountType}}) [{{item.PricePerPice}} INR /
+                      {{item.CountType}}]
+                    </td>
+                    <td>
+
+                      <button type="button" class="btn btn-outline-primary" style="" (click)="removeItem(item)">
+                        <span>Remove</span>
+                      </button>
+                      <span class="flex-lg-row"> {{item.Count}}</span>
+                      <button type="button" class="btn btn-outline-primary" (click)="addItem(item)">
+                        <span class="">Add</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr *ngIf="orderingFoodItems.B.length==0">
+                    <td>
+                      No item selected
+                    </td>
+
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </td>
+
+        </tr>
+        <tr>
+          <td style=" padding-top: 30px;">Lunch</td>
+          <td>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="row">
+                  <div style="text-align:center;" class="col-lg-12">
+                    <div ngbDropdown class="d-inline-block">
+                      <button type="button" class="btn btn-outline-primary" id="dropdownL" ngbDropdownToggle>Select Your
+                        Lunch </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownL">
+                        <button ngbDropdownItem *ngFor="let item of defauldFoodPlanLunct"
+                          (click)="dropdownFoodSelect(item,'L')">
+                          {{item.FoodItemName}}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="text-align:center; margin-top:5px;" class="col-lg-12">
+
+                    <button type="button" class="btn btn-outline-primary" style="font-weight: bold;"
+                      *ngIf="selectedFoodItemForBucket.L.FoodItemName!=undefined" (click)="moveToBasket('L')"
+                      [disabled]="selectedFoodItemForBucket.L.FoodItemName == undefined">
+                      {{selectedFoodItemForBucket.L.FoodItemName==undefined ? 'Add Item' : 'Move
+                      '+selectedFoodItemForBucket.L.FoodItemName + ' to basket'}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-8">
+                <table class="table table-borderless">
+                  <tr *ngFor="let item of orderingFoodItems.L">
+                    <td [ngStyle]="{'text-decoration': item.Count == 0 ?'line-through':'auto'}">
+                      {{item.FoodItemName}} ({{item.Count}} {{item.CountType}}) [{{item.PricePerPice}} INR /
+                      {{item.CountType}}]
+                    </td>
+                    <td>
+
+                      <button type="button" class="btn btn-outline-primary" style="" (click)="removeItem(item)">
+                        <span>Remove</span>
+                      </button>
+                      <span class="flex-lg-row"> {{item.Count}}</span>
+                      <button type="button" class="btn btn-outline-primary" (click)="addItem(item)">
+                        <span class="">Add</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr *ngIf="orderingFoodItems.L.length==0">
+                    <td>
+                      No item selected
+                    </td>
+
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+        <tr style=" padding-top: 30px;">
+          <td>Dinner</td>
+          <td>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="row">
+                  <div style="text-align:center;" class="col-lg-12">
+                    <div ngbDropdown class="d-inline-block">
+                      <button type="button" class="btn btn-outline-primary" id="dropdownD" ngbDropdownToggle>Select Your
+                        Dinner </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownD">
+                        <button ngbDropdownItem *ngFor="let item of defauldFoodPlanDinner"
+                          (click)="dropdownFoodSelect(item,'D')">
+                          {{item.FoodItemName}}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="text-align:center; margin-top:5px;" class="col-lg-12">
+
+                    <button type="button" class="btn btn-outline-primary" style="font-weight: bold;"
+                      *ngIf="selectedFoodItemForBucket.D.FoodItemName!=undefined" 
+                      (click)="moveToBasket('D')"
+                      [disabled]="selectedFoodItemForBucket.D.FoodItemName == undefined">
+                      {{selectedFoodItemForBucket.D.FoodItemName==undefined ? 'Add Item' : 'Move
+                      '+selectedFoodItemForBucket.D.FoodItemName + ' to basket'}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-8">
+                <table class="table table-borderless">
+                  <tr *ngFor="let item of orderingFoodItems.D">
+                    <td [ngStyle]="{'text-decoration': item.Count == 0 ?'line-through':'auto'}">
+                      {{item.FoodItemName}} ({{item.Count}} {{item.CountType}}) [{{item.PricePerPice}} INR /
+                      {{item.CountType}}]
+                    </td>
+                    <td>
+
+                      <button type="button" class="btn btn-outline-primary" style="" (click)="removeItem(item)">
+                        <span>Remove</span>
+                      </button>
+                      <span class="flex-lg-row"> {{item.Count}}</span>
+                      <button type="button" class="btn btn-outline-primary" (click)="addItem(item)">
+                        <span class="">Add</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr *ngIf="orderingFoodItems.D.length==0">
+                    <td>
+                      No item selected
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <span *ngIf="orderingFoodItems.B.length!= 0">
+
+  </span>
+  <div class="modal-footer">
+    <span class="float-left" style="font-size: large; font-weight: 600; position: absolute; left: 20px;">
+      Breakfast = {{totelBreakfast()}} + Lunch {{totelLunch()}} + Dinner {{totelDinner()}} = {{total()}} INR
+    </span>
+    <button type="button" class="btn btn-primary" (click)="applyDefaultPlan()">Apply Default Plan</button>
+    <button type="button" class="btn btn-primary" (click)="emptyBucket()">Delete All Plan</button>
+    <button type="button" class="btn btn-primary" (click)="onSaveFoodBasket()"
+      [disabled]="saveButtonDisableStatus|| validateButton()">
+      Save and proceed
+    </button>
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

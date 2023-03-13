@@ -30,6 +30,7 @@ namespace MammacookedWebAPi
         public string PaymentMedium { get; set; }
         public string DeleveredTo { get; set; }
         public Nullable<double> PendingAmount { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }

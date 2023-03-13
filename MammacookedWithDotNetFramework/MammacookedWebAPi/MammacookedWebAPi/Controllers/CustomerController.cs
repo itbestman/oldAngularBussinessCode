@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using MammacookedWebAPi.ContractModels;
+using MammacookedWebAPi.Enums;
+using AutoMapper;
 
 namespace MammacookedWebAPi.Controllers
 {
@@ -13,6 +16,19 @@ namespace MammacookedWebAPi.Controllers
     [RoutePrefix("api/Consumer")]
     public class CustomerController : ApiController
     {
+
+        IMapper iMapper;
+
+
+        public CustomerController()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Order, OrderModel>();
+            });
+
+            iMapper = config.CreateMapper();
+        }
         [Route("UpdateConsumer")]
         [HttpPost]
         public IHttpActionResult UpdateConsumer(JObject value)
@@ -117,9 +133,9 @@ namespace MammacookedWebAPi.Controllers
         [HttpPost]
         public IHttpActionResult GetFoodPlansForMonth(JObject value)
         {
-            DateTime DatePamam = Convert.ToDateTime(value["date"].ToString());
-            DateTime StartDate = new DateTime(DatePamam.Year, DatePamam.Month, 1);
-            DateTime EndDate = new DateTime(DatePamam.Year, DatePamam.Month , DateTime.DaysInMonth(DatePamam.Year, DatePamam.Month));
+            DateTime DateParam = Convert.ToDateTime(value["date"].ToString());
+            DateTime StartDate = new DateTime(DateParam.Year, DateParam.Month, 1);
+            DateTime EndDate = new DateTime(DateParam.Year, DateParam.Month, DateTime.DaysInMonth(DateParam.Year, DateParam.Month));
             EndDate = EndDate.AddHours(24).AddMinutes(60).AddSeconds(60);
             try
             {
@@ -129,7 +145,7 @@ namespace MammacookedWebAPi.Controllers
                     var res = (from O in db.Orders
                                join OI in db.OrderItems on O.Id equals OI.OrderId
                                join FI in db.FoodItems on OI.ItemId equals FI.Id
-                               where O.UserId == User.Identity.Name
+                               where O.UserId == User.Identity.Name && O.IsDeleted == false || O.IsDeleted == null
                                && O.Date >= StartDate && O.Date < EndDate
                                orderby O.DeleveredTo
                                select new
@@ -168,5 +184,212 @@ namespace MammacookedWebAPi.Controllers
             }
         }
 
+        [Route("GetUserDashBoardData")]
+        [HttpPost]
+        public IHttpActionResult GetUserDashBoardData(JObject value)
+        {
+            string UserName = User.Identity.Name;
+            try
+            {
+                using (DBContext db = new DBContext())
+                {
+
+                    var res = (
+                                from user in db.CustomerDetails
+                                where user.Email == UserName
+                                select user
+                               ).ToList();
+
+                    if (res != null)
+                    {
+                        return Ok(res);
+                    }
+                    else
+                    {
+                        return Json(new { Status = "Error", Email = User.Identity.Name });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [Route("AddOrder")]
+        [HttpPost]
+        public IHttpActionResult AddOrder(OrderContract orders)
+        {
+            try
+            {
+                if (DateTime.Now> orders.OrderDate)
+                {
+                    return BadRequest("Can not update old requests");
+                }
+                using (DBContext db = new DBContext())
+                {
+                    var tempOrders = db.Orders.Where((x) => x.Date == orders.OrderDate).Select((x) => x);
+                    foreach (var item in tempOrders)
+                    {
+                        item.IsDeleted = true;
+                    }
+                    db.SaveChanges();
+                }
+
+                using (DBContext db = new DBContext())
+                {
+                    var customer = (from user in db.CustomerDetails
+                                    where user.Email == User.Identity.Name
+                                    select user).FirstOrDefault();
+
+                    List<Order> listOrder = new List<Order>();
+
+                    if (orders.B.Count > 0 && orders.B.Where(x => x.Count > 0).ToList().Count > 0)
+                    {
+                        Order tblOrder = new Order();
+                        tblOrder.UserId = User.Identity.Name;
+                        tblOrder.TimeSlot = "B";
+                        tblOrder.Status = OrderStatus.BOOKED;
+                        tblOrder.PendingAmount = 0;
+                        tblOrder.PaymentStatus = PaymentStatus.PENDING;
+                        tblOrder.PaymentMedium = PaymentMedium.PAYMENTPENDING;
+                        tblOrder.Location = customer.Address;
+                        tblOrder.Date = orders.OrderDate;
+                        tblOrder.DeleveredTo = customer.FirstName + " " + customer.LastName;
+                        tblOrder.IsDeleted = false;
+                        foreach (var orderItem in orders.B)
+                        {
+                            if (orderItem.Count > 0)
+                            {
+                                OrderItem oi = new OrderItem();
+                                oi.ItemId = orderItem.FoodId;
+                                oi.Count = orderItem.Count;
+                                oi.DateTime = orders.OrderDate;
+                                tblOrder.OrderItems.Add(oi);
+                            }
+                            //db.Orders.Add()
+                        }
+                        db.Orders.Add(tblOrder);
+                        listOrder.Add(tblOrder);
+                    }
+                    if (orders.L.Count > 0 && orders.L.Where(x => x.Count > 0).ToList().Count > 0)
+                    {
+                        Order tblOrder = new Order();
+                        tblOrder.UserId = User.Identity.Name;
+                        tblOrder.TimeSlot = "L";
+                        tblOrder.Status = OrderStatus.BOOKED;
+                        tblOrder.PendingAmount = 0;
+                        tblOrder.PaymentStatus = PaymentStatus.PENDING;
+                        tblOrder.PaymentMedium = PaymentMedium.PAYMENTPENDING;
+                        tblOrder.Location = customer.Address;
+                        tblOrder.Date = orders.OrderDate;
+                        tblOrder.DeleveredTo = customer.FirstName + " " + customer.LastName;
+                        tblOrder.IsDeleted = false;
+                        foreach (var orderItem in orders.L)
+                        {
+                            if (orderItem.Count > 0)
+                            {
+                                OrderItem oi = new OrderItem();
+                                oi.ItemId = orderItem.FoodId;
+                                oi.Count = orderItem.Count;
+                                oi.DateTime = orders.OrderDate;
+                                tblOrder.OrderItems.Add(oi);
+                            }
+                            //db.Orders.Add()
+                        }
+                        db.Orders.Add(tblOrder);
+                        listOrder.Add(tblOrder);
+                    }
+                    if (orders.D.Count > 0 && orders.D.Where(x => x.Count > 0).ToList().Count > 0)
+                    {
+                        Order tblOrder = new Order();
+                        tblOrder.UserId = User.Identity.Name;
+                        tblOrder.TimeSlot = "D";
+                        tblOrder.Status = OrderStatus.BOOKED;
+                        tblOrder.PendingAmount = 0;
+                        tblOrder.PaymentStatus = PaymentStatus.PENDING;
+                        tblOrder.PaymentMedium = PaymentMedium.PAYMENTPENDING;
+                        tblOrder.Location = customer.Address;
+                        tblOrder.Date = orders.OrderDate;
+                        tblOrder.DeleveredTo = customer.FirstName + " " + customer.LastName;
+                        tblOrder.IsDeleted = false;
+                        foreach (var orderItem in orders.D)
+                        {
+                            if (orderItem.Count > 0)
+                            {
+                                OrderItem oi = new OrderItem();
+                                oi.ItemId = orderItem.FoodId;
+                                oi.Count = orderItem.Count;
+                                oi.DateTime = orders.OrderDate;
+                                tblOrder.OrderItems.Add(oi);
+                            }
+                            //db.Orders.Add()
+                        }
+                        db.Orders.Add(tblOrder);
+                        listOrder.Add(tblOrder);
+
+                    }
+
+                    var saveOutput = db.SaveChanges();
+                    if (saveOutput != 0)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return Json(new { Status = "Error", Email = User.Identity.Name });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetOrdersOfDate")]
+        [HttpPost]
+        public IHttpActionResult GetOrdersOfDate(JObject data)
+        {
+            try
+            {
+                DateTime orderDate = Convert.ToDateTime(data["orderDate"].ToString());
+                //IQueryable<Order> orderOnDate;
+                using (DBContext db = new DBContext())
+                {
+                    var customer = (from user in db.CustomerDetails
+                                    where user.Email == User.Identity.Name
+                                    select user).FirstOrDefault();
+
+                    var ordersValues = (from O in db.Orders
+                                        where O.Date == orderDate
+                                        && O.UserId == customer.Email
+                                        && O.OrderItems.Count > 0 
+                                        && (O.IsDeleted ==false || O.IsDeleted == null)
+                                        select new
+                                        {
+                                            orders = O.Id,
+                                            O.TimeSlot,
+                                            orderItem = O.OrderItems.Select(x => new { x.ItemId, x.Count })
+                                        }).ToList();
+
+
+
+
+
+                    return Ok(Newtonsoft.Json.JsonConvert.SerializeObject(ordersValues));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
+
 }
+
+

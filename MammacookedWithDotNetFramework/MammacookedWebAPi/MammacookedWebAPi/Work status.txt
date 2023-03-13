@@ -1,0 +1,21 @@
+﻿added booked item to table.
+
+
+
+to do
+1. disable order button onece clicked. -- no need because modal is automatically closed after click
+2. option to repeat old order or auto fill with default item --
+3. once come back from order modal then refresh plan page.
+4. found some issue in login,, in service token going as null
+5. load the same food into modal after click on calander = > working in this created api getOrdersOfDate
+6. update the plan on again submit
+7. create plan for month or week
+
+7/1/2022
+
+auto close after saving food.
+auto refresh the page after save the food, so now we can see ordered food
+
+//15/01/2023
+1. auto update the modal with plan of the day
+2. Delete for selected date

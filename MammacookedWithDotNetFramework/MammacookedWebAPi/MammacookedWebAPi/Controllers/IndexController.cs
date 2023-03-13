@@ -71,7 +71,6 @@ namespace MammacookedWebAPi.Controllers
             //return Ok("success full");
         }
 
-
         public static string ConvertImageToString(string name)
         {
             //fg.Select(x => new{x.Id,x.GroupDetails,x.GroupName,x.Image, theimage="manish"} );
@@ -163,7 +162,7 @@ namespace MammacookedWebAPi.Controllers
                               join OI in db.OrderItems on O.Id equals OI.OrderId
                               join FI in db.FoodItems on OI.ItemId equals FI.Id
                               where (O.UserId == "defalult_bf" || O.UserId == "defalult_dnr" || O.UserId == "defalult_lnc")
-                                    & FI.DeleteFlag == false
+                                    && FI.DeleteFlag == false 
                               select new
                               {
                                   FoodtypeName = O.UserId == "defalult_bf" ? "Breack Fast" : O.UserId == "defalult_dnr" ? "Dinner" : O.UserId == "defalult_lnc" ? "Lunch" : "",
@@ -173,7 +172,8 @@ namespace MammacookedWebAPi.Controllers
                                   PricePerPice=FI.Prise,
                                   CountType=FI.CountType,
                                   TotelPrice = OI.Count * FI.Prise,
-                                  Currency = FI.Currency
+                                  Currency = FI.Currency,
+                                  FoodId=FI.Id
                               }).ToList();
                     if (res != null)
                     {
@@ -190,13 +190,6 @@ namespace MammacookedWebAPi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-
-
-
-
-
-
 
         // GET: api/Index
         public IEnumerable<string> Get()
