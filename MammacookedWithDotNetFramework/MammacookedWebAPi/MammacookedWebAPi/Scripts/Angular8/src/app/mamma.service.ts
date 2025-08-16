@@ -14,9 +14,10 @@ import { LoginService } from './login/login.service';
 export class MammaService {
 
   apiURL: string = 'http://localhost:59786/api';
-  token = JSON.parse(JSON.stringify(sessionStorage.getItem('token')));
+  public token = JSON.parse(JSON.stringify(localStorage.getItem('token')));
   selectedFoodGroup = "";
   public showLoader: boolean = false;
+  public hasCustomerDetail: boolean = false;
   user: any = {};
   httpOptionsBearer = {
     headers: new HttpHeaders({
@@ -50,7 +51,7 @@ export class MammaService {
   }
 
   isLoggedIn() {
-    return sessionStorage.getItem('token') != undefined ? true : false;
+    return localStorage.getItem('token') != undefined ? true : false;
   }
 
 
@@ -218,12 +219,26 @@ export class MammaService {
     return this.httpClient.post<any>(this.apiURL + "/homepage/GetDefaultFoodPlans", data, this.httpOptionsBearer);
   }
 
+  getFoodPlans(data = {}) {
+    return this.httpClient.post<any>(this.apiURL + "/homepage/GetFoodPlans", data, this.httpOptionsBearer);
+  }
+
   AddOrder(data = {}) {
     return this.httpClient.post<any>(this.apiURL + "/Consumer/AddOrder", data, this.httpOptionsBearer);
   }
-  
+
   getOrdersOfDate(data) {
     return this.httpClient.post<any>(this.apiURL + "/Consumer/GetOrdersOfDate", data, this.httpOptionsBearer);
+  }
+
+  RepeatOrder(data) {
+    return this.httpClient.
+      post<any>(this.apiURL + "/Consumer/RepeatOrder", data, this.httpOptionsBearer);
+  }
+
+  setDefaultFoodPlan(data) {
+    return this.httpClient.
+      post<any>(this.apiURL + "/Consumer/SetDefaultFoodPlan", data, this.httpOptionsBearer);
   }
 
   // end Planner

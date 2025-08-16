@@ -1,142 +1,34 @@
 <div class="row">
-  <!--<div class="col-md-4">
-    <div class="card card-user">
-      <div class="image">
-        <img src="assets/img/damir-bosnjak.jpg" alt="...">
-      </div>
-      <div class="card-body">
-        <div class="author">
-          <a href="#">
-            <img class="avatar border-gray" src="assets/img/mike.jpg" alt="...">
-            <h5 class="title">Chet Faker</h5>
-          </a>
-          <p class="description">
-            @chetfaker
-          </p>
-        </div>
-        <p class="description text-center">
-          "I like the way you work it
-          <br> No diggity
-          <br> I wanna bag it up"
-        </p>
-      </div>
-      <div class="card-footer">
-        <hr>
-        <div class="button-container">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-6 ml-auto">
-              <h5>12
-                <br>
-                <small>Files</small>
-              </h5>
-            </div>
-            <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
-              <h5>2GB
-                <br>
-                <small>Used</small>
-              </h5>
-            </div>
-            <div class="col-lg-3 mr-auto">
-              <h5>24,6$
-                <br>
-                <small>Spent</small>
-              </h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Team Members</h4>
-      </div>
-      <div class="card-body">
-        <ul class="list-unstyled team-members">
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-md-7 col-7">
-                DJ Khaled
-                <br />
-                <span class="text-muted">
-                  <small>Offline</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-md-7 col-7">
-                Creative Tim
-                <br />
-                <span class="text-success">
-                  <small>Available</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-ms-7 col-7">
-                Flume
-                <br />
-                <span class="text-danger">
-                  <small>Busy</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>-->
   <div class="col-md-12">
     <div class="card card-user">
       <div class="card-header">
         <h5 class="card-title">Edit Profile</h5>
       </div>
       <div class="card-body">
-        <form>
+        <form #NgForm="ngForm" class="form" (ngSubmit)="NgForm.form.valid && UpdateProfile()">
           <div class="row">
             <div class="col-md-4 pr-1">
               <div class="form-group">
                 <label for="email">Email (username)</label>
-                <input type="text" class="form-control" disabled placeholder="Email" id="email" name="email" [(ngModel)]="userData.Email">
+                <input type="text" class="form-control" disabled placeholder="Email" id="email" name="email"
+                  [(ngModel)]="userData.Email">
               </div>
             </div>
             <div class="col-md-4 px-1">
               <div class="form-group">
                 <label for="firstname">First Name</label>
-                <input type="text" class="form-control" placeholder="First Name" id="firstname" name="firstName" [(ngModel)]="userData.firstName">
+                <input type="text" maxlength="20" required="true" class="form-control" placeholder="First Name"
+                  id="firstname" name="firstName" [(ngModel)]="userData.firstName" #name="ngModel">
+                <span class="text-danger" *ngIf="(name.touched || NgForm.submitted) && name.errors?.required">
+                  Name is required
+                </span>
               </div>
             </div>
             <div class="col-md-4 pl-1">
               <div class="form-group">
                 <label for="lastname">Last Name</label>
-                <input type="text" class="form-control" placeholder="Last Name" id="lastname" name="lastName" [(ngModel)]="userData.lastName">
+                <input type="text" maxlength="20" class="form-control" placeholder="Last Name" id="lastname"
+                  name="lastName" [(ngModel)]="userData.lastName">
               </div>
             </div>
           </div>
@@ -144,7 +36,11 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label>Full Address</label>
-                <input type="text" class="form-control" placeholder="Home Address" name="fullAddress" [(ngModel)]="userData.address">
+                <input type="text" maxlength="150" class="form-control" placeholder="Home Address" name="fullAddress"
+                  [(ngModel)]="userData.address" #address="ngModel" required>
+                  <span class="text-danger" *ngIf="(address.touched || NgForm.submitted) && address.errors?.required">
+                    Full address is required
+                  </span>
               </div>
             </div>
           </div>
@@ -152,19 +48,28 @@
             <div class="col-md-5 pr-1">
               <div class="form-group">
                 <label>City</label>
-                <input type="text" class="form-control" placeholder="City" name="city" [(ngModel)]="userData.city">
+                <input type="text" maxlength="15" class="form-control" placeholder="City" name="city"
+                  [(ngModel)]="userData.city" #city="ngModel" required>
+                  <span class="text-danger" *ngIf="(city.touched || NgForm.submitted) && city.errors?.required">
+                    City is required
+                  </span>
               </div>
             </div>
             <div class="col-md-4 px-1">
               <div class="form-group">
                 <label>Country</label>
-                <input type="text" disabled class="form-control" placeholder="Country" name="country" [(ngModel)]="userData.country">
+                <input type="text" disabled class="form-control" placeholder="Country" name="country"
+                  [(ngModel)]="userData.country">
               </div>
             </div>
             <div class="col-md-3 pl-1">
               <div class="form-group">
                 <label>Pin Code</label>
-                <input type="number" class="form-control" placeholder="Pin code" id="postalcode" name="postalcode" [(ngModel)]="userData.postalCode">
+                <input type="text" pattern="[0-9]*" maxlength="6" class="form-control" placeholder="Pin code"
+                  id="postalcode" name="postalcode" [(ngModel)]="userData.postalCode" #pincode="ngModel" required>
+                  <span class="text-danger" *ngIf="(pincode.touched || NgForm.submitted) && pincode.errors?.required">
+                    Pincode is required
+                  </span>
               </div>
             </div>
           </div>
@@ -173,13 +78,19 @@
             <div class="col-md-5 pr-1">
               <div class="form-group">
                 <label>Phone Number</label>
-                <input type="text" class="form-control" placeholder="Phone Number" id="phoneNumber" name="phoneNumber" [(ngModel)]="userData.phoneNumber">
+                <input type="text" pattern="[0-9]*" maxlength="10" placeholder="Phone Number" class="form-control"
+                  id="phoneNumber" name="phoneNumber" [(ngModel)]="userData.phoneNumber" #phoneNumber="ngModel" required>
+                  <span class="text-danger" *ngIf="(phoneNumber.touched || NgForm.submitted) && phoneNumber.errors?.required">
+                    Phone Number is required
+                  </span>
               </div>
             </div>
             <div class="col-md-4 px-1">
               <div class="form-group">
                 <label>Alternet Phone Number</label>
-                <input type="text" class="form-control" placeholder="Alternet Phone Number" id="altnumber" name="alternetNumber" [(ngModel)]="userData.altPhoneNumber">
+                <input type="text" class="form-control" pattern="[0-9]*" maxlength="10"
+                  placeholder="Alternet Phone Number" id="altnumber" name="alternetNumber"
+                  [(ngModel)]="userData.altPhoneNumber">
               </div>
             </div>
           </div>
@@ -189,18 +100,29 @@
             <div class="col-md-6 pr-1">
               <div class="form-group">
                 <label>Food Delivery Address</label>
-                <input type="text" class="form-control" placeholder="Delivery Address" id="deliveryAddress" name="deleviryAddress" [(ngModel)]="userData.foodDeliveryAddress"><br />
-                <button type="button" class="btn btn-primary" (click)="fillSameAddress()" [disabled]="userData.foodDeliveryAddress!=''">Delevery address is same as Permanent address</button>
+                <input type="text" maxlength="100" class="form-control" placeholder="Delivery Address"
+                  id="deliveryAddress" name="deleviryAddress" [(ngModel)]="userData.foodDeliveryAddress" #deliveryAddress ="ngModel" required>
+                  <span class="text-danger" *ngIf="(deliveryAddress.touched || NgForm.submitted) && deliveryAddress.errors?.required">
+                    Delivery address is required
+                  </span>
+                <button type="button" class="btn btn-primary" (click)="fillSameAddress()"
+                  [disabled]="userData.foodDeliveryAddress!=''">Delevery address is same as Permanent address</button>
               </div>
             </div>
             <div class="col-md-6 pl-1">
               <div class="form-group">
                 <label>Delivery Latitude Longitude</label>
-                <input type="text" class="form-control" placeholder="Latitude Longitude" id="FDALatLong" name="FDALatLong" [(ngModel)]="userData.FDALatLong">
+                <input type="text" class="form-control" placeholder="Latitude Longitude" id="FDALatLong"
+                  name="FDALatLong" [(ngModel)]="userData.FDALatLong" #latLong="ngModel" required>
+                  <span class="text-danger" *ngIf="(latLong.touched || NgForm.submitted) && latLong.errors?.required">
+                    Delivery Latitude, Longitude address is required
+                  </span>
                 <br />
-                <button type="button" class="btn btn-default" (click)="openGoogleMap()">Open Google Map to copy latitude and longitude</button>
+                <button type="button" class="btn btn-default" (click)="openGoogleMap()">Open Google Map to copy latitude
+                  and longitude</button>
                 <br />
-                <span class="text-danger"> To copy Latitude and Longitude please right click on your location on google map and select Latitude, Longitude and paste in the box </span><br />
+                <span class="text-danger"> To copy Latitude and Longitude please right click on your location on google
+                  map and select Latitude, Longitude and paste in the box </span><br />
 
               </div>
             </div>
@@ -240,18 +162,18 @@
       </div>
     </div>
   </div>-->
-          
+
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
                 <label> Please share more detail about destination if required.</label>
-                <textarea class="form-control textarea"  id="about" name="about" [(ngModel)]="userData.about">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
+                <textarea class="form-control textarea" id="about" name="about" [(ngModel)]="userData.about"></textarea>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="update ml-auto mr-auto">
-              <button type="submit" class="btn btn-primary btn-round" (click)="UpdateProfile()">Update Profile</button>
+              <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
             </div>
           </div>
         </form>

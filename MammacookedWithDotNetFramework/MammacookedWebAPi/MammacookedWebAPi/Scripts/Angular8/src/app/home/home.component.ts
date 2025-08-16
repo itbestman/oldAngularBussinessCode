@@ -201,7 +201,7 @@ export class HomeComponent implements OnInit {
   }
   
   logout() {
-    sessionStorage.clear();
+    localStorage.clear();
     this.appService.logOut().subscribe((data) => {
       this.isLoggedIn = this.appService.isLoggedIn();
       this._router.navigate(["home"]);

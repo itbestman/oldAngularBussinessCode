@@ -12,14 +12,14 @@ var HomeComponent = /** @class */ (function () {
         this.appService = appService;
         this._router = _router;
         this.config = config;
-        this.isLoggedIn = sessionStorage.getItem('token') != undefined ? true : false;
+        this.isLoggedIn = localStorage.getItem('token') != undefined ? true : false;
         this.foodGroupData = [];
         config.interval = 2000;
         config.wrap = true;
         config.keyboard = false;
         config.pauseOnHover = false;
         // config.pauseOnHover = true;
-        this.appService.isLoggedIn = sessionStorage.getItem('token') != undefined ? true : false;
+        this.appService.isLoggedIn = localStorage.getItem('token') != undefined ? true : false;
     }
     HomeComponent.prototype.ngOnInit = function () {
         this.loadPage();
@@ -41,7 +41,7 @@ var HomeComponent = /** @class */ (function () {
         this._router.navigate(["foodgroups"]);
     };
     HomeComponent.prototype.logout = function () {
-        sessionStorage.clear();
+        localStorage.clear();
         this._router.navigate(["login"]);
     };
     HomeComponent = __decorate([

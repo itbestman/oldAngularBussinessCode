@@ -15,10 +15,11 @@ export class RegisterComponent implements OnInit {
   email: string = "";
   password: string = "";
   confirmPassword: string = "";
-
+  errorArray: any;
+  
   ngOnInit() {
   }
-  errorArray: any;
+  
   registerUser() {
     this.errorArray = undefined;
     let postdata: any = {}
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
       console.log(data);
 
       if (data.result == "success") {
+        this.appService.hasCustomerDetail=false;
         //redirect
         this._router.navigate(['login']);
       }

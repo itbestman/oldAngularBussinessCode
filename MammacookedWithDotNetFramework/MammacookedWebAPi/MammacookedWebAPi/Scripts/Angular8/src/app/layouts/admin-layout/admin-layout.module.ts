@@ -12,7 +12,7 @@ import { TypographyComponent } from '../../pages/typography/typography.component
 import { PlannerComponent } from '../../pages/planner/planner.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { NotificationsComponent } from '../../pages/notifications/notifications.component';
-import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
+import { AboutUsComponent } from '../../pages/aboutUs/aboutUs.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/moment';
@@ -35,7 +35,7 @@ export function momentAdapterFactory() {
     DashboardComponent,
     UserComponent,
     TableComponent,
-    UpgradeComponent,
+    AboutUsComponent,
     TypographyComponent,
     PlannerComponent,
     MapsComponent,

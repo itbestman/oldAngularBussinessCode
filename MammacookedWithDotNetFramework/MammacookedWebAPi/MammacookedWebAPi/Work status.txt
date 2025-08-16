@@ -1,21 +1,57 @@
 ﻿added booked item to table.
-
-
+remember//
+1. for now we are not using different address of breack fast, dinner, lunch just depending on customerdeteil. address
+2. have to re write code for customercontroller>SetDefaultFoodPlan method. use groupby
+3. ability to add more item than default food
 
 to do
 1. disable order button onece clicked. -- no need because modal is automatically closed after click
-2. option to repeat old order or auto fill with default item --
-3. once come back from order modal then refresh plan page.
-4. found some issue in login,, in service token going as null
-5. load the same food into modal after click on calander = > working in this created api getOrdersOfDate
-6. update the plan on again submit
-7. create plan for month or week
+2. option to repeat old order or auto fill with default item -- done
+2.1		applay default food plan in modal --done
+
+3. once come back from order modal then refresh plan page.-- done
+4. found some issue in login,, in service token going as null -- added interceptor
+5. load the same food into modal after click on calander = > working in this created api getOrdersOfDate --done
+6. update the plan on again submit-- done
+7. create/repeat plan for month or week --done
+8. show dash board status like Money Remain, Total deleveries Added people , total earned money
+9. food tracking
+10. desable all menu if user profile is not filled. --done
+11. after new regestration user should redirect to user profile.-- done
+12. add auth Gurd
+13. in user component used window.location.reload(). replace it with observer
+14. validation in user component --done
+15. dash board things graph things
+16. remove unwanted codes.
+17. some time landing page having profile dropdown insted of login
+18. masking on user page not working.
+19. about us and contact us links. footer sections
+20. update blog and licence of footer
+21. devide ketchen by area
+22. online money loading
+
+test//
+1. Multiuser test
 
 7/1/2022
-
 auto close after saving food.
 auto refresh the page after save the food, so now we can see ordered food
 
 //15/01/2023
 1. auto update the modal with plan of the day
 2. Delete for selected date
+
+17/4/2023
+1. repeat food plan from Plan descriptin table form Food plan page
+2. default food plan auto load in modal popup
+
+
+
+
+select O.UserId,O.[Date],O.TimeSlot,O.Location,[Count],FI.Name from [Order] O
+join OrderItem OI on o.Id = OI.OrderId
+join FoodItem FI on FI.Id = OI.ItemId
+--order by [Date]
+where o.[status]='booked' and
+o.[Date] = '2023-07-05'and
+o.timeslot='b'

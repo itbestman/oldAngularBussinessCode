@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
   loginUser() {
     let data: any = {};
     //data = "grant_type=password&username=" + this.email + "&password=" + this.password;
+    this.appService.token = undefined;
+    localStorage.removeItem('token');
 
     data = "userName=" + encodeURIComponent(this.email) +
       "&password=" + encodeURIComponent(this.password) +
@@ -40,13 +42,25 @@ export class LoginComponent implements OnInit {
 
 
     this.loginService.login(data).subscribe((data) => {
-      console.log(data);
-      sessionStorage.setItem('token', data.access_token);
-      if (!this.appService.token) {
-        this.appService.token = data.access_token;
-      }
-      
-      this._router.navigate(['dashboard/dashboard']);
+
+      this.appService.token = data.access_token;
+
+      localStorage.setItem('token', data.access_token);
+
+
+      this.appService.GetConsumerDetails().subscribe((data) => {
+        if (data != null && Object.keys(data).length > 2) {//on new user also it having email and ok status field
+          this.appService.hasCustomerDetail = true;
+          this._router.navigate(['dashboard/dashboard']);
+        }
+        else if (data != null && Object.keys(data).length == 2) {
+          this.appService.hasCustomerDetail = false;
+          this._router.navigate(['dashboard/user']);
+        }
+      }, (error) => {
+        console.log(error);
+      });
+
     }, (error) => {
       console.log("error ", error);
       if (error.status == 400) {

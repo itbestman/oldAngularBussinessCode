@@ -223,13 +223,13 @@ namespace MammacookedWebAPi.Controllers
         {
             try
             {
-                if (DateTime.Now> orders.OrderDate)
+                if (DateTime.Now > orders.OrderDate)
                 {
                     return BadRequest("Can not update old requests");
                 }
                 using (DBContext db = new DBContext())
                 {
-                    var tempOrders = db.Orders.Where((x) => x.Date == orders.OrderDate).Select((x) => x);
+                    var tempOrders = db.Orders.Where((x) => x.Date == orders.OrderDate && x.UserId == User.Identity.Name).Select((x) => x);
                     foreach (var item in tempOrders)
                     {
                         item.IsDeleted = true;
@@ -254,7 +254,7 @@ namespace MammacookedWebAPi.Controllers
                         tblOrder.PendingAmount = 0;
                         tblOrder.PaymentStatus = PaymentStatus.PENDING;
                         tblOrder.PaymentMedium = PaymentMedium.PAYMENTPENDING;
-                        tblOrder.Location = customer.Address;
+                        tblOrder.Location = customer.BreakFastAddr;
                         tblOrder.Date = orders.OrderDate;
                         tblOrder.DeleveredTo = customer.FirstName + " " + customer.LastName;
                         tblOrder.IsDeleted = false;
@@ -282,7 +282,7 @@ namespace MammacookedWebAPi.Controllers
                         tblOrder.PendingAmount = 0;
                         tblOrder.PaymentStatus = PaymentStatus.PENDING;
                         tblOrder.PaymentMedium = PaymentMedium.PAYMENTPENDING;
-                        tblOrder.Location = customer.Address;
+                        tblOrder.Location = customer.BreakFastAddr;
                         tblOrder.Date = orders.OrderDate;
                         tblOrder.DeleveredTo = customer.FirstName + " " + customer.LastName;
                         tblOrder.IsDeleted = false;
@@ -310,7 +310,7 @@ namespace MammacookedWebAPi.Controllers
                         tblOrder.PendingAmount = 0;
                         tblOrder.PaymentStatus = PaymentStatus.PENDING;
                         tblOrder.PaymentMedium = PaymentMedium.PAYMENTPENDING;
-                        tblOrder.Location = customer.Address;
+                        tblOrder.Location = customer.BreakFastAddr;
                         tblOrder.Date = orders.OrderDate;
                         tblOrder.DeleveredTo = customer.FirstName + " " + customer.LastName;
                         tblOrder.IsDeleted = false;
@@ -365,18 +365,14 @@ namespace MammacookedWebAPi.Controllers
                     var ordersValues = (from O in db.Orders
                                         where O.Date == orderDate
                                         && O.UserId == customer.Email
-                                        && O.OrderItems.Count > 0 
-                                        && (O.IsDeleted ==false || O.IsDeleted == null)
+                                        && O.OrderItems.Count > 0
+                                        && (O.IsDeleted == false || O.IsDeleted == null)
                                         select new
                                         {
                                             orders = O.Id,
                                             O.TimeSlot,
                                             orderItem = O.OrderItems.Select(x => new { x.ItemId, x.Count })
                                         }).ToList();
-
-
-
-
 
                     return Ok(Newtonsoft.Json.JsonConvert.SerializeObject(ordersValues));
                 }
@@ -388,6 +384,219 @@ namespace MammacookedWebAPi.Controllers
             }
         }
 
+
+
+        [Route("RepeatOrder")]
+        [HttpPost]
+        public IHttpActionResult RepeatOrder(JObject data)
+        {
+            try
+            { // have to werite code for delete orders if already exists for coming days
+                string repeatOrderType = data["repeatOrderType"].ToString();
+                int orderId = 0;
+                orderId = Convert.ToInt32(data["orderId"].ToString());
+
+                //IQueryable<Order> orderOnDate;
+                using (DBContext db = new DBContext())
+                {
+                    var customer = (from user in db.CustomerDetails
+                                    where user.Email == User.Identity.Name
+                                    select user).FirstOrDefault();
+
+                    var pointedOrder = (from O in db.Orders
+                                        join OI in db.OrderItems on O.Id equals OI.OrderId
+                                        where O.Id == orderId
+                                        select O
+                                        ).FirstOrDefault();
+
+                    DateTime orderDateStart = pointedOrder.Date.Value; ;
+                    DateTime orderDateEnd = pointedOrder.Date.Value.AddDays((repeatOrderType == "W" ? 7 : repeatOrderType == "M" ? 30 : 0));
+                    var tempOrders = (from O in db.Orders
+                                      where O.UserId == User.Identity.Name &&
+                                      O.Date > orderDateStart && O.Date < orderDateEnd &&
+                                      O.TimeSlot == pointedOrder.TimeSlot
+                                      select O).ToList();
+                    foreach (var item in tempOrders)
+                    {
+                        item.IsDeleted = true;
+                    }
+
+                    //using (DBContext db = new DBContext())
+                    //{
+                    List<Order> orderList = new List<Order>();
+                    for (int i = 0; i < (repeatOrderType == "W" ? 7 : repeatOrderType == "M" ? 30 : 0); i++)
+                    {
+
+
+                        Order order = new Order();
+                        order.UserId = customer.Email;
+                        order.Date = pointedOrder.Date.Value.AddDays(i + 1);
+                        order.TimeSlot = pointedOrder.TimeSlot;
+                        order.Status = OrderStatus.BOOKED;
+                        order.Location = pointedOrder.Location;
+                        order.PaymentStatus = PaymentStatus.PENDING;
+                        order.PaymentMedium = PaymentMedium.PAYMENTPENDING;
+                        order.DeleveredTo = pointedOrder.DeleveredTo;
+                        order.PendingAmount = null;
+                        order.IsDeleted = false;
+                        //order.OrderItems = (List<OrderItem>) pointedOrder.OrderItems;
+                        foreach (OrderItem OI in pointedOrder.OrderItems)
+                        {
+                            OrderItem orderItem = new OrderItem();
+                            orderItem.ItemId = OI.ItemId;
+                            orderItem.DateTime = DateTime.Now;
+                            orderItem.Count = OI.Count;
+                            order.OrderItems.Add(orderItem);
+                        }
+                        db.Orders.Add(order);
+
+                    }
+
+                    var saveOutput = db.SaveChanges();
+                    if (saveOutput != 0)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return Json(new { Status = "Error", Email = User.Identity.Name });
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("SetDefaultFoodPlan")]
+        [HttpPost]
+        public IHttpActionResult SetDefaultFoodPlan(JObject data)
+        {
+            try
+            { // have to werite code for delete orders if already exists for coming days
+                string timeSlot = data["timeSlot"].ToString();
+                DateTime newOrderDate = Convert.ToDateTime(data["date"].ToString());
+
+                using (DBContext db = new DBContext())
+                {
+                    string timeSlotName = timeSlot == "B" ? "defalult_bf" : 
+                                          timeSlot == "D" ? "defalult_dnr" : 
+                                          timeSlot == "L" ? "defalult_lnc" : "";
+                    
+                    var order = (from O in db.Orders
+                                 join OI in db.OrderItems on O.Id equals OI.OrderId
+                                 where O.UserId == timeSlotName
+                                 select O).FirstOrDefault();
+
+                    var customer = (from user in db.CustomerDetails
+                                    where user.Email == User.Identity.Name
+                                    select user).FirstOrDefault();
+
+                    Order newOrder = new Order();
+                    newOrder.UserId = customer.Email;
+                    newOrder.Date = newOrderDate;
+                    newOrder.TimeSlot = timeSlot;
+                    newOrder.Status = OrderStatus.BOOKED;
+                    newOrder.Location = customer.BreakFastAddr;
+                    newOrder.PaymentStatus = PaymentStatus.PENDING;
+                    newOrder.PaymentMedium = PaymentMedium.PAYMENTPENDING;
+                    newOrder.DeleveredTo = customer.FirstName + " " + customer.LastName; ;
+                    newOrder.PendingAmount = null;
+                    newOrder.IsDeleted = false;
+                    //order.OrderItems = (List<OrderItem>) pointedOrder.OrderItems;
+                    foreach (OrderItem OI in order.OrderItems)
+                    {
+                        OrderItem orderItem = new OrderItem();
+                        orderItem.ItemId = OI.ItemId;
+                        orderItem.DateTime = DateTime.Now;
+                        orderItem.Count = OI.Count;
+                        newOrder.OrderItems.Add(orderItem);
+                    }
+                    db.Orders.Add(newOrder);
+
+
+                    //if (timeSlot == "L")
+                    //{
+                    //    foreach (var order in defaultOrders)
+                    //    {
+                    //        if (order.UserId == "defalult_lnc")
+                    //        {
+                    //            Order newOrder = new Order();
+                    //            newOrder.UserId = customer.Email;
+                    //            newOrder.Date = newOrderDate;
+                    //            newOrder.TimeSlot =  "L";
+                    //            newOrder.Status = OrderStatus.BOOKED;
+                    //            newOrder.Location = customer.Address;
+                    //            newOrder.PaymentStatus = PaymentStatus.PENDING;
+                    //            newOrder.PaymentMedium = PaymentMedium.PAYMENTPENDING;
+                    //            newOrder.DeleveredTo = customer.FirstName + " " + customer.LastName; ;
+                    //            newOrder.PendingAmount = null;
+                    //            newOrder.IsDeleted = false;
+                    //            //order.OrderItems = (List<OrderItem>) pointedOrder.OrderItems;
+                    //            foreach (OrderItem OI in order.OrderItems)
+                    //            {
+                    //                OrderItem orderItem = new OrderItem();
+                    //                orderItem.ItemId = OI.ItemId;
+                    //                orderItem.DateTime = DateTime.Now;
+                    //                orderItem.Count = OI.Count;
+                    //                newOrder.OrderItems.Add(orderItem);
+                    //            }
+                    //            db.Orders.Add(newOrder);
+                    //            break;
+                    //        }
+                    //    }
+
+                    //}
+                    //else if (timeSlot == "D")
+                    //{
+                    //    foreach (var order in defaultOrders)
+                    //    {
+                    //        if (order.UserId == "defalult_dnr")
+                    //        {
+                    //            Order newOrder = new Order();
+                    //            newOrder.UserId = customer.Email;
+                    //            newOrder.Date = newOrderDate;
+                    //            newOrder.TimeSlot = "D";
+                    //            newOrder.Status = OrderStatus.BOOKED;
+                    //            newOrder.Location = customer.Address;
+                    //            newOrder.PaymentStatus = PaymentStatus.PENDING;
+                    //            newOrder.PaymentMedium = PaymentMedium.PAYMENTPENDING;
+                    //            newOrder.DeleveredTo = customer.FirstName + " " + customer.LastName; ;
+                    //            newOrder.PendingAmount = null;
+                    //            newOrder.IsDeleted = false;
+                    //            //order.OrderItems = (List<OrderItem>) pointedOrder.OrderItems;
+                    //            foreach (OrderItem OI in order.OrderItems)
+                    //            {
+                    //                OrderItem orderItem = new OrderItem();
+                    //                orderItem.ItemId = OI.ItemId;
+                    //                orderItem.DateTime = DateTime.Now;
+                    //                orderItem.Count = OI.Count;
+                    //                newOrder.OrderItems.Add(orderItem);
+                    //            }
+                    //            db.Orders.Add(newOrder);
+                    //        }
+                    //    }
+                    //}
+
+                    var saveOutput = db.SaveChanges();
+                    if (saveOutput != 0)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return Json(new { Status = "Error", Email = User.Identity.Name });
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 
 }

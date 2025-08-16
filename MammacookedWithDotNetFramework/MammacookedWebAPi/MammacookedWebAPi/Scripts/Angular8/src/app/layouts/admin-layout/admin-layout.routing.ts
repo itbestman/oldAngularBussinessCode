@@ -7,7 +7,7 @@ import { TypographyComponent } from '../../pages/typography/typography.component
 import { PlannerComponent } from '../../pages/planner/planner.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { NotificationsComponent } from '../../pages/notifications/notifications.component';
-import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
+import { AboutUsComponent } from '../../pages/aboutUs/aboutUs.component';
 
 export const AdminLayoutRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -17,5 +17,5 @@ export const AdminLayoutRoutes: Routes = [
   { path: 'planner', component: PlannerComponent },
   { path: 'maps', component: MapsComponent },
   { path: 'notifications', component: NotificationsComponent },
-  { path: 'upgrade', component: UpgradeComponent }
+  { path: 'aboutus', component: AboutUsComponent }
 ];

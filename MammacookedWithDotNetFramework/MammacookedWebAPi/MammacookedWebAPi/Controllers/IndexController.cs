@@ -191,6 +191,44 @@ namespace MammacookedWebAPi.Controllers
             }
         }
 
+        [Route("GetFoodPlans")]
+        [HttpPost]
+        public IHttpActionResult GetFoodPlans()
+        {
+            try
+            {
+                using (DBContext db = new DBContext())
+                {
+                    var res = (from FI in db.FoodItems
+                               where FI.DeleteFlag == false
+                               select new
+                               {
+                                   //FoodtypeName = O.UserId == "defalult_bf" ? "Breack Fast" : O.UserId == "defalult_dnr" ? "Dinner" : O.UserId == "defalult_lnc" ? "Lunch" : "",
+                                   FoodItemName = FI.Name,
+                                   Details = FI.Details,
+                                   Count = 1,
+                                   PricePerPice = FI.Prise,
+                                   CountType = FI.CountType,
+                                   TotelPrice = 1 * FI.Prise,
+                                   Currency = FI.Currency,
+                                   FoodId = FI.Id
+                               }).ToList();
+                    if (res != null)
+                    {
+                        return Ok(res);
+                    }
+                    else
+                    {
+                        return Json(new { Status = "Error", Email = User.Identity.Name });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         // GET: api/Index
         public IEnumerable<string> Get()
         {

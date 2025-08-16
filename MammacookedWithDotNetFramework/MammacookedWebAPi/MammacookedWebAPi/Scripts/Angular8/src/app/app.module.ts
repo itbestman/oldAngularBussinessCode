@@ -12,7 +12,7 @@ import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, /* other http imports */ } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule, /* other http imports */ } from "@angular/common/http";
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
@@ -26,10 +26,17 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
+import { AppHttpInterceptor } from "./appHttpInterceptor.service";
+import {IConfig, NgxMaskModule} from 'ngx-mask';
+
+export const options: Partial<IConfig> ={
+  showMaskTyped:true
+};
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
 }
+
 
 @NgModule({
   declarations:[
@@ -56,10 +63,16 @@ export function momentAdapterFactory() {
     SidebarModule,
     FooterModule,
     NavbarModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory })
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
+    NgxMaskModule.forRoot(options)
   ],
   exports: [RouterModule],
-  providers: [MammaService,LoginService],
+  providers: [MammaService,LoginService,
+  {
+    provide:HTTP_INTERCEPTORS,
+    useClass:AppHttpInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

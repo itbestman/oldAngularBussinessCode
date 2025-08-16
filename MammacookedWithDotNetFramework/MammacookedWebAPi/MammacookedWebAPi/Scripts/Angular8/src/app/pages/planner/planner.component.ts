@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ElementRef } from '@angular/core';
 
 import { DefaultFoodPlanner, OrderedItemsOfDate } from './planner.models';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'icons-cmp',
@@ -57,7 +58,8 @@ export class PlannerComponent implements OnInit {
   };
   activeDayIsOpen: boolean = true;// black description pannel, giving hint about plan
   selectedDayForEditFoodPlan: string;// clicked date
-  defauldFoodPlan: DefaultFoodPlanner[] = []; //only default food plance list [{Count: 3  CountType  :   "Bowl"  Currency  :   "INR"  Details  :   "sahi paneer"  FoodId  :   3  FoodItemName  :   "Paneer"  FoodtypeName  :   "Dinner"  PricePerPice  :   40  TotelPrice  :   120}]  myView = 'month';
+  defauldFoodPlan: DefaultFoodPlanner[] = []; //only default food plance list [{Count: 3  CountType  :   "Bowl"  Currency  :   "INR"  Details  :   "sahi paneer"  FoodId  :   3  FoodItemName  :   "Paneer"  FoodtypeName  :   "Dinner"  PricePerPice  :   40  TotelPrice  :   120}] 
+  myView = 'month';
   todayFoodPlans = [];
   refresh: Subject<any> = new Subject();
   events: CalendarEvent[] = [];
@@ -75,20 +77,23 @@ export class PlannerComponent implements OnInit {
     L: [],
     D: []
   }
+  orderItemsOfDate: OrderedItemsOfDate[]=[]; //for load plan for the selected date
+  allFoodDropdown: DefaultFoodPlanner[];
+
   constructor(private appService: MammaService, private modalService: NgbModal) {
   }
-
+hold:any;
   ngOnInit() {
     this.loadForm();
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    console.log(date, 'date');
+    
 
     if (isSameMonth(date, this.viewDate)) {
       if (new Date() <= date) {
         this.selectedDayForEditFoodPlan = date.toDateString();
-        this.modalService.open(this.modalContent, { size: 'xl' });
+     this.hold = this.modalService.open(this.modalContent, { size: 'xl' });
       }
       if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
         this.activeDayIsOpen = false;
@@ -96,7 +101,7 @@ export class PlannerComponent implements OnInit {
         this.activeDayIsOpen = true;
       }
       this.viewDate = date;
-      this.loadDayFoodPlans();
+      this.loadDayFoodPlans(date);
       this.saveButtonDisableStatus = false;
     }
   }
@@ -108,7 +113,7 @@ export class PlannerComponent implements OnInit {
   }
 
   editPlanOnDate(selectedDate) {
-    console.log(selectedDate);
+    console.log(selectedDate, 'selectedDate');
   }
 
   loadForm() {
@@ -123,6 +128,15 @@ export class PlannerComponent implements OnInit {
       this.defauldFoodPlanBreackFast = this.defauldFoodPlan.filter(d => d.FoodtypeName == 'Breack Fast');
       this.defauldFoodPlanLunct = this.defauldFoodPlan.filter(d => d.FoodtypeName == 'Lunch');
       this.defauldFoodPlanDinner = this.defauldFoodPlan.filter(d => d.FoodtypeName == 'Dinner');
+    }, (error) => {
+      console.log(error);
+    });
+
+    this.appService.getFoodPlans().subscribe((data: DefaultFoodPlanner[]) => {// default food plans
+      this.allFoodDropdown = data
+      // this.defauldFoodPlanBreackFast = data
+      // this.defauldFoodPlanLunct = data
+      // this.defauldFoodPlanDinner = data
     }, (error) => {
       console.log(error);
     });
@@ -164,19 +178,17 @@ export class PlannerComponent implements OnInit {
     });
   }
 
-
-  loadDayFoodPlans() {
+  
+  loadDayFoodPlans(ClickedDate?: any) {
     // to generate data of detail table
     this.orderingFoodItems = { B: [], L: [], D: [] };
     this.appService.getOrdersOfDate({ orderDate: this.viewDate.toLocaleDateString() }).subscribe((data) => {
-      let orderItemsOfDate: OrderedItemsOfDate[] = JSON.parse(data);
-      orderItemsOfDate.forEach(item => {
-
-
+      this.orderItemsOfDate =  JSON.parse(data);
+      this.orderItemsOfDate.forEach(item => {
         if (item.TimeSlot == 'B') {
-          this.orderingFoodItems.B.push(...this.defauldFoodPlan.filter(
+          this.orderingFoodItems.B.push(...this.allFoodDropdown.filter(
             (x) => {
-              return item.orderItem.map(x => { return x.ItemId }).includes(x.FoodId) && x.FoodtypeName == 'Breack Fast'
+              return item.orderItem.map(x => { return x.ItemId }).includes(x.FoodId) //&& x.FoodtypeName == 'Breack Fast'
             }
           ))
           this.orderingFoodItems.B.map((oi) => {
@@ -185,9 +197,9 @@ export class PlannerComponent implements OnInit {
           })
 
         } else if (item.TimeSlot == 'L') {
-          this.orderingFoodItems.L.push(...this.defauldFoodPlan.filter(
+          this.orderingFoodItems.L.push(...this.allFoodDropdown.filter(
             (x) => {
-              return item.orderItem.map(x => { return x.ItemId }).includes(x.FoodId) && x.FoodtypeName == 'Lunch'
+              return item.orderItem.map(x => { return x.ItemId }).includes(x.FoodId)// && x.FoodtypeName == 'Lunch'
             }
           ))
           this.orderingFoodItems.L.map((oi) => {
@@ -196,9 +208,9 @@ export class PlannerComponent implements OnInit {
           })
 
         } else if (item.TimeSlot == 'D') {
-          this.orderingFoodItems.D.push(...this.defauldFoodPlan.filter(
+          this.orderingFoodItems.D.push(...this.allFoodDropdown.filter(
             (x) => {
-              return item.orderItem.map(x => { return x.ItemId }).includes(x.FoodId) && x.FoodtypeName == 'Dinner'
+              return item.orderItem.map(x => { return x.ItemId }).includes(x.FoodId)// && x.FoodtypeName == 'Dinner'
             }
           ))
           this.orderingFoodItems.D.map((oi) => {
@@ -211,7 +223,10 @@ export class PlannerComponent implements OnInit {
 
 
 
-      console.log(orderItemsOfDate, 'getOrderOfDate');
+      console.log(this.orderItemsOfDate, 'getOrderOfDate');
+      if (new Date() >= ClickedDate && this.orderItemsOfDate.length == 0) {
+        this.appService.showNotification('info', 'To add food plan, please click on the date in future');
+      }
     });
     let tempTodayFoodPlan = [];
     this.thisMonthFoodPlan.forEach((x) => {
@@ -255,7 +270,7 @@ export class PlannerComponent implements OnInit {
       });
     });
 
-    console.log('todayFoodPlans', this.todayFoodPlans);
+    console.log('todayFoodPlans', this.todayFoodPlans,JSON.stringify(this.todayFoodPlans));
   }
 
   dropdownFoodSelect(item: DefaultFoodPlanner, BLD) {
@@ -373,6 +388,7 @@ export class PlannerComponent implements OnInit {
     this.appService.AddOrder(this.orderingFoodItems).subscribe((data) => {// default food plans
       this.appService.showNotification('info', 'Food plan updated')
       this.modalService.dismissAll();
+      this.activeDayIsOpen=false;
       this.loadForm();
     }, (error) => {
       this.saveButtonDisableStatus = false;
@@ -384,9 +400,46 @@ export class PlannerComponent implements OnInit {
 
   }
 
-  applyDefaultPlan()
-  {
+  applyDefaultPlan() {
+    //yet to apply in future.
+    //apply difault plan for what breackfast or dinner or lunch
 
+  }
+
+  repeatOrder(repeatOrderType,item)//repeatOrderType=M/W 
+  {
+    let orderId:number = this.orderItemsOfDate.filter((x)=>{return x.TimeSlot==item.TimeSlot})[0].orders;
+    //{ orderDate: this.viewDate.toLocaleDateString() }
+
+    this.appService.RepeatOrder({repeatOrderType: repeatOrderType, orderId: orderId}).subscribe((data) => {// default food plans
+      console.log(data);
+      this.appService.showNotification('info', 'Food plan updated')
+      this.modalService.dismissAll();
+      this.loadForm();
+    }, (error) => {
+      this.appService.showNotification('error', 'Unable to save your food plan. please try after some time')
+      this.modalService.dismissAll();
+      console.log(error);
+      this.loadForm();
+    });
+  }
+
+  setDefaultPlan(timeSlot){
+    this.onSaveFoodBasket();
+    this.appService.setDefaultFoodPlan({timeSlot:timeSlot, date:this.viewDate.toLocaleDateString()})
+    .subscribe((data) => {// default food plans
+      console.log(data);
+      this.appService.showNotification('info', 'Food plan updated') 
+      this.loadForm();
+      
+      //this.dayClicked({date: this.viewDate, events: []});
+
+    }, (error) => {
+      this.appService.showNotification('error', 'Unable to save your food plan. please try after some time')
+      this.modalService.dismissAll();
+      console.log(error);
+      this.loadForm();
+    });
   }
 
 }

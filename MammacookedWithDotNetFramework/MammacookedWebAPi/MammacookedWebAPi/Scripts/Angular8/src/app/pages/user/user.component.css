@@ -1,0 +1,3 @@
+.form-control.ng-invalid{
+    border: 1px solid #ef8157 !important;
+}

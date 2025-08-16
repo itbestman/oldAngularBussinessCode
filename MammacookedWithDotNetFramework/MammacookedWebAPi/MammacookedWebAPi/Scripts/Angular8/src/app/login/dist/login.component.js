@@ -49,7 +49,7 @@ var LoginComponent = /** @class */ (function () {
             "&grant_type=password";
         this.loginService.login(data).subscribe(function (data) {
             console.log(data);
-            sessionStorage.setItem('token', data.access_token);
+            localStorage.setItem('token', data.access_token);
             _this._router.navigate(['home']);
         }, function (error) {
             console.log("error ", error);

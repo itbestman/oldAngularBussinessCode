@@ -3,3 +3,7 @@
 .navbar a:not(.btn):not(.dropdown-item) {
     color: darkgrey;
 }
+
+.ng-invalid{
+    border: 1px solid #ef8157 !important;
+}

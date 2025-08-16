@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit{
     }
 
   logout() {
-    sessionStorage.clear();
+    localStorage.clear();
     this.appService.logOut().subscribe((data) => {
       this.isLoggedIn = this.appService.isLoggedIn();
       this.router.navigate(["home"]);
